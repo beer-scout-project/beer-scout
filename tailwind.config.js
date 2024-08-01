@@ -1,5 +1,3 @@
-//update color to fit beer scout theme
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -11,9 +9,9 @@ export default {
     themes: [
       {
         myDark: {
-          primary: '#00CED1',
+          primary: '#FFA500',
           'primary-content': '#000000',
-          secondary: '#FFD166',
+          secondary: '#FF7F3E',
           'secondary-content': '#000000',
           accent: '#252525',
           'accent-content': '#FFFFFF',
@@ -35,9 +33,9 @@ export default {
       },
       {
         myLight: {
-          primary: '#00CED1',
+          primary: '#FFA500',
           'primary-content': '#000000',
-          secondary: '#FFD166',
+          secondary: '#FF7F3E',
           'secondary-content': '#000000',
           accent: '#C0C0C0',
           'accent-content': '#000000',

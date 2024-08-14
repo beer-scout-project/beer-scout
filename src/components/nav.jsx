@@ -44,6 +44,11 @@ const nav = () => {
                 Explore
               </Link>
             </li>
+            <li>
+              <Link to='/map' className='btn btn-ghost'>
+                Map
+              </Link>
+            </li>
           </ul>
         </div>
         <Link to='/' className='btn btn-ghost text-2xl font-header'>
@@ -60,6 +65,11 @@ const nav = () => {
           <li className='mx-1'>
             <Link to='/explore' className='btn btn-ghost'>
               Explore
+            </Link>
+          </li>
+          <li className='mx-1'>
+            <Link to='/map' className='btn btn-ghost'>
+              Map
             </Link>
           </li>
         </ul>

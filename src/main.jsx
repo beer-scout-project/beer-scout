@@ -5,6 +5,8 @@ import './index.css';
 import Nav from './components/nav.jsx';
 import Home from './pages/home.jsx';
 import Explore from './pages/explore.jsx';
+import Login from './pages/login.jsx';
+import Signup from './pages/signup.jsx';
 
 const App = () => (
   <Router>
@@ -14,6 +16,8 @@ const App = () => (
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/explore' element={<Explore />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
         </Routes>
       </div>
     </div>

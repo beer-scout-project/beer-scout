@@ -22,9 +22,9 @@ const home = () => {
             >
               Explore
             </Link>
-            <button className='btn btn-secondary sm:ml-4'>
+            <Link to='/login' className='btn btn-secondary sm:ml-4'>
               Login / Sign Up
-            </button>
+            </Link>
           </div>
         </div>
       </div>

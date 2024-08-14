@@ -41,7 +41,7 @@ const nav = () => {
             </li>
             <li>
               <Link to='/' className='btn btn-ghost'>
-                page 2
+                Explore
               </Link>
             </li>
           </ul>

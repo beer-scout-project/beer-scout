@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/home.jsx';
-import Nav from './components/nav.jsx';
 import './index.css';
+import Nav from './components/nav.jsx';
+import Home from './pages/home.jsx';
+import Explore from './pages/explore.jsx';
 
 const App = () => (
   <Router>
@@ -12,6 +13,7 @@ const App = () => (
       <div className='content-container'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/explore' element={<Explore />} />
         </Routes>
       </div>
     </div>

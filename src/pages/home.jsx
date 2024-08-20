@@ -6,8 +6,7 @@ const home = () => {
 		<div
 			className='hero min-h-full'
 			style={{
-				backgroundImage:
-					'url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)',
+				backgroundImage: 'url(/drinks-with-friends-1920x1080.png)',
 			}}
 		>
 			<div className='hero-overlay bg-black bg-opacity-60'></div>

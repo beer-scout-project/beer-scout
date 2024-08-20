@@ -12,7 +12,7 @@ const home = () => {
 			<div className='hero-overlay bg-black bg-opacity-60'></div>
 			<div className='hero-content text-white text-center'>
 				<div className='max-w-md'>
-					<img src='beer-scout-logo-600x600.png' alt='beer-scout-logo' />
+					<img src='beer-scout-logo-18-750x750.png' alt='beer-scout-logo' />
 					<h1 className='mb-5 text-5xl font-bold'>Beer Scout</h1>
 					<p className='mb-5'>Find bars and cheap drinks near you!</p>
 					<div className='flex flex-col sm:flex-row justify-center'>

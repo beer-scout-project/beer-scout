@@ -29,11 +29,12 @@ const login = () => {
 				</Link>
 			</div>
 			<div className='divider'>OR</div>
-			<div className='flex items-center space-x-2'>
-				<p>Don't have an account?</p>
-				<Link to='/signup' className='link'>
-					Sign Up
-				</Link>
+			<div className='flex flex-col items-center gap-2 w-full max-w-[325px]'>
+				{/* <Link to='/signup' className='link'> */}
+				<button className='block btn btn-secondary w-full'>
+					<Link to='/signup'>Create Account</Link>
+				</button>
+				{/* </Link> */}
 			</div>
 		</div>
 	);

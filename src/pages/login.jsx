@@ -24,17 +24,17 @@ const login = () => {
 					</label>
 				</form>
 				<button className='block btn btn-primary'>Login</button>
-				<Link>
-					<span className='block link'>Forgot Password?</span>
-				</Link>
+				<div className='block link no-underline cursor-default'>
+					<Link onClick={() => console.log('forgot password')}>
+						Forgot Password?
+					</Link>
+				</div>
 			</div>
 			<div className='divider'>OR</div>
 			<div className='flex flex-col items-center gap-2 w-full max-w-[325px]'>
-				{/* <Link to='/signup' className='link'> */}
 				<button className='block btn btn-secondary w-full'>
 					<Link to='/signup'>Create Account</Link>
 				</button>
-				{/* </Link> */}
 			</div>
 		</div>
 	);

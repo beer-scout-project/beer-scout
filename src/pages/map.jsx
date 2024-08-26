@@ -1,7 +1,16 @@
-import React from 'react';
+import MapComponent from '/src/components/MapComponent/MapComponent';
+import '../../src/index.css';
 
 const map = () => {
-  return <div>map</div>;
+  return (
+    <div>
+      <div>map</div>
+    
+      <div className='map-container'>
+        <MapComponent />
+      </div>
+    </div>
+  );
 };
 
 export default map;

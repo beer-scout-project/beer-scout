@@ -1,0 +1,5 @@
+/*leaflet is weird about needing sizing so just added random size now to get map in, not intended to be size of the map*/
+.mapSizing {
+  height: 400px;
+  width: 400px;
+}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function LoginForm() {
   return (
     <div className="flex w-full max-w-[325px] flex-col gap-6">
-      <form>
+      <form className="flex flex-col gap-4">
         <label htmlFor="email" className="block">
           <span className="block">Email</span>
           <input
@@ -20,8 +20,14 @@ export default function LoginForm() {
             className="w-full rounded p-1 text-black"
           ></input>
         </label>
+        <button
+          type="submit"
+          onClick={() => console.log("login")}
+          className="btn btn-primary mt-4 block"
+        >
+          Login
+        </button>
       </form>
-      <button className="btn btn-primary block">Login</button>
       <div className="link block cursor-default no-underline">
         <Link onClick={() => console.log("forgot password")} className="text">
           Forgot Password?

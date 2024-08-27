@@ -11,7 +11,11 @@ const login = () => {
 						<input
 							type='email'
 							name='email'
-							className='p-1 rounded w-full'
+							className='p-1 rounded w-full text-black
+              shadow-sm placeholder-slate-400
+              focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+              invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500'
 						></input>
 					</label>
 					<label htmlFor='password' className='block'>
@@ -19,13 +23,13 @@ const login = () => {
 						<input
 							type='password'
 							name='password'
-							className='p-1 rounded w-full'
+							className='p-1 rounded w-full text-black'
 						></input>
 					</label>
 				</form>
 				<button className='block btn btn-primary'>Login</button>
 				<div className='block link no-underline cursor-default'>
-					<Link onClick={() => console.log('forgot password')}>
+					<Link onClick={() => console.log('forgot password')} className='text'>
 						Forgot Password?
 					</Link>
 				</div>

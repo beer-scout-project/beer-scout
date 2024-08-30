@@ -1,7 +1,25 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import useApi from "../utils/useApi";
+import { useState } from "react";
 
 export default function SignUp() {
+  const { createNewUser } = useApi();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    createNewUser(firstName, lastName, username, email, password);
+  };
+
   return (
     <div className="flex flex-col items-center gap-8 p-10">
       <div className="flex w-full max-w-[325px] flex-col gap-6">
@@ -12,9 +30,11 @@ export default function SignUp() {
               First Name
             </label>
             <input
+              className="w-full rounded p-1 text-black"
               type="text"
               name="first-name"
-              className="w-full rounded p-1 text-black"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             ></input>
           </div>
           <div>
@@ -25,16 +45,20 @@ export default function SignUp() {
               type="text"
               name="last-name"
               className="w-full rounded p-1 text-black"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             ></input>
           </div>
           <div>
             <label htmlFor="display-name" className="block">
-              Display Name*
+              Username/Display Name*
             </label>
             <input
               type="text"
               name="display-name"
               className="w-full rounded p-1 text-black"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             ></input>
           </div>
           <div>
@@ -45,6 +69,10 @@ export default function SignUp() {
               type="email"
               name="email"
               className="laceholder-slate-400focus:outline-none w-full rounded p-1 text-black shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             ></input>
           </div>
           <div>
@@ -55,6 +83,8 @@ export default function SignUp() {
               type="password"
               name="password"
               className="w-full rounded p-1 text-black"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             ></input>
           </div>
           <div>
@@ -65,12 +95,13 @@ export default function SignUp() {
               type="password"
               name="confirm-password"
               className="w-full rounded p-1 text-black"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             ></input>
           </div>
           <button
-            type="submit"
-            onClick={() => console.log("register")}
             className="btn btn-primary mt-4 block"
+            onClick={handleRegister}
           >
             Register
           </button>

@@ -1,7 +1,44 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import useApi from "../utils/useApi";
+import { useState } from "react";
 
 export default function SignUp() {
+  const { createNewUser } = useApi();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const form = e.target.closest("form");
+
+    // Check the form validity
+    if (form.checkValidity()) {
+      // If valid, create a new user
+      createNewUser(firstName, lastName, username, email, password);
+    } else {
+      // If not valid, add custom class to highlight invalid fields
+      const requiredFields = form.querySelectorAll("[required]");
+      requiredFields.forEach((field) => {
+        if (!field.validity.valid) {
+          field.classList.add("border-red-500");
+        } else {
+          field.classList.remove("border-red-500");
+        }
+      });
+      form.reportValidity(); // This triggers the native validation UI
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-8 p-10">
       <div className="flex w-full max-w-[325px] flex-col gap-6">
@@ -12,9 +49,12 @@ export default function SignUp() {
               First Name
             </label>
             <input
+              id="first-name"
+              className="w-full rounded p-1 text-black"
               type="text"
               name="first-name"
-              className="w-full rounded p-1 text-black"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             ></input>
           </div>
           <div>
@@ -22,19 +62,26 @@ export default function SignUp() {
               Last Name
             </label>
             <input
+              id="last-name"
               type="text"
               name="last-name"
               className="w-full rounded p-1 text-black"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             ></input>
           </div>
           <div>
             <label htmlFor="display-name" className="block">
-              Display Name*
+              Username/Display Name*
             </label>
             <input
+              id="display-name"
               type="text"
               name="display-name"
               className="w-full rounded p-1 text-black"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
             ></input>
           </div>
           <div>
@@ -42,9 +89,15 @@ export default function SignUp() {
               Email*
             </label>
             <input
+              id="email"
               type="email"
               name="email"
-              className="laceholder-slate-400focus:outline-none w-full rounded p-1 text-black shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none"
+              className="w-full rounded p-1 text-black placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
             ></input>
           </div>
           <div>
@@ -52,9 +105,13 @@ export default function SignUp() {
               Password*
             </label>
             <input
+              id="password"
               type="password"
               name="password"
-              className="w-full rounded p-1 text-black"
+              className="w-full rounded p-1 text-black required:border-red-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             ></input>
           </div>
           <div>
@@ -62,15 +119,18 @@ export default function SignUp() {
               Confirm Password*
             </label>
             <input
+              id="confirm-password"
               type="password"
               name="confirm-password"
-              className="w-full rounded p-1 text-black"
+              className="w-full rounded p-1 text-black required:border-red-500"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             ></input>
           </div>
           <button
-            type="submit"
-            onClick={() => console.log("register")}
             className="btn btn-primary mt-4 block"
+            onClick={handleRegister}
           >
             Register
           </button>

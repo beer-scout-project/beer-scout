@@ -49,6 +49,7 @@ export default function SignUp() {
               First Name
             </label>
             <input
+              id="first-name"
               className="w-full rounded p-1 text-black"
               type="text"
               name="first-name"
@@ -61,6 +62,7 @@ export default function SignUp() {
               Last Name
             </label>
             <input
+              id="last-name"
               type="text"
               name="last-name"
               className="w-full rounded p-1 text-black"
@@ -73,6 +75,7 @@ export default function SignUp() {
               Username/Display Name*
             </label>
             <input
+              id="display-name"
               type="text"
               name="display-name"
               className="w-full rounded p-1 text-black"
@@ -86,6 +89,7 @@ export default function SignUp() {
               Email*
             </label>
             <input
+              id="email"
               type="email"
               name="email"
               className="w-full rounded p-1 text-black placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none"
@@ -101,6 +105,7 @@ export default function SignUp() {
               Password*
             </label>
             <input
+              id="password"
               type="password"
               name="password"
               className="w-full rounded p-1 text-black required:border-red-500"
@@ -114,6 +119,7 @@ export default function SignUp() {
               Confirm Password*
             </label>
             <input
+              id="confirm-password"
               type="password"
               name="confirm-password"
               className="w-full rounded p-1 text-black required:border-red-500"

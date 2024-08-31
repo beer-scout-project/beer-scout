@@ -13,11 +13,30 @@ export default function SignUp() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    createNewUser(firstName, lastName, username, email, password);
+
+    const form = e.target.closest("form");
+
+    // Check the form validity
+    if (form.checkValidity()) {
+      // If valid, create a new user
+      createNewUser(firstName, lastName, username, email, password);
+    } else {
+      // If not valid, add custom class to highlight invalid fields
+      const requiredFields = form.querySelectorAll("[required]");
+      requiredFields.forEach((field) => {
+        if (!field.validity.valid) {
+          field.classList.add("border-red-500");
+        } else {
+          field.classList.remove("border-red-500");
+        }
+      });
+      form.reportValidity(); // This triggers the native validation UI
+    }
   };
 
   return (
@@ -59,6 +78,7 @@ export default function SignUp() {
               className="w-full rounded p-1 text-black"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             ></input>
           </div>
           <div>
@@ -68,11 +88,12 @@ export default function SignUp() {
             <input
               type="email"
               name="email"
-              className="laceholder-slate-400focus:outline-none w-full rounded p-1 text-black shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none"
+              className="w-full rounded p-1 text-black placeholder-slate-400 shadow-sm invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
+              required
             ></input>
           </div>
           <div>
@@ -82,9 +103,10 @@ export default function SignUp() {
             <input
               type="password"
               name="password"
-              className="w-full rounded p-1 text-black"
+              className="w-full rounded p-1 text-black required:border-red-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             ></input>
           </div>
           <div>
@@ -94,9 +116,10 @@ export default function SignUp() {
             <input
               type="password"
               name="confirm-password"
-              className="w-full rounded p-1 text-black"
+              className="w-full rounded p-1 text-black required:border-red-500"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             ></input>
           </div>
           <button

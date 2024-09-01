@@ -24,5 +24,25 @@ export default function useApi() {
     setUser(newUser);
   };
 
-  return { user, setUser, createNewUser };
+  const getStoredUser = () => {
+    // get user from local storage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    // check if user exists
+    if (storedUser) {
+      // if yes, set user
+      setUser(
+        new User(
+          storedUser.firstName,
+          storedUser.lastName,
+          storedUser.userName,
+          storedUser.email,
+          storedUser.password,
+        ),
+      );
+    } else {
+      // if no user, return null
+      return null;
+    }
+  };
+
 }

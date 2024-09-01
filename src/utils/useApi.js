@@ -24,6 +24,23 @@ export default function useApi() {
     setUser(newUser);
   };
 
+  const loginUser = (email, password) => {
+    // check if user exists
+    if (user) {
+      // if yes, verify username and password
+      if (email === user.email && password === user.password) {
+        // if correct, return valid user
+        return "valid credentials";
+      } else {
+        // if not correct, return null
+        return "invalid credentials";
+      }
+    } else {
+      // if no user, create new user
+      return "user does not exist";
+    }
+  };
+
   const getStoredUser = () => {
     // get user from local storage
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -45,4 +62,5 @@ export default function useApi() {
     }
   };
 
+  return { user, setUser, createNewUser, loginUser };
 }

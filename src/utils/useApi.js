@@ -24,16 +24,16 @@ export default function useApi() {
     setUser(newUser);
   };
 
-  const loginUser = (email, password) => {
+  const validateUser = (email, password) => {
     // check if user exists
     if (user) {
       // if yes, verify username and password
       if (email === user.email && password === user.password) {
         // if correct, return valid user
-        return "valid credentials";
+        return "valid";
       } else {
         // if not correct, return null
-        return "invalid credentials";
+        return "invalid";
       }
     } else {
       // if no user, create new user
@@ -62,5 +62,5 @@ export default function useApi() {
     }
   };
 
-  return { user, setUser, createNewUser, loginUser };
+  return { user, setUser, createNewUser, validateUser };
 }

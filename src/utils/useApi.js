@@ -32,11 +32,11 @@ export default function useApi() {
         // if correct, return valid user
         return "valid";
       } else {
-        // if not correct, return null
+        // if not correct, return invalid
         return "invalid";
       }
     } else {
-      // if no user, create new user
+      // if no user, return user does not exist
       return "user does not exist";
     }
   };

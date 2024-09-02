@@ -18,7 +18,7 @@ export default function Login() {
     } else if (isUserValid === "invalid") {
       setUserValidation("invalid");
     } else if (isUserValid === "user does not exist") {
-      setUserValidation("User does not exist");
+      setUserValidation("user does not exist");
     }
   };
 

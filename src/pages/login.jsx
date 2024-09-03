@@ -110,6 +110,8 @@ export default function Login() {
       </div>
       <div className="divider">OR</div>
       <div className="flex w-full flex-col items-center gap-2">
+        <p>Don't have an account?</p>
+        <Link to="/signup" className="black w-full max-w-[325px]">
           <button className="btn btn-secondary w-full">Create Account</button>
         </Link>
       </div>

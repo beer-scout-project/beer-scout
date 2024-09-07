@@ -1,6 +1,62 @@
 import { useEffect, useState } from "react";
 import User from "../utils/User";
 
+//temp user functions
+const apiUrl = "http://localhost:8787";
+
+export async function registerUser(username, email, password) {
+  try {
+    const response = await fetch(`${apiUrl}/users/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message);
+    }
+
+    const data = await response.json();
+    console.log("User registered successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error registering user:", error);
+    throw error;
+  }
+}
+
+export async function loginUser(email, password) {
+  try {
+    const response = await fetch(`${apiUrl}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message);
+    }
+
+    const data = await response.json();
+    console.log("User logged in successfully:", data);
+    console.log("Logged in user data:", data);
+    return data;
+  } catch (error) {
+    console.error("Error logging in:", error);
+    throw error;
+  }
+}
+
+//end of temp user functions
+
 export default function useApi() {
   const [user, setUser] = useState(null);
 

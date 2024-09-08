@@ -1,7 +1,23 @@
-import React from 'react';
+import React from "react";
 
-const explore = () => {
-  return <div>explore page</div>;
-};
-
-export default explore;
+export default function Explore() {
+  return (
+    <div>
+      <div>
+        <h2>Explore</h2>
+      </div>
+      <div>
+        <h6>Happening Now</h6>
+      </div>
+      <div>
+        <h6>Recent posts</h6>
+      </div>
+      <div>
+        <h6>All Happy Hours</h6>
+      </div>
+      <div>
+        <h6>Map View</h6>
+      </div>
+    </div>
+  );
+}

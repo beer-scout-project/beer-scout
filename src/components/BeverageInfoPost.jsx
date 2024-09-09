@@ -17,7 +17,7 @@ export default function BeverageInfoPost(props) {
           </div>
           <div>
             <p className="text-secondary">{props.beverageInfo}</p>
-            <p className="font-light text-gray-300">{props.additionalInfo}</p>
+            <p className="font-light">{props.additionalInfo}</p>
           </div>
         </div>
       </div>

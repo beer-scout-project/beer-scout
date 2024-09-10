@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import "leaflet/dist/leaflet.css";
 import styles from './mapComponent.module.css'
 import { useState } from 'react';
-
+import data from '../../../public/data.json';
 
 function LocationMarker() {
   const [position, setPosition] = useState(null)
@@ -24,6 +24,9 @@ function LocationMarker() {
 }
 
 function MapComponent() {
+
+  const markers = data;
+
 return (
 <div className={styles.mapSizing}>
 <MapContainer center={[47.5661541251246, -52.7094622252908]} zoom={14} style={{height: "100%", width: "100%"}}>
@@ -31,12 +34,14 @@ return (
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  <Marker position={[47.5661541251246, -52.7094622252908]}>
-    <Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-    </Popup>
+    {markers.map((marker, index) => (
+          <Marker key={index} position={[marker.lat, marker.lng]}>
+            <Popup>{marker.name}</Popup>
+          </Marker>
+        ))}
+
     <LocationMarker />
-  </Marker>
+  
 </MapContainer>
 </div>
 );

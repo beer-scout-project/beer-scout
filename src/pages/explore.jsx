@@ -3,13 +3,13 @@ import LocationInfoPost from "../components/LocationInfoPost";
 
 export default function Explore() {
   return (
-    <div>
+    <div className="flex flex-col gap-8 p-10">
       <div>
         <h2>Explore</h2>
       </div>
-      <div className="width">
+      <div className="width flex flex-col gap-2">
         <h6>Happening Now</h6>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap gap-4">
           <BeverageInfoPost
             avatarImage="/public/temp-images/bannerman-logo.jpg"
             avatarName="Bannerman Brewing Co."
@@ -24,9 +24,9 @@ export default function Explore() {
           />
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-2">
         <h6>Recent posts</h6>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap gap-4">
           <BeverageInfoPost
             avatarImage="/public/temp-images/girl1-avatar.jpg"
             avatarName="Jane Smith"
@@ -41,9 +41,9 @@ export default function Explore() {
           />
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-2">
         <h6>All Happy Hours</h6>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <LocationInfoPost
             imagePath="/public/temp-images/landwash-brewery.png"
             imageDescription="Landwash Brewery"

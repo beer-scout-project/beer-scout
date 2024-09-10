@@ -1,4 +1,5 @@
 [
+  [
     {
       "lat": 47.5554643,
       "lng": -52.713944,
@@ -42,12 +43,6 @@
       "place_id": "ChIJU641z7ujDEsRHsVD6XGpvlM"
     },
     {
-      "lat": 47.5621151,
-      "lng": -52.7100923,
-      "name": "Bridie Molloy's",
-      "place_id": "ChIJ2TciGrujDEsRnXIkk4bQoKw"
-    },
-    {
       "lat": 47.5621768,
       "lng": -52.7099864,
       "name": "Lottie's Place",
@@ -84,28 +79,10 @@
       "place_id": "ChIJwbj-LwujDEsRJ3j4ELkPfW8"
     },
     {
-      "lat": 47.5745854,
-      "lng": -52.72399739999999,
-      "name": "Big Ben's Ltd",
-      "place_id": "ChIJAQMr85KjDEsRY5WMa2EGCZI"
-    },
-    {
       "lat": 47.5601917,
       "lng": -52.71248629999999,
       "name": "The Newfoundland Embassy",
       "place_id": "ChIJVVVJ2aSjDEsREZ--Cqao0TA"
-    },
-    {
-      "lat": 47.5704709,
-      "lng": -52.71418079999999,
-      "name": "Georgetown Pub",
-      "place_id": "ChIJx2jQaPGjDEsREW2xJKZfJ4A"
-    },
-    {
-      "lat": 47.563533,
-      "lng": -52.7159586,
-      "name": "Peter Easton",
-      "place_id": "ChIJwyjlxLyjDEsRmGqnOAT8jM0"
     },
     {
       "lat": 47.560712,
@@ -155,13 +132,7 @@
       "name": "Oliver's Restaurant",
       "place_id": "ChIJeW8mb7mjDEsREDQ5C284nSw"
     },
-    {
-      "lat": 47.563933,
-      "lng": -52.71583219999999,
-      "name": "Ches's Famous Fish & Chips",
-      "place_id": "ChIJBXFk57yjDEsRC92BWw4DT40"
-    },
-    {
+   {
       "lat": 47.56496809999999,
       "lng": -52.7060822,
       "name": "The Salt House Kitchen",
@@ -190,6 +161,128 @@
       "lng": -52.7123267,
       "name": "Exile Restaurant and Lounge",
       "place_id": "ChIJO2yICaWjDEsRTeW1z16M_x4"
+    },
+    {
+      "lat": 47.56008909999999,
+      "lng": -52.710453,
+      "name": "St. John's Fish Exchange Kitchen & Wet Bar",
+      "place_id": "ChIJuca1JKWjDEsRUBh0A945Ew0"
+    },
+    {
+      "lat": 47.5602935,
+      "lng": -52.7120288,
+      "name": "The Corner Stone",
+      "place_id": "ChIJfWgt2qSjDEsRWnY7DupGL4U"
+    },
+    {
+      "lat": 47.5614295,
+      "lng": -52.71014699999999,
+      "name": "Blue On Water",
+      "place_id": "ChIJBR59J7ujDEsRrO8JbPBvJP0"
+    },
+    {
+      "lat": 47.56272779999999,
+      "lng": -52.7104538,
+      "name": "Chinched",
+      "place_id": "ChIJqeN92aSjDEsRHQy0glV2M_U"
+    },
+    {
+      "lat": 47.5616461,
+      "lng": -52.7095334,
+      "name": "The Gypsy Tea Room",
+      "place_id": "ChIJzbNiK6WjDEsR9mqoZDRkXfo"
+    },
+    {
+      "lat": 47.5624957,
+      "lng": -52.71082190000001,
+      "name": "The Majestic Theatre",
+      "place_id": "ChIJ5TLoE7ujDEsRq4Uydor6IbE"
+    },
+    {
+      "lat": 47.56225209999999,
+      "lng": -52.70974919999999,
+      "name": "YellowBelly Brewery",
+      "place_id": "ChIJPXA8G7ujDEsRoA8VlLYgyQI"
+    },
+    {
+      "lat": 47.5640993,
+      "lng": -52.7079817,
+      "name": "Magnum & Steins",
+      "place_id": "ChIJd9GcQ7mjDEsRQyVBSOej8Fg"
+    },
+    {
+      "lat": 47.5621073,
+      "lng": -52.71008,
+      "name": "Bridie Molloy's",
+      "place_id": "ChIJ2TciGrujDEsRnXIkk4bQoKw"
+    },
+    {
+      "lat": 47.56202099999999,
+      "lng": -52.710703,
+      "name": "Rob Roy",
+      "place_id": "ChIJRyCZFrujDEsRTx7v0GuSwRI"
+    },
+    {
+      "lat": 47.5619271,
+      "lng": -52.710337,
+      "name": "Turkey Joe's",
+      "place_id": "ChIJq6qqqr2jDEsRImPFoiMBHig"
+    },
+    {
+      "lat": 47.5621808,
+      "lng": -52.70999339999999,
+      "name": "Lottie's Place",
+      "place_id": "ChIJtTzIGrujDEsR314zrC1Qbks"
+    },
+    {
+      "lat": 47.5639675,
+      "lng": -52.7074553,
+      "name": "The Rose & Thistle Pub",
+      "place_id": "ChIJU641z7ujDEsRHsVD6XGpvlM"
+    },
+    {
+      "lat": 47.5643191,
+      "lng": -52.7065615,
+      "name": "Boca Tapas Bar",
+      "place_id": "ChIJ9dIx0bujDEsRHOXzEWNhhSU"
+    },
+    {
+      "lat": 47.56239979999999,
+      "lng": -52.7100998,
+      "name": "Trapper John's",
+      "place_id": "ChIJpxEPELujDEsRqLP8BVNDfb0"
+    },
+    {
+      "lat": 47.562213,
+      "lng": -52.70973600000001,
+      "name": "Underbelly",
+      "place_id": "ChIJixCfHLujDEsRsnlSRsFJBss"
+    },
+    {
+      "lat": 47.5617998,
+      "lng": -52.71027499999999,
+      "name": "The Black Sheep",
+      "place_id": "ChIJL0xZE7mjDEsRbEeaXiGajAE"
+    },
+    {
+      "lat": 47.5612535,
+      "lng": -52.7107028,
+      "name": "The Adelaide Oyster House",
+      "place_id": "ChIJVV_b17qjDEsRusWwIOdLqA0"
+    },
+    {
+      "lat": 47.5616461,
+      "lng": -52.7095334,
+      "name": "EVOO",
+      "place_id": "ChIJdb_v5bqjDEsRXD6AwyYb6TI"
+    },
+    {
+      "lat": 47.5616625,
+      "lng": -52.7107611,
+      "name": "O’Reilly’s Irish Newfoundland Pub",
+      "place_id": "ChIJMd58I7ujDEsRt5MPmdtt-L4"
     }
+  ]
+  
   ]
   

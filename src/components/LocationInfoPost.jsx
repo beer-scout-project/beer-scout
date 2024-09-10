@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export default function LocationInfoPost(props) {
   return (
-    <div className="card glass max-h-[384px] min-w-[250px] max-w-[384px] flex-shrink flex-grow basis-[350px] shadow-xl">
+    <div className="card glass max-h-[384px] min-w-[250px] max-w-[384px] flex-shrink flex-grow basis-[350px] bg-base-200 shadow-xl">
       <figure className="h-64 w-full">
         <img src={props.imagePath} alt={props.imageDescription} />
       </figure>

@@ -1,9 +1,10 @@
 import BeverageInfoPost from "../components/BeverageInfoPost";
 import LocationInfoPost from "../components/LocationInfoPost";
+import { Link } from "react-router-dom";
 
 export default function Explore() {
   return (
-    <div className="flex flex-col gap-8 p-10">
+    <div className="m-auto flex max-w-max flex-col gap-8 p-10">
       <div>
         <h2>Explore</h2>
       </div>
@@ -59,8 +60,17 @@ export default function Explore() {
           />
         </div>
       </div>
-      <div>
+      <div className="flex flex-col gap-2">
         <h6>Map View</h6>
+        <div className="min-h-[250px] min-w-[250px] max-w-[786px] flex-shrink flex-grow basis-[350px] max-[795px]:max-w-[384px]">
+          <Link to="/map">
+            <img
+              className="rounded-2xl"
+              src="/public/temp-images/temp-map.png"
+              alt="Map of all happy hours"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );

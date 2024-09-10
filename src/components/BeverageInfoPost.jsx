@@ -12,7 +12,7 @@ export default function BeverageInfoPost(props) {
               </div>
             </div>
             <div>
-              <p className="font-bold">{props.avatarName}</p>
+              <p className="font-regular">{props.avatarName}</p>
             </div>
           </div>
           <div>

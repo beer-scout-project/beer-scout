@@ -1,4 +1,5 @@
 import BeverageInfoPost from "../components/BeverageInfoPost";
+import LocationInfoPost from "../components/LocationInfoPost";
 
 export default function Explore() {
   return (
@@ -6,7 +7,7 @@ export default function Explore() {
       <div>
         <h2>Explore</h2>
       </div>
-      <div>
+      <div className="width">
         <h6>Happening Now</h6>
         <div className="flex flex-col gap-4">
           <BeverageInfoPost
@@ -42,6 +43,21 @@ export default function Explore() {
       </div>
       <div>
         <h6>All Happy Hours</h6>
+        <div className="flex gap-4">
+          <LocationInfoPost
+            imagePath="/public/temp-images/landwash-brewery.png"
+            imageDescription="Landwash Brewery"
+            locationName="Landwash Brewery"
+            postInfo="Introducing our new Happy Hour!"
+          />
+          <LocationInfoPost
+            imagePath="/public/temp-images/banished-brewery.jpg"
+            imageDescription="Banished Brewery"
+            imageLocation
+            locationName="Banished Brewery"
+            postInfo="Our tap room is now open!"
+          />
+        </div>
       </div>
       <div>
         <h6>Map View</h6>

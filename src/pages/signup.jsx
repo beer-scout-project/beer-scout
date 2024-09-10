@@ -142,6 +142,9 @@ export default function SignUp() {
         <Link to="/login" className="w-full">
           <button className="btn btn-secondary w-full">Login</button>
         </Link>
+        <Link to="/temp-signup" className="w-full">
+          <button className="btn btn-secondary w-full">Temp Signup 👽</button>
+        </Link>
       </div>
     </div>
   );

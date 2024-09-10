@@ -24,7 +24,7 @@ export default {
           neutral: "#FFE8C8",
           "neutral-content": "#FFFFFF",
           "base-100": "#120000",
-          "base-200": "#000000",
+          "base-200": "#3a2112",
           "base-300": "#000000",
           "base-content": "#F8F8FF",
           info: "#00A7E6",
@@ -35,6 +35,8 @@ export default {
           "warning-content": "#FFFFFF",
           error: "#F54748",
           "error-content": "#FFFFFF",
+          "text-primary": "#120000",
+          "text-secondary": "#120000",
         },
       },
       {

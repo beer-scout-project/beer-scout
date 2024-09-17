@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBeer } from "react-icons/fa";
+import { IoLogoOctocat } from "react-icons/io";
 
 const nav = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
@@ -20,6 +21,11 @@ const nav = () => {
         </Link>
       </div>
       <div className="flex-none">
+        {/* temp button */}
+        <Link to="/add-bar" className="btn btn-ghost">
+          add bar <IoLogoOctocat />
+        </Link>
+        {/* end of temp button */}
         <button className="btn btn-square btn-ghost">
           <label className="swap swap-rotate">
             <input

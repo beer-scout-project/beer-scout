@@ -84,13 +84,13 @@ const AddBarForm = () => {
             <option disabled selected>
               Select serving size
             </option>
-            <option value="355ml">Can: 355 ml</option>
-            <option value="330ml">Bottle: 330 ml</option>
-            <option value="473ml">Pint: 473 ml</option>
-            <option value="568ml">Large Pint: 568 ml</option>
-            <option value="284ml">Half Pint: 284 ml</option>
-            <option value="500ml">Mug: 500 ml</option>
-            <option value="1000ml">Pitcher: 1000 ml</option>
+            <option value="355ml">Can (355 ml)</option>
+            <option value="473ml">Tall Can (473 ml)</option>
+            <option value="330ml">Bottle (330 ml)</option>
+            <option value="473ml">Pint (473 ml)</option>
+            <option value="568ml">Large Pint (568 ml)</option>
+            <option value="284ml">Half Pint (284 ml)</option>
+            <option value="1000ml">Pitcher (1000 ml)</option>
           </select>
         </div>
 

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const home = () => {
-  const [selectedCity, setSelectedCity] = useState("");
+
+  const selectedCity = "st_johns"
+
+  //Code for drop down list if additional cities added
+  /*const [selectedCity, setSelectedCity] = useState("");
 
   const handleSelectChange = (event) => {
     setSelectedCity(event.target.value);
-  };
+  };*/
 
   // temp add to storage
   const handleClick = () => {
@@ -26,10 +30,11 @@ const home = () => {
         <div className="w-full">
           <h1 className="mb-5 text-5xl font-extrabold">Scouting Beer Deals?</h1>
           <h5 className="mb-5 text-xl font-light">
-            Find the cheapest beer near you!
+            Find the cheapest beer in downtown St. John&#39;s!
           </h5>
-          <div className="flex flex-col justify-center sm:flex-row">
-            <select
+          <div className="flex flex-col items-center">
+            {/*Code for drop down list if additional cities added*/}
+            {/*<select
               className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
               onChange={handleSelectChange}
             >
@@ -38,13 +43,13 @@ const home = () => {
               </option>
               <option>St.Johns</option>
               <option>Halifax</option>
-            </select>
+            </select>*/}
             <Link
               to="/bar-list"
               className="btn btn-primary btn-wide sm:ml-4"
               onClick={handleClick}
             >
-              Continue
+              Cheapest beer right now!
             </Link>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addBarPrice } from "../utils/useApi";
 
 const AddBarForm = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,10 @@ const AddBarForm = () => {
     happy_hour_day: "",
     happy_hour_start: "",
     happy_hour_end: "",
-  });
+  }); // State for form data on load
+
+  const [error, setError] = useState(null); // State for error handling
+  const [success, setSuccess] = useState(null); // State for success message
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -21,10 +25,54 @@ const AddBarForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Log form data when submitted
-    console.log(formData);
+    setError(null); // Clear previous error
+    setSuccess(null); // Clear previous success message
+
+    // ensure all fields are filled out
+    if (!formData.bar_name) {
+      setError("Bar name is required.");
+      return;
+    }
+    if (!formData.location) {
+      setError("Location is required.");
+      return;
+    }
+    if (!formData.serving_size) {
+      setError("Serving size is required.");
+      return;
+    }
+    if (!formData.price || isNaN(formData.price)) {
+      setError("Valid price is required.");
+      return;
+      // create price range validation function
+    }
+
+    try {
+      // Send *formData* json to the backend
+      const response = await addBarPrice(formData);
+      console.log("Form submitted successfully:", response);
+
+      // Show success message
+      setSuccess("Bar price added successfully!");
+
+      // Reset form after submit
+      setFormData({
+        bar_name: "",
+        location: "",
+        serving_size: "",
+        price: "",
+        happy_hour: false,
+        happy_hour_day: "",
+        happy_hour_start: "",
+        happy_hour_end: "",
+      });
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setError("Failed to add bar price. Please try again.");
+    }
   };
 
   return (
@@ -61,11 +109,11 @@ const AddBarForm = () => {
             className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
             required
           >
-            <option disabled selected>
+            <option value="" disabled>
               Select your city
             </option>
-            <option>St.Johns</option>
-            <option>Halifax</option>
+            <option value="st_johns">St. John's</option>
+            <option value="halifax">Halifax</option>
           </select>
         </div>
 
@@ -81,7 +129,7 @@ const AddBarForm = () => {
             className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
             required
           >
-            <option disabled selected>
+            <option value="" disabled>
               Select serving size
             </option>
             <option value="355ml">Can (355 ml)</option>
@@ -193,6 +241,10 @@ const AddBarForm = () => {
             Submit
           </button>
         </div>
+
+        {/* Success/Error messages */}
+        {success && <p className="mt-4 text-green-500">{success}</p>}
+        {error && <p className="mt-4 text-red-500">{error}</p>}
       </form>
     </div>
   );

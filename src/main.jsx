@@ -8,6 +8,8 @@ import Nav from "./components/nav.jsx";
 import Home from "./pages/home.jsx";
 import BarList from "./pages/barList.jsx";
 import AddBarForm from "./pages/addBarForm.jsx";
+// temp
+import TempDisplay from "./pages/tempDisplay.jsx";
 
 const App = () => (
   <Router>
@@ -18,6 +20,8 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/bar-list" element={<BarList />} />
           <Route path="/add-bar" element={<AddBarForm />} />
+          {/* temp */}
+          <Route path="/temp" element={<TempDisplay />} />
         </Routes>
       </div>
     </div>

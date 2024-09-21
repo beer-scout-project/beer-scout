@@ -21,11 +21,14 @@ const nav = () => {
         </Link>
       </div>
       <div className="flex-none">
-        {/* temp button */}
+        {/* temp buttons */}
+        <Link to="/temp" className="btn btn-ghost">
+          temp display
+        </Link>
         <Link to="/add-bar" className="btn btn-ghost">
           add bar <IoLogoOctocat />
         </Link>
-        {/* end of temp button */}
+        {/* end of temp buttons */}
         <button className="btn btn-square btn-ghost">
           <label className="swap swap-rotate">
             <input

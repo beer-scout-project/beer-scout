@@ -10,6 +10,7 @@ import BarList from "./pages/barList.jsx";
 import AddBarForm from "./pages/addBarForm.jsx";
 // temp
 import TempDisplay from "./pages/tempDisplay.jsx";
+import AboutPage from "./pages/aboutPage.jsx";
 
 const App = () => (
   <Router>
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/add-bar" element={<AddBarForm />} />
           {/* temp */}
           <Route path="/temp" element={<TempDisplay />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBeer } from "react-icons/fa";
+import { FaInfo } from "react-icons/fa";
 
 const nav = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
@@ -25,7 +26,7 @@ const nav = () => {
           temp display
         </Link>
         <Link to="/add-bar" className="btn btn-ghost">
-          add bar 
+          add bar
         </Link>
         <Link to="/about" className="btn btn-ghost">
           <FaInfo size={20} />

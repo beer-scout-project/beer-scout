@@ -27,6 +27,9 @@ const nav = () => {
         <Link to="/add-bar" className="btn btn-ghost">
           add bar 
         </Link>
+        <Link to="/about" className="btn btn-ghost">
+          About
+        </Link>
         {/* end of temp buttons */}
         <button className="btn btn-square btn-ghost">
           <label className="swap swap-rotate">

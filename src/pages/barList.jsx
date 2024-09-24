@@ -88,7 +88,9 @@ const BarList = () => {
             <span className="mr-2">
               <FaLocationDot />
             </span>
-            {city ? ` ${city}` : "No location selected"}
+            St. John&#39;s
+            {/*For When there are more cities
+            {city ? ` ${city}` : "No location selected"}*/}
           </p>
           <h2 className="mb-4 mt-2 text-2xl font-bold text-gray-800">
             Cheapest Beer Now

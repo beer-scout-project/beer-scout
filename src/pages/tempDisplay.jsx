@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getBarPricesByLocation } from "../utils/useApi";
+import { IoTimeOutline } from "react-icons/io5"; // Import the icon
 
 const TempDisplay = () => {
   const [barPrices, setBarPrices] = useState([]);
@@ -54,20 +55,26 @@ const TempDisplay = () => {
           {barPrices.map((bar, index) => (
             <li
               key={index}
-              className="rounded-lg border bg-base-100 p-4 shadow"
+              className="relative rounded-lg border bg-base-100 p-4 shadow"
             >
+              {/* Conditionally render the IoTimeOutline icon if happy_hour is true */}
+              {bar.happy_hour && (
+                <IoTimeOutline className="absolute right-2 top-2 text-3xl text-primary" />
+              )}
+
               <p className="text-lg font-bold">{bar.bar_name}</p>
               <p>Location: {bar.location}</p>
               <p>Serving Size: {bar.serving_size}</p>
 
-              {/* ensure price is a number and handle null/undefined values we should handle this in the form (check price is in range before handle submit for add bar prices) */}
+              {/* ensure price is a number and handle null/undefined values */}
               <p>
                 Price: $
                 {bar.price !== null && !isNaN(bar.price)
                   ? parseFloat(bar.price).toFixed(2)
                   : "N/A"}
               </p>
-              {/* if happy hour true show this else hide it we need to handle the date and time submission, database takes 24 hour time ex 19:00-21:00 need to write a function to convert to am and pm time */}
+
+              {/* Happy Hour Details */}
               {bar.happy_hour && (
                 <div>
                   <p>Happy Hour Day: {bar.happy_hour_day}</p>
@@ -76,7 +83,8 @@ const TempDisplay = () => {
                   </p>
                 </div>
               )}
-              {/* Display created_at in a readable format using format date function above */}
+
+              {/* Display created_at in a readable format using formatDate function */}
               <p>Updated At: {formatDate(bar.created_at)}</p>
             </li>
           ))}

@@ -28,7 +28,7 @@ const nav = () => {
           add bar 
         </Link>
         <Link to="/about" className="btn btn-ghost">
-          About
+          <FaInfo size={20} />
         </Link>
         {/* end of temp buttons */}
         <button className="btn btn-square btn-ghost">

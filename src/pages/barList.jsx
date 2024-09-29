@@ -23,6 +23,12 @@ const BarList = () => {
     try {
       const data = await getBarPricesByLocation("st_johns");
       const sortedData = sortBarsByPrice(data);
+      // highlight the bar with the lowest price
+      if (sortedData.length > 0) {
+        sortedData[0].isHighlighted = true;
+      }
+      console.log("Sorted data:", sortedData);
+
       setBarPrices(sortedData);
     } catch (error) {
       setError(error.message);
@@ -66,56 +72,56 @@ const BarList = () => {
       price: "$4.50",
       updated: "2023-10-01",
       perLiter: "$9/l",
-      isHighlight: true,
+      isHighlighted: true,
     },
     {
       name: "Ale House",
       price: "$5.00",
       updated: "2023-09-28",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
     {
       name: "Brew",
       price: "$5.25",
       updated: "2023-09-26",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
     {
       name: "Crafty Bar",
       price: "$5.50",
       updated: "2023-09-20",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
     {
       name: "Lager Lounge",
       price: "$6.00",
       updated: "2023-09-15",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
     {
       name: "The Hoppy",
       price: "$4.50",
       updated: "2023-10-01",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
     {
       name: "Ale House",
       price: "$5.00",
       updated: "2023-09-28",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
     {
       name: "Brew",
       price: "$5.25",
       updated: "2023-09-26",
       perLiter: "$9/l",
-      isHighlight: false,
+      isHighlighted: false,
     },
   ];
 
@@ -129,7 +135,7 @@ const BarList = () => {
 
       {/* Main content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <div className="h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white p-6 shadow-lg">
+        <div className="h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
           {/* Display city from localStorage */}
           <p className="mb-4 flex items-center text-sm text-orange-600">
             <span className="mr-2">
@@ -139,7 +145,7 @@ const BarList = () => {
             {/*For When there are more cities
             {city ? ` ${city}` : "No location selected"}*/}
           </p>
-          <h2 className="mb-4 mt-2 text-2xl font-bold text-gray-800">
+          <h2 className="mb-4 mt-2 text-2xl font-bold text-[#2f2f2f]">
             Cheapest Beer Now
           </h2>
 
@@ -149,29 +155,31 @@ const BarList = () => {
               <div
                 key={index}
                 className={`flex items-center justify-between rounded-lg p-4 ${
-                  bar.isHighlight ? "bg-orange-500 text-white" : "bg-orange-100"
+                  bar.isHighlighted
+                    ? "bg-[#D2691E] text-[#FAF9F6]"
+                    : "bg-[#FDEBD0]"
                 }`}
               >
                 <div>
                   <p
-                    className={`text-lg ${bar.isHighlight ? "font-semibold" : "font-normal text-gray-900"}`}
+                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
                   >
                     {bar.bar_name}
                   </p>
                   <p
-                    className={`text-sm ${bar.isHighlight ? "text-orange-200" : "text-gray-500"}`}
+                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
                   >
                     Updated: {formatDate(bar.created_at)}
                   </p>
                 </div>
                 <div className="text-right">
                   <p
-                    className={`text-lg ${bar.isHighlight ? "font-semibold" : "font-normal text-gray-900"}`}
+                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
                   >
                     {`$${bar.price} (${bar.serving_size})`}
                   </p>
                   <p
-                    className={`text-sm ${bar.isHighlight ? "text-orange-200" : "text-gray-500"}`}
+                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
                   >
                     {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
                   </p>

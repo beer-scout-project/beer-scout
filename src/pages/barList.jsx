@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { getBarPricesByLocation } from "../utils/useApi";
 
 const BarList = () => {
   const [city, setCity] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [barPrices, setBarPrices] = useState([]);
 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
@@ -10,7 +14,32 @@ const BarList = () => {
     if (storedCity) {
       setCity(storedCity);
     }
+    fetchBarPrices();
   }, []);
+
+  const fetchBarPrices = async () => {
+    setLoading(true);
+    setError(null); // Clear any previous errors
+    try {
+      const data = await getBarPricesByLocation("st_johns");
+      setBarPrices(data);
+    } catch (error) {
+      setError(error.message);
+    }
+    setLoading(false);
+  };
+
+  // Function to format the date from the db to display to the user
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  console.log(barPrices);
 
   // Placeholder data for bars
   const bars = [
@@ -98,7 +127,7 @@ const BarList = () => {
 
           {/* Bars List */}
           <div className="space-y-4">
-            {bars.map((bar, index) => (
+            {barPrices.map((bar, index) => (
               <div
                 key={index}
                 className={`flex items-center justify-between rounded-lg p-4 ${
@@ -109,12 +138,12 @@ const BarList = () => {
                   <p
                     className={`text-lg ${bar.isHighlight ? "font-semibold" : "font-normal text-gray-900"}`}
                   >
-                    {bar.name}
+                    {bar.bar_name}
                   </p>
                   <p
                     className={`text-sm ${bar.isHighlight ? "text-orange-200" : "text-gray-500"}`}
                   >
-                    Updated: {bar.updated}
+                    Updated: {formatDate(bar.created_at)}
                   </p>
                 </div>
                 <div className="text-right">

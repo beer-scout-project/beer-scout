@@ -22,7 +22,8 @@ const BarList = () => {
     setError(null); // Clear any previous errors
     try {
       const data = await getBarPricesByLocation("st_johns");
-      setBarPrices(data);
+      const sortedData = sortBarsByPrice(data);
+      setBarPrices(sortedData);
     } catch (error) {
       setError(error.message);
     }
@@ -39,7 +40,24 @@ const BarList = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  console.log(barPrices);
+  // Function to sort bars by price per 100ml
+  const sortBarsByPrice = (data) => {
+    const sortedBars = structuredClone(data);
+    sortedBars.sort((a, b) => {
+      const pricePer100MlA = getPricePer100Ml(a.price, a.serving_size);
+      const pricePer100MlB = getPricePer100Ml(b.price, b.serving_size);
+      return pricePer100MlA - pricePer100MlB;
+    });
+    return sortedBars;
+  };
+
+  // Function to get price per millilitre
+  const getPricePer100Ml = (price, servingSize) => {
+    // remove ml from serving size
+    const millilitres = servingSize.replace("ml", "");
+    const pricePer100Ml = (price * 100) / millilitres;
+    return pricePer100Ml.toFixed(2);
+  };
 
   // Placeholder data for bars
   const bars = [
@@ -127,7 +145,7 @@ const BarList = () => {
 
           {/* Bars List */}
           <div className="space-y-4">
-            {barPrices.map((bar, index) => (
+            {barPrices?.map((bar, index) => (
               <div
                 key={index}
                 className={`flex items-center justify-between rounded-lg p-4 ${
@@ -150,12 +168,12 @@ const BarList = () => {
                   <p
                     className={`text-lg ${bar.isHighlight ? "font-semibold" : "font-normal text-gray-900"}`}
                   >
-                    {bar.price}
+                    {`$${bar.price} (${bar.serving_size})`}
                   </p>
                   <p
                     className={`text-sm ${bar.isHighlight ? "text-orange-200" : "text-gray-500"}`}
                   >
-                    {bar.perLiter}
+                    {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
                   </p>
                 </div>
               </div>

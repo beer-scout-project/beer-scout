@@ -47,6 +47,14 @@ const BarList = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const convertTo12HourTime = (timeString) => {
+    const [hours, minutes] = timeString.split(":").map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes);
+    const options = { hour: "numeric", minute: "numeric", hour12: true };
+    return date.toLocaleTimeString("en-US", options);
+  };
+
   // Function to sort bars by price per 100ml
   const sortBarsByPrice = (data) => {
     const sortedBars = structuredClone(data);
@@ -207,8 +215,11 @@ const BarList = () => {
                           </h3>
                           <p className="pt-4 text-left">
                             Day: {selectedBar.happy_hour_day} <br />
-                            Time: {selectedBar.happy_hour_start} -{" "}
-                            {selectedBar.happy_hour_end}
+                            Time:{" "}
+                            {convertTo12HourTime(
+                              selectedBar.happy_hour_start,
+                            )}{" "}
+                            - {convertTo12HourTime(selectedBar.happy_hour_end)}
                           </p>
                           <div className="modal-action m-0">
                             <form method="dialog">

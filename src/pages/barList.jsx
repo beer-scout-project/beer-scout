@@ -189,8 +189,11 @@ const BarList = () => {
                   <div className="flex items-center gap-2">
                     {/* Conditionally render the IoTimeOutline icon if happy_hour is true */}
                     {bar.happy_hour && (
-                      <button onClick={() => openModal(bar)}>
-                        <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
+                      <button
+                        onClick={() => openModal(bar)}
+                        className="flex w-[24px] justify-center"
+                      >
+                        <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />
                       </button>
                     )}
                     {/* Happy Hour Modal */}
@@ -207,7 +210,7 @@ const BarList = () => {
                             Time: {selectedBar.happy_hour_start} -{" "}
                             {selectedBar.happy_hour_end}
                           </p>
-                          <div className="modal-action">
+                          <div className="modal-action m-0">
                             <form method="dialog">
                               {/* if there is a button in form, it will close the modal */}
                               <button

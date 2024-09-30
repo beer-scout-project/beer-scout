@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { getBarPricesByLocation } from "../utils/useApi";
+import { IoTimeOutline } from "react-icons/io5"; // Import the icon
 
 const BarList = () => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [barPrices, setBarPrices] = useState([]);
+  const [selectedBar, setSelectedBar] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
@@ -27,8 +30,6 @@ const BarList = () => {
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
       }
-      console.log("Sorted data:", sortedData);
-
       setBarPrices(sortedData);
     } catch (error) {
       setError(error.message);
@@ -44,6 +45,14 @@ const BarList = () => {
       day: "numeric",
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const convertTo12HourTime = (timeString) => {
+    const [hours, minutes] = timeString.split(":").map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes);
+    const options = { hour: "numeric", minute: "numeric", hour12: true };
+    return date.toLocaleTimeString("en-US", options);
   };
 
   // Function to sort bars by price per 100ml
@@ -63,6 +72,18 @@ const BarList = () => {
     const millilitres = servingSize.replace("ml", "");
     const pricePer100Ml = (price * 100) / millilitres;
     return pricePer100Ml.toFixed(2);
+  };
+
+  const openModal = (bar) => {
+    setSelectedBar(bar);
+    setIsModalOpen(true);
+    document.body.classList.add("modal-open");
+  };
+
+  const closeModal = () => {
+    setSelectedBar(null);
+    setIsModalOpen(false);
+    document.body.classList.remove("modal-open");
   };
 
   // Placeholder data for bars
@@ -135,7 +156,7 @@ const BarList = () => {
 
       {/* Main content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <div className="h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
+        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
           {/* Display city from localStorage */}
           <p className="mb-4 flex items-center text-sm text-orange-600">
             <span className="mr-2">
@@ -173,11 +194,53 @@ const BarList = () => {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p
-                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
-                  >
-                    {`$${bar.price} (${bar.serving_size})`}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    {/* Conditionally render the IoTimeOutline icon if happy_hour is true */}
+                    {bar.happy_hour && (
+                      <button
+                        onClick={() => openModal(bar)}
+                        className="flex w-[24px] justify-center"
+                      >
+                        <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />
+                      </button>
+                    )}
+                    {/* Happy Hour Modal */}
+                    {isModalOpen && selectedBar && (
+                      <dialog open className="modal">
+                        {/* Darkening Overlay */}
+                        <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
+                        <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+                          <h3 className="text-left text-lg font-bold">
+                            {selectedBar.bar_name} Happy Hour
+                          </h3>
+                          <p className="pt-4 text-left">
+                            Day: {selectedBar.happy_hour_day} <br />
+                            Time:{" "}
+                            {convertTo12HourTime(
+                              selectedBar.happy_hour_start,
+                            )}{" "}
+                            - {convertTo12HourTime(selectedBar.happy_hour_end)}
+                          </p>
+                          <div className="modal-action m-0">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button
+                                onClick={closeModal}
+                                className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
+                              >
+                                Close
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
+                    )}{" "}
+                    <p
+                      className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                    >
+                      {`$${bar.price} (${bar.serving_size})`}
+                    </p>
+                  </div>
                   <p
                     className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
                   >

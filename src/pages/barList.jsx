@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { getBarPricesByLocation } from "../utils/useApi";
+import { IoTimeOutline } from "react-icons/io5"; // Import the icon
 
 const BarList = () => {
   const [city, setCity] = useState("");
@@ -27,8 +28,6 @@ const BarList = () => {
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
       }
-      console.log("Sorted data:", sortedData);
-
       setBarPrices(sortedData);
     } catch (error) {
       setError(error.message);
@@ -173,11 +172,17 @@ const BarList = () => {
                   </p>
                 </div>
                 <div className="text-right">
-                  <p
-                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
-                  >
-                    {`$${bar.price} (${bar.serving_size})`}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    {/* Conditionally render the IoTimeOutline icon if happy_hour is true */}
+                    {bar.happy_hour && (
+                      <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
+                    )}
+                    <p
+                      className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                    >
+                      {`$${bar.price} (${bar.serving_size})`}
+                    </p>
+                  </div>
                   <p
                     className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
                   >

@@ -8,6 +8,8 @@ const BarList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [barPrices, setBarPrices] = useState([]);
+  const [selectedBar, setSelectedBar] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
@@ -62,6 +64,18 @@ const BarList = () => {
     const millilitres = servingSize.replace("ml", "");
     const pricePer100Ml = (price * 100) / millilitres;
     return pricePer100Ml.toFixed(2);
+  };
+
+  const openModal = (bar) => {
+    setSelectedBar(bar);
+    setIsModalOpen(true);
+    document.body.classList.add("modal-open");
+  };
+
+  const closeModal = () => {
+    setSelectedBar(null);
+    setIsModalOpen(false);
+    document.body.classList.remove("modal-open");
   };
 
   // Placeholder data for bars
@@ -175,8 +189,38 @@ const BarList = () => {
                   <div className="flex items-center gap-2">
                     {/* Conditionally render the IoTimeOutline icon if happy_hour is true */}
                     {bar.happy_hour && (
-                      <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
+                      <button onClick={() => openModal(bar)}>
+                        <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
+                      </button>
                     )}
+                    {/* Happy Hour Modal */}
+                    {isModalOpen && selectedBar && (
+                      <dialog open className="modal">
+                        {/* Darkening Overlay */}
+                        <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
+                        <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+                          <h3 className="text-left text-lg font-bold">
+                            {selectedBar.bar_name} Happy Hour
+                          </h3>
+                          <p className="pt-4 text-left">
+                            Day: {selectedBar.happy_hour_day} <br />
+                            Time: {selectedBar.happy_hour_start} -{" "}
+                            {selectedBar.happy_hour_end}
+                          </p>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button
+                                onClick={closeModal}
+                                className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
+                              >
+                                Close
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
+                    )}{" "}
                     <p
                       className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
                     >

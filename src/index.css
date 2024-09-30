@@ -82,3 +82,8 @@ body {
   flex-grow: 1;
   overflow-y: auto;
 }
+
+/* Fix black bar where scrollbar is when modal is open */
+:root:has(.modal-open) {
+  scrollbar-gutter: auto !important;
+}

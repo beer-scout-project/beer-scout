@@ -156,7 +156,7 @@ const BarList = () => {
 
       {/* Main content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <div className="h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
+        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
           {/* Display city from localStorage */}
           <p className="mb-4 flex items-center text-sm text-orange-600">
             <span className="mr-2">

@@ -76,10 +76,8 @@ const AddBarForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-[10px] sm:mx-4 md:mx-auto rounded-lg bg-white p-6 shadow-lg">
-      <h2 className="mb-4 text-2xl font-bold text-black">
-        Add a Beer Price
-      </h2>
+    <div className="mx-[10px] max-w-lg rounded-lg bg-white p-6 shadow-lg sm:mx-4 md:mx-auto">
+      <h2 className="mb-4 text-2xl font-bold text-black">Add a Beer Price</h2>
       <form onSubmit={handleSubmit}>
         {/* Bar Name */}
         <div className="form-control mb-4">
@@ -92,13 +90,13 @@ const AddBarForm = () => {
             value={formData.bar_name}
             onChange={handleChange}
             placeholder="Type here"
-            className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
+            className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
             required
           />
         </div>
 
         {/* Location */}
-        {/*<div className="form-control mb-4">
+        <div className="form-control mb-4">
           <label className="label">
             <span className="label-text text-black">Location</span>
           </label>
@@ -106,7 +104,7 @@ const AddBarForm = () => {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
+            className="select select-bordered w-full max-w-xs bg-base-200 text-secondary-content"
             required
           >
             <option value="" disabled>
@@ -115,7 +113,7 @@ const AddBarForm = () => {
             <option value="st_johns">St. John's</option>
             <option value="halifax">Halifax</option>
           </select>
-        </div>*/}
+        </div>
 
         {/* Serving Size */}
         <div className="form-control mb-4">
@@ -126,7 +124,7 @@ const AddBarForm = () => {
             name="serving_size"
             value={formData.serving_size}
             onChange={handleChange}
-            className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
+            className="select select-bordered w-full max-w-xs bg-base-200 text-secondary-content"
             required
           >
             <option value="" disabled>
@@ -153,7 +151,7 @@ const AddBarForm = () => {
             value={formData.price}
             onChange={handleChange}
             placeholder="Enter price"
-            className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
+            className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
             step="0.01"
             required
           />
@@ -185,7 +183,7 @@ const AddBarForm = () => {
                 name="happy_hour_day"
                 value={formData.happy_hour_day}
                 onChange={handleChange}
-                className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
+                className="select select-bordered w-full max-w-xs bg-base-200 text-secondary-content"
                 required={formData.happy_hour}
               >
                 <option value="">Select a day</option>
@@ -211,7 +209,7 @@ const AddBarForm = () => {
                 name="happy_hour_start"
                 value={formData.happy_hour_start}
                 onChange={handleChange}
-                className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
+                className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
                 required={formData.happy_hour}
               />
             </div>
@@ -228,7 +226,7 @@ const AddBarForm = () => {
                 name="happy_hour_end"
                 value={formData.happy_hour_end}
                 onChange={handleChange}
-                className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
+                className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
                 required={formData.happy_hour}
               />
             </div>

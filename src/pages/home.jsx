@@ -21,7 +21,7 @@ const home = () => {
     <div
       className="hero min-h-full"
       style={{
-        backgroundImage: "url(/beer-scout-hero.png)",
+        backgroundImage: "url(/beer-scout-hero-2.png)",
       }}
     >
       <div className="hero-overlay bg-black bg-opacity-60"></div>

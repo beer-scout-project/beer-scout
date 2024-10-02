@@ -2,8 +2,7 @@
 import { Link } from "react-router-dom";
 
 const home = () => {
-
-  const selectedCity = "st_johns"
+  const selectedCity = "st_johns";
 
   //Code for drop down list if additional cities added
   /*const [selectedCity, setSelectedCity] = useState("");
@@ -22,7 +21,7 @@ const home = () => {
     <div
       className="hero min-h-full"
       style={{
-        backgroundImage: "url(/drinks-with-friends-1920x1080.png)",
+        backgroundImage: "url(/beer-scout-hero.png)",
       }}
     >
       <div className="hero-overlay bg-black bg-opacity-60"></div>

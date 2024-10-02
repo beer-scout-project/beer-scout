@@ -10,16 +10,14 @@ const BarList = () => {
   const [barPrices, setBarPrices] = useState([]);
   //const [selectedBar, setSelectedBar] = useState(null);
   //const [isModalOpen, setIsModalOpen] = useState(false);
-  
 
   //starting sort by if happy hour is current
   const currentDate = new Date();
   const day = currentDate.getDate();
   const currentHour = currentDate.getHours();
   const currentMinutes = currentDate.getMinutes();
-  const currentTime = `${currentHour}:${currentMinutes < 10 ? '0' : ''}${currentMinutes}`;
+  const currentTime = `${currentHour}:${currentMinutes < 10 ? "0" : ""}${currentMinutes}`;
 
- 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
     const storedCity = localStorage.getItem("city");
@@ -83,7 +81,7 @@ const BarList = () => {
     return pricePer100Ml.toFixed(2);
   };
 
- /* const openModal = (bar) => {
+  /* const openModal = (bar) => {
     setSelectedBar(bar);
     setIsModalOpen(true);
     document.body.classList.add("modal-open");
@@ -95,7 +93,7 @@ const BarList = () => {
     document.body.classList.remove("modal-open");
   };*/
 
-    return (
+  return (
     <div
       className="relative h-full bg-cover bg-center"
       style={{ backgroundImage: "url('/drinks-with-friends-1920x1080.png')" }}
@@ -118,7 +116,7 @@ const BarList = () => {
           <h2 className="mb-4 mt-2 text-2xl font-bold text-[#2f2f2f]">
             Cheapest Beer Now
           </h2>
-             
+
           {/* Bars List */}
           <div className="space-y-4">
             {barPrices?.map((bar, index) => (
@@ -140,20 +138,20 @@ const BarList = () => {
                     className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
                   >
                     Updated: {formatDate(bar.created_at)}
-                  </p>   
+                  </p>
                   {bar.happy_hour && (
                     <p
                       className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
                     >
                       {/*Need to format so icon is on same row as happy hour time, maybe centred in middle of bottom row */}
-                      <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />                     
+                      <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />
                       Happy hour price until:{" "}
                       {convertTo12HourTime(bar.happy_hour_end)}
-                    </p>   
+                    </p>
                   )}
                 </div>
                 <div className="text-right">
-                  <div className="flex items-center gap-2">                
+                  <div className="flex items-center gap-2">
                     <p
                       className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
                     >
@@ -165,9 +163,7 @@ const BarList = () => {
                   >
                     {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
                   </p>
-             
                 </div>
-         
               </div>
             ))}
           </div>
@@ -179,67 +175,7 @@ const BarList = () => {
 
 export default BarList;
 
-/*// Placeholder data for bars
-  const bars = [
-    {
-      name: "The Hoppy",
-      price: "$4.50",
-      updated: "2023-10-01",
-      perLiter: "$9/l",
-      isHighlighted: true,
-    },
-    {
-      name: "Ale House",
-      price: "$5.00",
-      updated: "2023-09-28",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-    {
-      name: "Brew",
-      price: "$5.25",
-      updated: "2023-09-26",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-    {
-      name: "Crafty Bar",
-      price: "$5.50",
-      updated: "2023-09-20",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-    {
-      name: "Lager Lounge",
-      price: "$6.00",
-      updated: "2023-09-15",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-    {
-      name: "The Hoppy",
-      price: "$4.50",
-      updated: "2023-10-01",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-    {
-      name: "Ale House",
-      price: "$5.00",
-      updated: "2023-09-28",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-    {
-      name: "Brew",
-      price: "$5.25",
-      updated: "2023-09-26",
-      perLiter: "$9/l",
-      isHighlighted: false,
-    },
-  ];*/
-
-  /*  //Happy Hour Modal 
+/*  //Happy Hour Modal 
   {isModalOpen && selectedBar && (
     <dialog open className="modal">
        //Darkening Overlay 

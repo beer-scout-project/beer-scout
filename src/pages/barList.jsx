@@ -105,7 +105,7 @@ const BarList = () => {
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
           {/* Display city from localStorage */}
-          <p className="mb-4 flex items-center text-sm text-orange-600">
+          <p className="mb-2 flex items-center text-orange-600">
             <span className="mr-2">
               <FaLocationDot />
             </span>
@@ -113,7 +113,7 @@ const BarList = () => {
             {/*For When there are more cities
             {city ? ` ${city}` : "No location selected"}*/}
           </p>
-          <h2 className="mb-4 mt-2 text-2xl font-bold text-[#2f2f2f]">
+          <h2 className="mb-4 text-2xl font-bold text-[#2f2f2f]">
             Cheapest Beer Now
           </h2>
 

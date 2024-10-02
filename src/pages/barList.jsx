@@ -8,9 +8,18 @@ const BarList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [barPrices, setBarPrices] = useState([]);
-  const [selectedBar, setSelectedBar] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [selectedBar, setSelectedBar] = useState(null);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
+  //starting sort by if happy hour is current
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const currentHour = currentDate.getHours();
+  const currentMinutes = currentDate.getMinutes();
+  const currentTime = `${currentHour}:${currentMinutes < 10 ? '0' : ''}${currentMinutes}`;
+
+ 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
     const storedCity = localStorage.getItem("city");
@@ -74,7 +83,7 @@ const BarList = () => {
     return pricePer100Ml.toFixed(2);
   };
 
-  const openModal = (bar) => {
+ /* const openModal = (bar) => {
     setSelectedBar(bar);
     setIsModalOpen(true);
     document.body.classList.add("modal-open");
@@ -84,9 +93,93 @@ const BarList = () => {
     setSelectedBar(null);
     setIsModalOpen(false);
     document.body.classList.remove("modal-open");
-  };
+  };*/
 
-  // Placeholder data for bars
+    return (
+    <div
+      className="relative h-full bg-cover bg-center"
+      style={{ backgroundImage: "url('/drinks-with-friends-1920x1080.png')" }}
+    >
+      {/* darkening overlay */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+
+      {/* Main content */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
+        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
+          {/* Display city from localStorage */}
+          <p className="mb-4 flex items-center text-sm text-orange-600">
+            <span className="mr-2">
+              <FaLocationDot />
+            </span>
+            St. John&#39;s
+            {/*For When there are more cities
+            {city ? ` ${city}` : "No location selected"}*/}
+          </p>
+          <h2 className="mb-4 mt-2 text-2xl font-bold text-[#2f2f2f]">
+            Cheapest Beer Now
+          </h2>
+             
+          {/* Bars List */}
+          <div className="space-y-4">
+            {barPrices?.map((bar, index) => (
+              <div
+                key={index}
+                className={`flex items-center justify-between rounded-lg p-4 ${
+                  bar.isHighlighted
+                    ? "bg-[#D2691E] text-[#FAF9F6]"
+                    : "bg-[#FDEBD0]"
+                }`}
+              >
+                <div>
+                  <p
+                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                  >
+                    {bar.bar_name}
+                  </p>
+                  <p
+                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                  >
+                    Updated: {formatDate(bar.created_at)}
+                  </p>   
+                  {bar.happy_hour && (
+                    <p
+                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                    >
+                      {/*Need to format so icon is on same row as happy hour time, maybe centred in middle of bottom row */}
+                      <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />                     
+                      Happy hour price until:{" "}
+                      {convertTo12HourTime(bar.happy_hour_end)}
+                    </p>   
+                  )}
+                </div>
+                <div className="text-right">
+                  <div className="flex items-center gap-2">                
+                    <p
+                      className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                    >
+                      {`$${bar.price} (${bar.serving_size})`}
+                    </p>
+                  </div>
+                  <p
+                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                  >
+                    {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
+                  </p>
+             
+                </div>
+         
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BarList;
+
+/*// Placeholder data for bars
   const bars = [
     {
       name: "The Hoppy",
@@ -144,116 +237,36 @@ const BarList = () => {
       perLiter: "$9/l",
       isHighlighted: false,
     },
-  ];
+  ];*/
 
-  return (
-    <div
-      className="relative h-full bg-cover bg-center"
-      style={{ backgroundImage: "url('/drinks-with-friends-1920x1080.png')" }}
-    >
-      {/* darkening overlay */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-
-      {/* Main content */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-[#FAF9F6] p-6 shadow-lg">
-          {/* Display city from localStorage */}
-          <p className="mb-4 flex items-center text-sm text-orange-600">
-            <span className="mr-2">
-              <FaLocationDot />
-            </span>
-            St. John&#39;s
-            {/*For When there are more cities
-            {city ? ` ${city}` : "No location selected"}*/}
-          </p>
-          <h2 className="mb-4 mt-2 text-2xl font-bold text-[#2f2f2f]">
-            Cheapest Beer Now
-          </h2>
-
-          {/* Bars List */}
-          <div className="space-y-4">
-            {barPrices?.map((bar, index) => (
-              <div
-                key={index}
-                className={`flex items-center justify-between rounded-lg p-4 ${
-                  bar.isHighlighted
-                    ? "bg-[#D2691E] text-[#FAF9F6]"
-                    : "bg-[#FDEBD0]"
-                }`}
-              >
-                <div>
-                  <p
-                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
-                  >
-                    {bar.bar_name}
-                  </p>
-                  <p
-                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                  >
-                    Updated: {formatDate(bar.created_at)}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="flex items-center gap-2">
-                    {/* Conditionally render the IoTimeOutline icon if happy_hour is true */}
-                    {bar.happy_hour && (
-                      <button
-                        onClick={() => openModal(bar)}
-                        className="flex w-[24px] justify-center"
-                      >
-                        <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />
-                      </button>
-                    )}
-                    {/* Happy Hour Modal */}
-                    {isModalOpen && selectedBar && (
-                      <dialog open className="modal">
-                        {/* Darkening Overlay */}
-                        <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
-                        <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
-                          <h3 className="text-left text-lg font-bold">
-                            {selectedBar.bar_name} Happy Hour
-                          </h3>
-                          <p className="pt-4 text-left">
-                            Day: {selectedBar.happy_hour_day} <br />
-                            Time:{" "}
-                            {convertTo12HourTime(
-                              selectedBar.happy_hour_start,
-                            )}{" "}
-                            - {convertTo12HourTime(selectedBar.happy_hour_end)}
-                          </p>
-                          <div className="modal-action m-0">
-                            <form method="dialog">
-                              {/* if there is a button in form, it will close the modal */}
-                              <button
-                                onClick={closeModal}
-                                className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
-                              >
-                                Close
-                              </button>
-                            </form>
-                          </div>
-                        </div>
-                      </dialog>
-                    )}{" "}
-                    <p
-                      className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
-                    >
-                      {`$${bar.price} (${bar.serving_size})`}
-                    </p>
-                  </div>
-                  <p
-                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                  >
-                    {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+  /*  //Happy Hour Modal 
+  {isModalOpen && selectedBar && (
+    <dialog open className="modal">
+       //Darkening Overlay 
+      <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
+      <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+        <h3 className="text-left text-lg font-bold">
+          {selectedBar.bar_name} Happy Hour
+        </h3>
+        <p className="pt-4 text-left">
+          Day: {selectedBar.happy_hour_day} <br />
+          Time:{" "}
+          {convertTo12HourTime(
+            selectedBar.happy_hour_start,
+          )}{" "}
+          - {convertTo12HourTime(selectedBar.happy_hour_end)}
+        </p>
+        <div className="modal-action m-0">
+          <form method="dialog">
+            // if there is a button in form, it will close the modal 
+            <button
+              onClick={closeModal}
+              className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
+            >
+              Close
+            </button>
+          </form>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default BarList;
+    </dialog>
+  )}{" "}*/

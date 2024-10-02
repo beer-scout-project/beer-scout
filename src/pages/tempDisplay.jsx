@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { getBarPricesByLocation } from "../utils/useApi";
 import { IoTimeOutline } from "react-icons/io5"; // Import the icon
 
@@ -36,7 +36,7 @@ const TempDisplay = () => {
     <div className="p-4">
       {/* button for search this is locked to st_johns manually but we should take location from dropdown when handle submit/fetch bar prices for that location */}
       <button onClick={fetchBarPrices} className="btn btn-primary">
-        Search for St. John's
+        Search for St. John&#39;s
       </button>
 
       {/* loading state - this also looks like shit please make it nicer for production */}
@@ -63,7 +63,7 @@ const TempDisplay = () => {
               )}
 
               <p className="text-lg font-bold">{bar.bar_name}</p>
-              <p>Location: {bar.location}</p>
+              <p>Location: St. John&#39;s</p>
               <p>Serving Size: {bar.serving_size}</p>
 
               {/* ensure price is a number and handle null/undefined values */}

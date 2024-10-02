@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { addBarPrice } from "../utils/useApi";
 
 const AddBarForm = () => {
@@ -78,7 +78,7 @@ const AddBarForm = () => {
   return (
     <div className="max-w-lg mx-[10px] sm:mx-4 md:mx-auto rounded-lg bg-white p-6 shadow-lg">
       <h2 className="mb-4 text-2xl font-bold text-black">
-        Add a New Bar Price
+        Add a Beer Price
       </h2>
       <form onSubmit={handleSubmit}>
         {/* Bar Name */}

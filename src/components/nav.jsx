@@ -22,9 +22,9 @@ const nav = () => {
       </div>
       <div className="flex-none">
         {/* temp buttons */}
-        <Link to="/temp" className="btn btn-ghost">
+        {/*<Link to="/temp" className="btn btn-ghost">
           temp display
-        </Link>
+        </Link>*/}
         <Link to="/add-bar" className="btn btn-ghost">
           add bar
         </Link>

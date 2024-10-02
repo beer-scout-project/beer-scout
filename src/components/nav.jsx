@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBeer } from "react-icons/fa";
-import { FaInfo } from "react-icons/fa";
+import { FaBeer, FaInfo } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 const nav = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
@@ -22,17 +22,14 @@ const nav = () => {
       </div>
       <div className="flex-none">
         {/* temp buttons */}
-        {/*<Link to="/temp" className="btn btn-ghost">
-          temp display
-        </Link>*/}
-        <Link to="/add-bar" className="btn btn-ghost">
-          add bar
+        <Link to="/add-bar" className="btn btn-circle btn-ghost mr-2">
+          <FaPlus size={20} />
         </Link>
-        <Link to="/about" className="btn btn-ghost">
+        <Link to="/about" className="btn btn-circle btn-ghost mr-2">
           <FaInfo size={20} />
         </Link>
         {/* end of temp buttons */}
-        <button className="btn btn-square btn-ghost">
+        <button className="btn btn-circle btn-ghost">
           <label className="swap swap-rotate">
             <input
               type="checkbox"

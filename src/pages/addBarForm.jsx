@@ -113,7 +113,7 @@ const AddBarForm = () => {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                className="select select-bordered w-full max-w-xs bg-base-200 text-secondary-content"
+                className="select select-bordered w-full bg-base-200 text-secondary-content"
                 required
               >
                 <option value="" disabled>
@@ -132,7 +132,7 @@ const AddBarForm = () => {
                 name="serving_size"
                 value={formData.serving_size}
                 onChange={handleChange}
-                className="select select-bordered w-full max-w-xs bg-base-200 text-secondary-content"
+                className="select select-bordered w-full bg-base-200 text-secondary-content"
                 required
               >
                 <option value="" disabled>
@@ -158,13 +158,13 @@ const AddBarForm = () => {
                 value={formData.price}
                 onChange={handleChange}
                 placeholder="Enter price"
-                className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
+                className="input input-bordered w-full bg-base-200 text-secondary-content"
                 step="0.01"
                 required
               />
             </div>
             {/* Happy Hour Checkbox */}
-            <div className="form-control mb-4 max-w-xs">
+            <div className="form-control mb-4">
               <label className="label cursor-pointer">
                 <span className="label-text text-black">Happy Hour</span>
                 <input
@@ -190,7 +190,7 @@ const AddBarForm = () => {
                     name="happy_hour_day"
                     value={formData.happy_hour_day}
                     onChange={handleChange}
-                    className="select select-bordered w-full max-w-xs bg-base-200 text-secondary-content"
+                    className="select select-bordered w-full bg-base-200 text-secondary-content"
                     required={formData.happy_hour}
                   >
                     <option value="">Select a day</option>
@@ -215,7 +215,7 @@ const AddBarForm = () => {
                     name="happy_hour_start"
                     value={formData.happy_hour_start}
                     onChange={handleChange}
-                    className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
+                    className="input input-bordered w-full bg-base-200 text-secondary-content"
                     required={formData.happy_hour}
                   />
                 </div>
@@ -231,7 +231,7 @@ const AddBarForm = () => {
                     name="happy_hour_end"
                     value={formData.happy_hour_end}
                     onChange={handleChange}
-                    className="input input-bordered w-full max-w-xs bg-base-200 text-secondary-content"
+                    className="input input-bordered w-full bg-base-200 text-secondary-content"
                     required={formData.happy_hour}
                   />
                 </div>
@@ -239,7 +239,7 @@ const AddBarForm = () => {
             )}
             {/* Submit Button */}
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary w-full max-w-xs">
+              <button type="submit" className="btn btn-primary w-full">
                 Submit
               </button>
             </div>

@@ -105,6 +105,11 @@ const BarList = () => {
 
           {/* Bars List */}
           <div className="space-y-4">
+            {/* Display loading icon */}
+            {loading && (
+              <span className="loading loading-spinner ml-[49%] text-warning"></span>
+            )}
+
             {barPrices?.map((bar, index) => (
               <div
                 key={index}

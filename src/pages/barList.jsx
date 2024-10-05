@@ -108,48 +108,53 @@ const BarList = () => {
             {barPrices?.map((bar, index) => (
               <div
                 key={index}
-                className={`flex items-center justify-between rounded-lg p-4 ${
+                className={`flex flex-col gap-2 rounded-lg p-4 ${
                   bar.isHighlighted
                     ? "bg-[#D2691E] text-[#FAF9F6]"
                     : "bg-[#FDEBD0]"
                 }`}
               >
-                <div>
-                  <p
-                    className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
-                  >
-                    {bar.bar_name}
-                  </p>
-                  <p
-                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                  >
-                    Updated: {formatDate(bar.created_at)}
-                  </p>
-                  {bar.happy_hour && (
-                    <p
-                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                    >
-                      {/*Need to format so icon is on same row as happy hour time, maybe centred in middle of bottom row */}
-                      <IoTimeOutline className="color-[#2f2f2f] text-2xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center active:text-xl" />
-                      Happy hour price until:{" "}
-                      {convertTo12HourTime(bar.happy_hour_end)}
-                    </p>
-                  )}
-                </div>
-                <div className="text-right">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between">
+                  <div>
                     <p
                       className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
                     >
-                      {`$${bar.price} (${bar.serving_size})`}
+                      {bar.bar_name}
+                    </p>
+                    <p
+                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                    >
+                      Updated: {formatDate(bar.created_at)}
                     </p>
                   </div>
-                  <p
-                    className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                  >
-                    {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
-                  </p>
+                  <div className="text-right">
+                    <div className="flex items-center gap-2">
+                      <p
+                        className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                      >
+                        {`$${bar.price} (${bar.serving_size})`}
+                      </p>
+                    </div>
+                    <p
+                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                    >
+                      {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
+                    </p>
+                  </div>
                 </div>
+                {bar.happy_hour && (
+                  <div className="align-center flex gap-2">
+                    {/*Need to format so icon is on same row as happy hour time, maybe centred in middle of bottom row */}
+                    <IoTimeOutline className="color-[#2f2f2f] active:text-l text-xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center" />
+
+                    <p
+                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                    >
+                      Happy hour price until{" "}
+                      {convertTo12HourTime(bar.happy_hour_end)}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>

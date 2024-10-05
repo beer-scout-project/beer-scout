@@ -76,176 +76,179 @@ const AddBarForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-[10px] sm:mx-4 md:mx-auto rounded-lg bg-white p-6 shadow-lg">
-      <h2 className="mb-4 text-2xl font-bold text-black">
-        Add a Beer Price
-      </h2>
-      <form onSubmit={handleSubmit}>
-        {/* Bar Name */}
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text text-black">Bar Name</span>
-          </label>
-          <input
-            type="text"
-            name="bar_name"
-            value={formData.bar_name}
-            onChange={handleChange}
-            placeholder="Type here"
-            className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
-            required
-          />
-        </div>
-
-        {/* Location */}
-        {/*<div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text text-black">Location</span>
-          </label>
-          <select
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
-            required
-          >
-            <option value="" disabled>
-              Select your city
-            </option>
-            <option value="st_johns">St. John's</option>
-            <option value="halifax">Halifax</option>
-          </select>
-        </div>*/}
-
-        {/* Serving Size */}
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text text-black">Serving Size</span>
-          </label>
-          <select
-            name="serving_size"
-            value={formData.serving_size}
-            onChange={handleChange}
-            className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
-            required
-          >
-            <option value="" disabled>
-              Select serving size
-            </option>
-            <option value="355ml">Can (355 ml)</option>
-            <option value="473ml">Tall Can (473 ml)</option>
-            <option value="330ml">Bottle (330 ml)</option>
-            <option value="473ml">Pint (473 ml)</option>
-            <option value="568ml">Large Pint (568 ml)</option>
-            <option value="284ml">Half Pint (284 ml)</option>
-            <option value="1000ml">Pitcher (1000 ml)</option>
-          </select>
-        </div>
-
-        {/* Price */}
-        <div className="form-control mb-4">
-          <label className="label">
-            <span className="label-text text-black">Price ($)</span>
-          </label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="Enter price"
-            className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
-            step="0.01"
-            required
-          />
-        </div>
-
-        {/* Happy Hour Checkbox */}
-        <div className="form-control mb-4 max-w-xs">
-          <label className="label cursor-pointer">
-            <span className="label-text text-black">Happy Hour</span>
-            <input
-              type="checkbox"
-              name="happy_hour"
-              checked={formData.happy_hour}
-              onChange={handleChange}
-              className="checkbox-primary checkbox"
-            />
-          </label>
-        </div>
-
-        {/* Happy Hour Details */}
-        {formData.happy_hour && (
-          <>
-            {/* Happy Hour Day */}
+    <div
+      className="relative h-full bg-cover bg-center"
+      style={{ backgroundImage: "url('/drinks-with-friends-1920x1080.png')" }}
+    >
+      {/* darkening overlay */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
+        {/* Main content */}
+        <div className="mx-[10px] h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white p-6 shadow-lg sm:mx-4 md:mx-auto">
+          <h2 className="mb-4 text-2xl font-bold text-black">
+            Add a Beer Price
+          </h2>
+          <form onSubmit={handleSubmit}>
+            {/* Bar Name */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">Happy Hour Day</span>
+                <span className="label-text text-black">Bar Name</span>
+              </label>
+              <input
+                type="text"
+                name="bar_name"
+                value={formData.bar_name}
+                onChange={handleChange}
+                placeholder="Type here"
+                className="input input-bordered w-full bg-base-200 text-secondary-content"
+                required
+              />
+            </div>
+            {/* Location */}
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text text-black">Location</span>
               </label>
               <select
-                name="happy_hour_day"
-                value={formData.happy_hour_day}
+                name="location"
+                value={formData.location}
                 onChange={handleChange}
-                className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
-                required={formData.happy_hour}
+                className="select select-bordered w-full bg-base-200 text-secondary-content"
+                required
               >
-                <option value="">Select a day</option>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
+                <option value="" disabled>
+                  Select your city
+                </option>
+                <option value="st_johns">St. John's</option>
+                <option value="halifax">Halifax</option>
               </select>
             </div>
-
-            {/* Happy Hour Start */}
+            {/* Serving Size */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">
-                  Happy Hour Start Time
-                </span>
+                <span className="label-text text-black">Serving Size</span>
               </label>
-              <input
-                type="time"
-                name="happy_hour_start"
-                value={formData.happy_hour_start}
+              <select
+                name="serving_size"
+                value={formData.serving_size}
                 onChange={handleChange}
-                className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
-                required={formData.happy_hour}
-              />
+                className="select select-bordered w-full bg-base-200 text-secondary-content"
+                required
+              >
+                <option value="" disabled>
+                  Select serving size
+                </option>
+                <option value="355ml">Can (355 ml)</option>
+                <option value="473ml">Tall Can (473 ml)</option>
+                <option value="330ml">Bottle (330 ml)</option>
+                <option value="473ml">Pint (473 ml)</option>
+                <option value="568ml">Large Pint (568 ml)</option>
+                <option value="284ml">Half Pint (284 ml)</option>
+                <option value="1000ml">Pitcher (1000 ml)</option>
+              </select>
             </div>
-
-            {/* Happy Hour End */}
+            {/* Price */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">
-                  Happy Hour End Time
-                </span>
+                <span className="label-text text-black">Price ($)</span>
               </label>
               <input
-                type="time"
-                name="happy_hour_end"
-                value={formData.happy_hour_end}
+                type="number"
+                name="price"
+                value={formData.price}
                 onChange={handleChange}
-                className="input input-bordered w-full max-w-xs bg-base-100 text-base-content"
-                required={formData.happy_hour}
+                placeholder="Enter price"
+                className="input input-bordered w-full bg-base-200 text-secondary-content"
+                step="0.01"
+                required
               />
             </div>
-          </>
-        )}
-
-        {/* Submit Button */}
-        <div className="form-control mt-6">
-          <button type="submit" className="btn btn-primary w-full max-w-xs">
-            Submit
-          </button>
+            {/* Happy Hour Checkbox */}
+            <div className="form-control mb-4">
+              <label className="label cursor-pointer">
+                <span className="label-text text-black">Happy Hour</span>
+                <input
+                  type="checkbox"
+                  name="happy_hour"
+                  checked={formData.happy_hour}
+                  onChange={handleChange}
+                  className="checkbox-primary checkbox"
+                />
+              </label>
+            </div>
+            {/* Happy Hour Details */}
+            {formData.happy_hour && (
+              <>
+                {/* Happy Hour Day */}
+                <div className="form-control mb-4">
+                  <label className="label">
+                    <span className="label-text text-black">
+                      Happy Hour Day
+                    </span>
+                  </label>
+                  <select
+                    name="happy_hour_day"
+                    value={formData.happy_hour_day}
+                    onChange={handleChange}
+                    className="select select-bordered w-full bg-base-200 text-secondary-content"
+                    required={formData.happy_hour}
+                  >
+                    <option value="">Select a day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                  </select>
+                </div>
+                {/* Happy Hour Start */}
+                <div className="form-control mb-4">
+                  <label className="label">
+                    <span className="label-text text-black">
+                      Happy Hour Start Time
+                    </span>
+                  </label>
+                  <input
+                    type="time"
+                    name="happy_hour_start"
+                    value={formData.happy_hour_start}
+                    onChange={handleChange}
+                    className="input input-bordered w-full bg-base-200 text-secondary-content"
+                    required={formData.happy_hour}
+                  />
+                </div>
+                {/* Happy Hour End */}
+                <div className="form-control mb-4">
+                  <label className="label">
+                    <span className="label-text text-black">
+                      Happy Hour End Time
+                    </span>
+                  </label>
+                  <input
+                    type="time"
+                    name="happy_hour_end"
+                    value={formData.happy_hour_end}
+                    onChange={handleChange}
+                    className="input input-bordered w-full bg-base-200 text-secondary-content"
+                    required={formData.happy_hour}
+                  />
+                </div>
+              </>
+            )}
+            {/* Submit Button */}
+            <div className="form-control mt-6">
+              <button type="submit" className="btn btn-primary w-full">
+                Submit
+              </button>
+            </div>
+            {/* Success/Error messages */}
+            {success && <p className="mt-4 text-green-500">{success}</p>}
+            {error && <p className="mt-4 text-red-500">{error}</p>}
+          </form>
         </div>
-
-        {/* Success/Error messages */}
-        {success && <p className="mt-4 text-green-500">{success}</p>}
-        {error && <p className="mt-4 text-red-500">{error}</p>}
-      </form>
+      </div>
     </div>
   );
 };

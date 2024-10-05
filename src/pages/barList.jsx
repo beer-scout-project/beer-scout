@@ -82,7 +82,7 @@ const BarList = () => {
   return (
     <div
       className="relative h-full bg-cover bg-center"
-      style={{ backgroundImage: "url('/drinks-with-friends-1920x1080.png')" }}
+      style={{ backgroundImage: "url('/beer-scout-hero.png')" }}
     >
       {/* darkening overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>

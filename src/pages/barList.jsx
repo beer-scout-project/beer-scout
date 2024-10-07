@@ -9,12 +9,12 @@ const BarList = () => {
   const [error, setError] = useState(null);
   const [barPrices, setBarPrices] = useState([]);
 
-  //starting sort by if happy hour is current
+  /*starting sort by if happy hour is current
   const currentDate = new Date();
   const day = currentDate.getDate();
   const currentHour = currentDate.getHours();
   const currentMinutes = currentDate.getMinutes();
-  const currentTime = `${currentHour}:${currentMinutes < 10 ? "0" : ""}${currentMinutes}`;
+  const currentTime = `${currentHour}:${currentMinutes < 10 ? "0" : ""}${currentMinutes}`;*/
 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
@@ -29,8 +29,9 @@ const BarList = () => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      const data = await getBarPricesByLocation("st_johns");
-      const sortedData = sortBarsByPrice(data);
+      const data = await getBarPricesByLocation("st_johns"); //Get prices by location
+      const currentData = filterPricesByHappyHour(data);  //Only show prices that are currently active
+      const sortedData = sortBarsByPrice(currentData);  //Sort the list be price
       // highlight the bar with the lowest price
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
@@ -40,6 +41,32 @@ const BarList = () => {
       setError(error.message);
     }
     setLoading(false);
+  };
+
+  //Filter bars to show only current prices
+  const filterPricesByHappyHour = (data) => {
+    const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
+    const currentTime = new Date();
+
+    return data.filter((bar) => {
+      if (!bar.happy_hour) {
+        return true; 
+      }
+  
+      const barStartTime = new Date();
+      const [startHour, startMinute] = bar.happy_hour_start.split(":");
+      barStartTime.setHours(startHour, startMinute);
+  
+      const barEndTime = new Date();
+      const [endHour, endMinute] = bar.happy_hour_end.split(":");
+      barEndTime.setHours(endHour, endMinute);
+  
+      return (
+        bar.happy_hour_day === currentDay &&
+        currentTime >= barStartTime &&
+        currentTime <= barEndTime
+      );
+    });
   };
 
   // Function to format the date from the db to display to the user
@@ -82,7 +109,7 @@ const BarList = () => {
   return (
     <div
       className="relative h-full bg-cover bg-center"
-      style={{ backgroundImage: "url('/beer-scout-hero.png')" }}
+      style={{ backgroundImage: "url('/beerBackground.png')" }}
     >
       {/* darkening overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -149,7 +176,7 @@ const BarList = () => {
                 </div>
                 {bar.happy_hour && (
                   <div className="align-center flex gap-2">
-                    {/*Need to format so icon is on same row as happy hour time, maybe centred in middle of bottom row */}
+                    
                     <IoTimeOutline className="color-[#2f2f2f] active:text-l text-xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center" />
 
                     <p

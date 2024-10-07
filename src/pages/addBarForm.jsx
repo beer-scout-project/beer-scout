@@ -78,7 +78,7 @@ const AddBarForm = () => {
   return (
     <div
       className="relative h-full bg-cover bg-center"
-      style={{ backgroundImage: "url('/beer-scout-hero.png')" }}
+      style={{ backgroundImage: "url('/beerBackground.png')" }}
     >
       {/* darkening overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -119,7 +119,7 @@ const AddBarForm = () => {
                 <option value="" disabled>
                   Select your city
                 </option>
-                <option value="st_johns">St. John's</option>
+                <option value="st_johns">St. John&#39;s</option>
               </select>
             </div>
             {/* Serving Size */}

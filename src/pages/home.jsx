@@ -21,10 +21,10 @@ const home = () => {
     <div
       className="hero min-h-full"
       style={{
-        backgroundImage: "url(/beer-scout-hero-2.png)",
+        backgroundImage: "url(/beerBackground.png)",
       }}
     >
-      <div className="hero-overlay bg-black bg-opacity-60"></div>
+      <div className="hero-overlay bg-black bg-opacity-50"></div>
       <div className="hero-content text-center text-white">
         <div className="w-full">
           <h1 className="mb-5 text-5xl font-extrabold">Scouting Beer Deals?</h1>

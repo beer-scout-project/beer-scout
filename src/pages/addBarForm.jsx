@@ -84,15 +84,15 @@ const AddBarForm = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         {/* Main content */}
-        <div className="mx-[10px] h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white p-6 shadow-lg sm:mx-4 md:mx-auto">
-          <h2 className="mb-4 text-2xl font-bold text-black">
+        <div className="mx-[10px] h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-base-100 p-6 shadow-lg sm:mx-4 md:mx-auto">
+          <h2 className="mb-4 text-2xl font-bold text-base-content">
             Add a Beer Price
           </h2>
           <form onSubmit={handleSubmit}>
             {/* Bar Name */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">Bar Name</span>
+                <span className="label-text text-base-content">Bar Name</span>
               </label>
               <input
                 type="text"
@@ -107,7 +107,7 @@ const AddBarForm = () => {
             {/* Location */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">Location</span>
+                <span className="label-text text-base-content">Location</span>
               </label>
               <select
                 name="location"
@@ -125,7 +125,9 @@ const AddBarForm = () => {
             {/* Serving Size */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">Serving Size</span>
+                <span className="label-text text-base-content">
+                  Serving Size
+                </span>
               </label>
               <select
                 name="serving_size"
@@ -149,7 +151,7 @@ const AddBarForm = () => {
             {/* Price */}
             <div className="form-control mb-4">
               <label className="label">
-                <span className="label-text text-black">Price ($)</span>
+                <span className="label-text text-base-content">Price ($)</span>
               </label>
               <input
                 type="number"
@@ -165,7 +167,7 @@ const AddBarForm = () => {
             {/* Happy Hour Checkbox */}
             <div className="form-control mb-4">
               <label className="label cursor-pointer">
-                <span className="label-text text-black">Happy Hour</span>
+                <span className="label-text text-base-content">Happy Hour</span>
                 <input
                   type="checkbox"
                   name="happy_hour"
@@ -181,7 +183,7 @@ const AddBarForm = () => {
                 {/* Happy Hour Day */}
                 <div className="form-control mb-4">
                   <label className="label">
-                    <span className="label-text text-black">
+                    <span className="label-text text-base-content">
                       Happy Hour Day
                     </span>
                   </label>
@@ -205,7 +207,7 @@ const AddBarForm = () => {
                 {/* Happy Hour Start */}
                 <div className="form-control mb-4">
                   <label className="label">
-                    <span className="label-text text-black">
+                    <span className="label-text text-base-content">
                       Happy Hour Start Time
                     </span>
                   </label>
@@ -221,7 +223,7 @@ const AddBarForm = () => {
                 {/* Happy Hour End */}
                 <div className="form-control mb-4">
                   <label className="label">
-                    <span className="label-text text-black">
+                    <span className="label-text text-base-content">
                       Happy Hour End Time
                     </span>
                   </label>

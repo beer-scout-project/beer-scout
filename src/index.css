@@ -83,11 +83,7 @@ body {
   overflow-y: auto;
 }
 
-/* Fix black bar where scrollbar is when modal is open */
-:root:has(.modal-open) {
-  scrollbar-gutter: auto !important;
-}
-
+/* Fix tooltip color */
 .tooltip::before {
   color: #120000;
 }

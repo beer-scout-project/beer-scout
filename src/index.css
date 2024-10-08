@@ -87,3 +87,7 @@ body {
 :root:has(.modal-open) {
   scrollbar-gutter: auto !important;
 }
+
+.tooltip::before {
+  color: #120000;
+}

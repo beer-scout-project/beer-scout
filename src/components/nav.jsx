@@ -22,12 +22,19 @@ const nav = () => {
       </div>
       <div className="flex-none">
         {/* temp buttons */}
-        <Link to="/add-bar" className="btn btn-circle btn-ghost mr-2">
-          <FaPlus size={20} />
-        </Link>
-        <Link to="/about" className="btn btn-circle btn-ghost mr-2">
-          <FaInfo size={20} />
-        </Link>
+        <div
+          className="tooltip tooltip-bottom mr-2"
+          data-tip="Suggest a beer price"
+        >
+          <Link to="/add-bar" className="btn btn-circle btn-ghost">
+            <FaPlus size={20} />
+          </Link>
+        </div>
+        <div className="tooltip tooltip-bottom mr-2" data-tip="About Page">
+          <Link to="/about" className="btn btn-circle btn-ghost">
+            <FaInfo size={20} />
+          </Link>
+        </div>
         {/* end of temp buttons */}
         <button className="btn btn-circle btn-ghost">
           <label className="swap swap-rotate">

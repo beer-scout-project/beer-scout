@@ -30,8 +30,8 @@ const BarList = () => {
     setError(null); // Clear any previous errors
     try {
       const data = await getBarPricesByLocation("st_johns"); //Get prices by location
-      const currentData = filterPricesByHappyHour(data);  //Only show prices that are currently active
-      const sortedData = sortBarsByPrice(currentData);  //Sort the list be price
+      const currentData = filterPricesByHappyHour(data); //Only show prices that are currently active
+      const sortedData = sortBarsByPrice(currentData); //Sort the list be price
       // highlight the bar with the lowest price
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
@@ -50,17 +50,17 @@ const BarList = () => {
 
     return data.filter((bar) => {
       if (!bar.happy_hour) {
-        return true; 
+        return true;
       }
-  
+
       const barStartTime = new Date();
       const [startHour, startMinute] = bar.happy_hour_start.split(":");
       barStartTime.setHours(startHour, startMinute);
-  
+
       const barEndTime = new Date();
       const [endHour, endMinute] = bar.happy_hour_end.split(":");
       barEndTime.setHours(endHour, endMinute);
-  
+
       return (
         bar.happy_hour_day === currentDay &&
         currentTime >= barStartTime &&
@@ -176,8 +176,7 @@ const BarList = () => {
                 </div>
                 {bar.happy_hour && (
                   <div className="align-center flex gap-2">
-                    
-                    <IoTimeOutline className="color-[#2f2f2f] active:text-l text-xl text-[#D2691E] hover:text-[#2f2f2f] active:text-center" />
+                    <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
 
                     <p
                       className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}

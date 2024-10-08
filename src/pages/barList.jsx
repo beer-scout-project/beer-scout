@@ -9,13 +9,6 @@ const BarList = () => {
   const [error, setError] = useState(null);
   const [barPrices, setBarPrices] = useState([]);
 
-  /*starting sort by if happy hour is current
-  const currentDate = new Date();
-  const day = currentDate.getDate();
-  const currentHour = currentDate.getHours();
-  const currentMinutes = currentDate.getMinutes();
-  const currentTime = `${currentHour}:${currentMinutes < 10 ? "0" : ""}${currentMinutes}`;*/
-
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
     const storedCity = localStorage.getItem("city");
@@ -31,7 +24,7 @@ const BarList = () => {
     try {
       const data = await getBarPricesByLocation("st_johns"); //Get prices by location
       const currentData = filterPricesByHappyHour(data);  //Only show prices that are currently active
-      const sortedData = sortBarsByPrice(currentData);  //Sort the list be price
+      const sortedData = sortBarsByPrice(currentData);  //Sort the list by price
       // highlight the bar with the lowest price
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;

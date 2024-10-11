@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { addBarPrice } from "../utils/useApi";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 const AddBarForm = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const AddBarForm = () => {
 
   const [error, setError] = useState(null); // State for error handling
   const [success, setSuccess] = useState(null); // State for success message
+  const [validPrice, setValidPrice] = useState(null); // State for check if price is valid
+  const [validPriceMessage, setValidPriceMessage] = useState(null); // State for message if pi
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -23,6 +27,10 @@ const AddBarForm = () => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const handleClose = () => {
+    setError(null);
   };
 
   // Handle form submission
@@ -112,7 +120,34 @@ const AddBarForm = () => {
     >
       {/* darkening overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
+
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
+        {error && (
+          <div
+            role="alert"
+            className="custom-md:max-w-max alert alert-warning absolute right-4 top-4 flex w-[300px] min-w-[300px] justify-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span>{error}</span>
+            <button onClick={handleClose}>
+              {/* <IoMdCloseCircleOutline className="h-[1.2rem] w-[1.2rem]" /> */}
+              <IoCloseCircleSharp className="h-[1.3rem] w-[1.3rem]" />
+            </button>
+          </div>
+        )}
+
         {/* Main content */}
         <div className="mx-[10px] h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-base-100 p-6 shadow-lg sm:mx-4 md:mx-auto">
           <h2 className="mb-4 text-2xl font-bold text-base-content">
@@ -276,7 +311,6 @@ const AddBarForm = () => {
             </div>
             {/* Success/Error messages */}
             {success && <p className="mt-4 text-green-500">{success}</p>}
-            {error && <p className="mt-4 text-red-500">{error}</p>}
           </form>
         </div>
       </div>

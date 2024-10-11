@@ -50,6 +50,36 @@ const AddBarForm = () => {
       // create price range validation function
     }
 
+    // Function to get price per millilitre
+    const getPricePer100Ml = (price, servingSize) => {
+      // remove ml from serving size
+      const millilitres = servingSize.replace("ml", "");
+      const pricePer100Ml = (price * 100) / millilitres;
+      return pricePer100Ml.toFixed(2);
+    };
+
+    // Function to check if the user entered an obviously incorrect price
+    const validatePrice = () => {
+      const pricePer100Ml = getPricePer100Ml(
+        formData.price,
+        formData.serving_size,
+      );
+      if (pricePer100Ml < 0.5) {
+        return "This price seems too good to be true! Please check the price you entered.";
+      }
+      if (pricePer100Ml > 5) {
+        return "That's one expensive beer! Please check the price you entered.";
+      }
+      return null;
+    };
+
+    // Run price validation
+    const priceValidationMessage = validatePrice();
+    if (priceValidationMessage) {
+      setError(priceValidationMessage);
+      return;
+    }
+
     try {
       // Send *formData* json to the backend
       const response = await addBarPrice(formData);

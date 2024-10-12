@@ -23,8 +23,8 @@ const BarList = () => {
     setError(null); // Clear any previous errors
     try {
       const data = await getBarPricesByLocation("st_johns"); //Get prices by location
-      const currentData = filterPricesByHappyHour(data);  //Only show prices that are currently active
-      const sortedData = sortBarsByPrice(currentData);  //Sort the list by price
+      const currentData = filterPricesByHappyHour(data); //Only show prices that are currently active
+      const sortedData = sortBarsByPrice(currentData); //Sort the list by price
       // highlight the bar with the lowest price
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
@@ -60,6 +60,26 @@ const BarList = () => {
         currentTime <= barEndTime
       );
     });
+  };
+
+  // Function to get the description based on the size
+  const getBeerDescriptionFromSize = (size) => {
+    switch (size) {
+      case "268ml":
+        return "Half Pints";
+      case "330ml":
+        return "Bottles";
+      case "355ml":
+        return "Cans";
+      case "473ml":
+        return "16oz Pints";
+      case "591ml":
+        return "20oz Pints";
+      case "1140ml":
+        return "Pitchers";
+      default:
+        return size;
+    }
   };
 
   // Function to format the date from the db to display to the user
@@ -130,57 +150,62 @@ const BarList = () => {
               <span className="loading loading-spinner ml-[49%] text-warning"></span>
             )}
 
-            {barPrices?.map((bar, index) => (
-              <div
-                key={index}
-                className={`flex flex-col gap-2 rounded-lg p-4 ${
-                  bar.isHighlighted
-                    ? "bg-[#D2691E] text-[#FAF9F6]"
-                    : "bg-[#fcdcad]"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p
-                      className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
-                    >
-                      {bar.bar_name}
-                    </p>
-                    <p
-                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                    >
-                      Updated: {formatDate(bar.created_at)}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <div className="flex items-center gap-2">
+            {barPrices?.map((bar, index) => {
+              let beerDescription = getBeerDescriptionFromSize(
+                bar.serving_size,
+              );
+              return (
+                <div
+                  key={index}
+                  className={`flex flex-col gap-2 rounded-lg p-4 ${
+                    bar.isHighlighted
+                      ? "bg-[#D2691E] text-[#FAF9F6]"
+                      : "bg-[#fcdcad]"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
                       <p
                         className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
                       >
-                        {`$${bar.price} (${bar.serving_size})`}
+                        {bar.bar_name}
+                      </p>
+                      <p
+                        className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                      >
+                        Updated: {formatDate(bar.created_at)}
                       </p>
                     </div>
-                    <p
-                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                    >
-                      {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
-                    </p>
+                    <div className="text-right">
+                      <div className="flex items-center gap-2">
+                        <p
+                          className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                        >
+                          {`$${bar.price} ${beerDescription}`}
+                        </p>
+                      </div>
+                      <p
+                        className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                      >
+                        {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                {bar.happy_hour && (
-                  <div className="align-center flex gap-2">
-                    <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
+                  {bar.happy_hour && (
+                    <div className="align-center flex gap-2">
+                      <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
 
-                    <p
-                      className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
-                    >
-                      Happy hour price until{" "}
-                      {convertTo12HourTime(bar.happy_hour_end)}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+                      <p
+                        className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                      >
+                        Happy hour price today until{" "}
+                        {convertTo12HourTime(bar.happy_hour_end)}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

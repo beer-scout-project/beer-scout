@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { addBarPrice } from "../utils/useApi";
-import { IoMdCloseCircleOutline } from "react-icons/io";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
 const AddBarForm = () => {
@@ -17,8 +16,6 @@ const AddBarForm = () => {
 
   const [error, setError] = useState(null); // State for error handling
   const [success, setSuccess] = useState(null); // State for success message
-  const [validPrice, setValidPrice] = useState(null); // State for check if price is valid
-  const [validPriceMessage, setValidPriceMessage] = useState(null); // State for message if pi
 
   // Handle form field changes
   const handleChange = (e) => {
@@ -55,7 +52,6 @@ const AddBarForm = () => {
     if (!formData.price || isNaN(formData.price)) {
       setError("Valid price is required.");
       return;
-      // create price range validation function
     }
 
     // Function to get price per millilitre
@@ -125,7 +121,7 @@ const AddBarForm = () => {
         {error && (
           <div
             role="alert"
-            className="custom-md:max-w-max alert alert-warning absolute right-4 top-4 flex w-[300px] min-w-[300px] justify-center"
+            className="alert alert-warning absolute right-4 top-4 flex w-80 justify-center rounded-lg sm:w-[max-content]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

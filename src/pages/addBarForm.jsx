@@ -26,7 +26,11 @@ const AddBarForm = () => {
     });
   };
 
-  const handleClose = () => {
+  const handleCloseSuccess = () => {
+    setSuccess(null);
+  };
+
+  const handleCloseAlert = () => {
     setError(null);
   };
 
@@ -118,6 +122,31 @@ const AddBarForm = () => {
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
+        {/* Success/Error messages */}
+        {success && (
+          <div
+            role="alert"
+            className="alert alert-success absolute right-4 top-4 z-10 flex max-w-max justify-center rounded-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>{" "}
+            <span>{success}</span>
+            <button onClick={handleCloseSuccess}>
+              <IoCloseCircleSharp className="h-[1.3rem] w-[1.3rem]" />
+            </button>
+          </div>
+        )}
         {error && (
           <div
             role="alert"
@@ -137,7 +166,7 @@ const AddBarForm = () => {
               />
             </svg>
             <span>{error}</span>
-            <button onClick={handleClose}>
+            <button onClick={handleCloseAlert}>
               {/* <IoMdCloseCircleOutline className="h-[1.2rem] w-[1.2rem]" /> */}
               <IoCloseCircleSharp className="h-[1.3rem] w-[1.3rem]" />
             </button>
@@ -305,8 +334,6 @@ const AddBarForm = () => {
                 Submit
               </button>
             </div>
-            {/* Success/Error messages */}
-            {success && <p className="mt-4 text-green-500">{success}</p>}
           </form>
         </div>
       </div>

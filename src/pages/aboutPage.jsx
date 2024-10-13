@@ -74,6 +74,69 @@ export default function AboutPage() {
               </ol>
             </div>
           </div>
+          <div className="flex flex-col gap-4">
+            <h4>Terms of Service</h4>
+            <p>
+            Welcome to Beer Scout, your go-to resource for finding the best beer deals in Downtown St. John&#39;s, Newfoundland. By accessing or using our website, you agree to the following terms and conditions:
+            </p>
+            <ol className="list-decimal pl-5">
+              <li>
+                General Information
+              </li>
+              <p>
+                Beer Scout provides information about beer deals and pricing around St. John’s. Our platform relies on user-submitted content, meaning deals and promotions are contributed by the community. We strive to ensure that the information provided is accurate, but we cannot guarantee the accuracy, completeness, or timeliness of any listing.
+              </p>
+              <br />
+              <li>
+                User Responsibilities
+              </li>
+              <p>
+                By using Beer Scout, you agree to:
+                <ul>
+                  <li>
+                    •	Provide accurate and truthful information when submitting deals.
+                  </li>
+                  <li>
+                    •	Respect the intellectual property rights of Beer Scout and other users.
+                  </li>
+                  <li>
+                    •	Not use the website for any illegal or harmful purposes.
+                  </li>
+                  <li>
+                    •	Acknowledge that Beer Scout is for personal use only and not for commercial purposes.
+                  </li>
+                </ul>
+              </p>
+              <br />
+              <li>
+                Content Submission
+              </li>
+              <p>
+                When submitting beer deals or other content to Beer Scout, you grant us the right to display and share this content on our platform. You are responsible for ensuring that your submissions do not infringe on any third-party rights or violate any laws.  
+              </p>
+              <br />
+              <li>
+                Limitation of Liability
+              </li>
+              <p>
+                Beer Scout is not responsible for any inaccuracies in user-submitted content or any loss or damage resulting from the use of our website. We do not guarantee the availability or accuracy of any deals listed, as pricing and promotions may change at any time.  
+              </p>
+              <br />
+              <li>
+                Third-Party Links
+              </li>
+              <p>
+                Beer Scout may include links to third-party websites or promotions. We do not control or endorse these external sites and are not responsible for their content or practices.  
+              </p>
+              <br />
+              <li>
+                Changes to the Terms
+              </li>
+              <p>
+                Beer Scout reserves the right to modify these terms at any time. Any changes will be posted on this page, and your continued use of the website constitutes acceptance of these modifications.
+              </p>
+            </ol>
+          </div>
         </div>
       </div>
     </div>

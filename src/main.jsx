@@ -8,7 +8,7 @@ import Nav from "./components/nav.jsx";
 import Home from "./pages/home.jsx";
 import BarList from "./pages/barList.jsx";
 import AddBarForm from "./pages/addBarForm.jsx";
-// temp
+// t
 import TempDisplay from "./pages/tempDisplay.jsx";
 import AboutPage from "./pages/aboutPage.jsx";
 

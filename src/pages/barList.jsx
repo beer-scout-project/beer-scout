@@ -55,7 +55,7 @@ const BarList = () => {
       barEndTime.setHours(endHour, endMinute);
 
       return (
-        bar.happy_hour_day === currentDay &&
+        bar.happy_hour_day.includes(currentDay) &&
         currentTime >= barStartTime &&
         currentTime <= barEndTime
       );

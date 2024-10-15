@@ -9,7 +9,7 @@ const AddBarForm = () => {
     serving_size: "",
     price: "",
     happy_hour: false,
-    happy_hour_day: "",
+    happy_hour_day: [],
     happy_hour_start: "",
     happy_hour_end: "",
   }); // State for form data on load
@@ -18,12 +18,27 @@ const AddBarForm = () => {
   const [success, setSuccess] = useState(null); // State for success message
 
   // Handle form field changes
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+  
+    if (name === "happy_hour_day") {
+      if (checked) {
+        setFormData(prevData => ({
+          ...prevData,
+          happy_hour_day: [...prevData.happy_hour_day, value],
+        }));
+      } else {
+        setFormData(prevData => ({
+          ...prevData,
+          happy_hour_day: prevData.happy_hour_day.filter(day => day !== value),
+        }));
+      }
+    } else {
+      setFormData(prevData => ({
+        ...prevData,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+    }
   };
 
   const handleCloseSuccess = () => {
@@ -103,7 +118,7 @@ const AddBarForm = () => {
         serving_size: "",
         price: "",
         happy_hour: false,
-        happy_hour_day: "",
+        happy_hour_day: [],
         happy_hour_start: "",
         happy_hour_end: "",
       });
@@ -195,7 +210,7 @@ const AddBarForm = () => {
                 <option value="Bannerman Brewing Co.">Bannerman Brewing Co.</option>
                 <option value="Bernard Stanley Gastropub">Bernard Stanley Gastropub</option>
                 <option value="Boston Pizza">Boston Pizza</option>
-                <option value="Brewdock">Brewdocky</option>
+                <option value="Brewdock">Brewdock</option>
                 <option value="Bridie Molloy's">Bridie Molloy&#39;s</option>
                 <option value="Broderick's on George">Broderick&#39;s on George</option>
                 <option value="Bull & Barrel">Bull & Barrel</option>
@@ -327,22 +342,98 @@ const AddBarForm = () => {
                       Happy Hour Day
                     </span>
                   </label>
-                  <select
-                    name="happy_hour_day"
-                    value={formData.happy_hour_day}
-                    onChange={handleChange}
-                    className="select select-bordered w-full bg-base-200 text-secondary-content"
-                    required={formData.happy_hour}
-                  >
-                    <option value="">Select a day</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
-                  </select>
+                  <div className="checkbox-group">
+                    {/* Monday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Monday"
+                        checked={formData.happy_hour_day.includes("Monday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Monday</span>
+                    </label>
+                    <br />
+                    {/* Tuesday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Tuesday"
+                        checked={formData.happy_hour_day.includes("Tuesday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Tuesday</span>
+                    </label>
+                    <br />
+                    {/* Wednesday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Wednesday"
+                        checked={formData.happy_hour_day.includes("Wednesday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Wednesday</span>
+                    </label>
+                    <br />
+                    {/* Thursday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Thursday"
+                        checked={formData.happy_hour_day.includes("Thursday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Thursday</span>
+                    </label>
+                    <br />
+                    {/* Friday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Friday"
+                        checked={formData.happy_hour_day.includes("Friday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Friday</span>
+                    </label>
+                    <br />
+                    {/* Saturday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Saturday"
+                        checked={formData.happy_hour_day.includes("Saturday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Saturday</span>
+                    </label>
+                    <br />
+                    {/* Sunday */}
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="happy_hour_day"
+                        value="Sunday"
+                        checked={formData.happy_hour_day.includes("Sunday")}
+                        onChange={handleChange}
+                        className="checkbox checkbox-primary"
+                      />
+                      <span className="ml-2">Sunday</span>
+                    </label>
+                  </div>
                 </div>
                 {/* Happy Hour Start */}
                 <div className="form-control mb-4">

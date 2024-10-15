@@ -1,4 +1,7 @@
-const apiUrl = "http://localhost:8787";
+const apiUrl =
+  import.meta.env.MODE === "production"
+    ? "https://beer-scout-backend-production.up.railway.app" // Production backend URL
+    : "http://localhost:8787"; // Development backend URL
 
 export async function addBarPrice(barData) {
   try {

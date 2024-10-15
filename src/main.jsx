@@ -13,7 +13,7 @@ import TempDisplay from "./pages/tempDisplay.jsx";
 import AboutPage from "./pages/aboutPage.jsx";
 
 const App = () => (
-  <Router basename="/beer-scout/">
+  <Router>
     <div className="app-container">
       <Nav />
       <div className="content-container">

@@ -36,7 +36,7 @@ const BarList = () => {
     setLoading(false);
   };
 
-  //Filter bars to show only current prices
+  // Filter bars to show only current prices
   const filterPricesByHappyHour = (data) => {
     const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
     const currentTime = new Date();
@@ -166,12 +166,20 @@ const BarList = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p
-                        className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                        className={`text-lg ${
+                          bar.isHighlighted
+                            ? "font-semibold"
+                            : "font-normal text-gray-900"
+                        }`}
                       >
                         {bar.bar_name}
                       </p>
                       <p
-                        className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                        className={`text-sm ${
+                          bar.isHighlighted
+                            ? "text-orange-200"
+                            : "text-gray-500"
+                        }`}
                       >
                         Updated: {formatDate(bar.created_at)}
                       </p>
@@ -179,13 +187,21 @@ const BarList = () => {
                     <div className="text-right">
                       <div className="flex items-center gap-2">
                         <p
-                          className={`text-lg ${bar.isHighlighted ? "font-semibold" : "font-normal text-gray-900"}`}
+                          className={`text-lg ${
+                            bar.isHighlighted
+                              ? "font-semibold"
+                              : "font-normal text-gray-900"
+                          }`}
                         >
                           {`$${bar.price} ${beerDescription}`}
                         </p>
                       </div>
                       <p
-                        className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                        className={`text-sm ${
+                          bar.isHighlighted
+                            ? "text-orange-200"
+                            : "text-gray-500"
+                        }`}
                       >
                         {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
                       </p>
@@ -193,10 +209,18 @@ const BarList = () => {
                   </div>
                   {bar.happy_hour && (
                     <div className="align-center flex gap-2">
-                      <IoTimeOutline className="color-[#2f2f2f] text-xl text-[#D2691E]" />
-
+                      <IoTimeOutline
+                        className="text-xl"
+                        style={{
+                          color: bar.isHighlighted ? "#FFFFFF" : "#D2691E",
+                        }}
+                      />
                       <p
-                        className={`text-sm ${bar.isHighlighted ? "text-orange-200" : "text-gray-500"}`}
+                        className={`text-sm ${
+                          bar.isHighlighted
+                            ? "text-orange-200"
+                            : "text-gray-500"
+                        }`}
                       >
                         Happy hour price today until{" "}
                         {convertTo12HourTime(bar.happy_hour_end)}

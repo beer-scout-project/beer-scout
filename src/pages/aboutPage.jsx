@@ -12,9 +12,9 @@ export default function AboutPage() {
             <h4>About</h4>
             <p>
               Beer Scout is here to help you track down the best beer deals in
-              Downtown St. John&#39;s! 🍻 We want you to hang out with your
-              friends and family without stressing about your wallet. So, let us
-              know when you spot a great price—together, we can keep Beer Scout
+              Downtown St. John&#39;s! 🍻 We want you to hang out with your friends
+              and family without stressing about your wallet. So, let us know
+              when you spot a great price—together, we can keep Beer Scout
               growing and our community thriving! Cheers! 🍻✨
             </p>
           </div>
@@ -108,12 +108,7 @@ export default function AboutPage() {
             <ol className="list-decimal pl-5">
               <li>General Information</li>
               <p>
-                Beer Scout provides information about beer deals and pricing
-                around St. John’s. Our platform relies on user-submitted
-                content, meaning deals and promotions are contributed by the
-                community. We strive to ensure that the information provided is
-                accurate, but we cannot guarantee the accuracy, completeness, or
-                timeliness of any listing.
+                Beer Scout provides information about beer deals and pricing around St. John&#39;s. Our platform relies on user-submitted content, meaning deals and promotions are contributed by the community. We strive to ensure that the information provided is accurate, but we cannot guarantee the accuracy, completeness, or timeliness of any listing.
               </p>
               <br />
               <li>User Responsibilities</li>

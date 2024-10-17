@@ -58,7 +58,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-8 md:flex-row">
             <img
               className="max-w-[275px] rounded-lg"
-              src="/add-bar-form-happy-hr-350x906.png"
+              src="/add-bar-form-happy-hr-350x1120.png"
               alt="form for use to submit a beer price"
             />
             <div className="flex flex-col flex-wrap gap-4">

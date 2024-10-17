@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addBarPrice } from "../utils/useApi";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
@@ -17,7 +17,6 @@ const AddBarForm = () => {
   const [error, setError] = useState(null); // State for error handling
   const [success, setSuccess] = useState(null); // State for success message
 
-  // Handle form field changes
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
@@ -43,21 +42,29 @@ const AddBarForm = () => {
     }
   };
 
-  const handleCloseSuccess = () => {
-    setSuccess(null);
-  };
+  // close alert after 5 seconds
+  const handleCloseSuccess = () => setSuccess(null);
+  const handleCloseAlert = () => setError(null);
 
-  const handleCloseAlert = () => {
-    setError(null);
-  };
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
 
-  // Handle form submission
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Clear previous error
-    setSuccess(null); // Clear previous success message
+    setError(null);
+    setSuccess(null);
 
-    // ensure all fields are filled out
     if (!formData.bar_name) {
       setError("Bar name is required.");
       return;
@@ -75,15 +82,12 @@ const AddBarForm = () => {
       return;
     }
 
-    // Function to get price per millilitre
     const getPricePer100Ml = (price, servingSize) => {
-      // remove ml from serving size
       const millilitres = servingSize.replace("ml", "");
       const pricePer100Ml = (price * 100) / millilitres;
       return pricePer100Ml.toFixed(2);
     };
 
-    // Function to check if the user entered an obviously incorrect price
     const validatePrice = () => {
       const pricePer100Ml = getPricePer100Ml(
         formData.price,
@@ -98,7 +102,6 @@ const AddBarForm = () => {
       return null;
     };
 
-    // Run price validation
     const priceValidationMessage = validatePrice();
     if (priceValidationMessage) {
       setError(priceValidationMessage);
@@ -106,14 +109,10 @@ const AddBarForm = () => {
     }
 
     try {
-      // Send *formData* json to the backend
       const response = await addBarPrice(formData);
       console.log("Form submitted successfully:", response);
-
-      // Show success message
       setSuccess("Bar price added successfully!");
 
-      // Reset form after submit
       setFormData({
         bar_name: "",
         location: "",
@@ -135,11 +134,9 @@ const AddBarForm = () => {
       className="relative h-full bg-cover bg-center"
       style={{ backgroundImage: "url('/beerBackground.png')" }}
     >
-      {/* darkening overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        {/* Success/Error messages */}
         {success && (
           <div
             role="alert"
@@ -184,7 +181,6 @@ const AddBarForm = () => {
             </svg>
             <span>{error}</span>
             <button onClick={handleCloseAlert}>
-              {/* <IoMdCloseCircleOutline className="h-[1.2rem] w-[1.2rem]" /> */}
               <IoCloseCircleSharp className="h-[1.3rem] w-[1.3rem]" />
             </button>
           </div>

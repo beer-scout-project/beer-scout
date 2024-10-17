@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { addBarPrice } from "../utils/useApi";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import barNames from "../components/barNames.json";
 
 const AddBarForm = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +13,10 @@ const AddBarForm = () => {
     happy_hour_day: [],
     happy_hour_start: "",
     happy_hour_end: "",
-  }); // State for form data on load
+  });
 
-  const [error, setError] = useState(null); // State for error handling
-  const [success, setSuccess] = useState(null); // State for success message
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -42,7 +43,6 @@ const AddBarForm = () => {
     }
   };
 
-  // close alert after 5 seconds
   const handleCloseSuccess = () => setSuccess(null);
   const handleCloseAlert = () => setError(null);
 
@@ -135,7 +135,6 @@ const AddBarForm = () => {
       style={{ backgroundImage: "url('/beerBackground.png')" }}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
-
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         {success && (
           <div
@@ -185,14 +184,11 @@ const AddBarForm = () => {
             </button>
           </div>
         )}
-
-        {/* Main content */}
         <div className="mx-[10px] h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-base-100 p-6 shadow-lg sm:mx-4 md:mx-auto">
           <h2 className="mb-4 text-2xl font-bold text-base-content">
             Add a Beer Price
           </h2>
           <form onSubmit={handleSubmit}>
-            {/* Bar Name */}
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text text-base-content">Bar Name</span>
@@ -205,84 +201,11 @@ const AddBarForm = () => {
                 required
               >
                 <option value="">Select a bar</option>
-                <option value="Bannerman Brewing Co.">
-                  Bannerman Brewing Co.
-                </option>
-                <option value="Bernard Stanley Gastropub">
-                  Bernard Stanley Gastropub
-                </option>
-                <option value="Boston Pizza">Boston Pizza</option>
-                <option value="Brewdock">Brewdock</option>
-                <option value="Bridie Molloy's">Bridie Molloy&#39;s</option>
-                <option value="Broderick's on George">
-                  Broderick&#39;s on George
-                </option>
-                <option value="Bull & Barrel">Bull & Barrel</option>
-                <option value="Christian's Pub">Christian&#39;s Pub</option>
-                <option value="Cork'd">Cork&#39;d</option>
-                <option value="Erins Pub">Erins Pub</option>
-                <option value="Exile Restaurant and Lounge">
-                  Exile Restaurant and Lounge
-                </option>
-                <option value="Green Sleeves">Green Sleeves</option>
-                <option value="Jungle Jim's Eatery">
-                  Jungle Jim&#39;s Eatery
-                </option>
-                <option value="Karaoke Kops">Karaoke Kops</option>
-                <option value="Kelly's Pub">Kelly&#39;s Pub</option>
-                <option value="Konfusion">Konfusion</option>
-                <option value="LIV">LIV</option>
-                <option value="Loose Tie">Loose Tie</option>
-                <option value="Lottie's Place">Lottie&#39;s Place</option>
-                <option value="Lucy's Bar">Lucy&#39;s Bar</option>
-                <option value="Magnum & Steins">Magnum & Steins</option>
-                <option value="No. 4 Restaurant & Bar">
-                  No. 4 Restaurant & Bar
-                </option>
-                <option value="O’Reilly’s Irish Newfoundland Pub">
-                  O&#39;Reilly&#39;s Irish Newfoundland Pub
-                </option>
-                <option value="Oíche">Oíche</option>
-                <option value="On The Rocks">On The Rocks</option>
-                <option value="papillon cocktail bar">
-                  papillon cocktail bar
-                </option>
-                <option value="Quidi Vidi Brewery">Quidi Vidi Brewery</option>
-                <option value="Rob Roy">Rob Roy</option>
-                <option value="Shamrock City Pub">Shamrock City Pub</option>
-                <option value="Sláinte Whisky & Wine">
-                  Sláinte Whisky & Wine
-                </option>
-                <option value="Spirit">Spirit</option>
-                <option value="Station Lounge">Station Lounge</option>
-                <option value="The Adelaide Oyster House">
-                  The Adelaide Oyster House
-                </option>
-                <option value="The Black Sheep">The Black Sheep</option>
-                <option value="The Celtic Hearth">The Celtic Hearth</option>
-                <option value="The Duke Of Duckworth">
-                  The Duke Of Duckworth
-                </option>
-                <option value="The Martini Bar">The Martini Bar</option>
-                <option value="The Merchant Tavern">The Merchant Tavern</option>
-                <option value="The Newfoundland Embassy">
-                  The Newfoundland Embassy
-                </option>
-                <option value="The Rock House">The Rock House</option>
-                <option value="The Rose & Thistle Pub">
-                  The Rose & Thistle Pub
-                </option>
-                <option value="The Salt House Kitchen">
-                  The Salt House Kitchen
-                </option>
-                <option value="The Ship Pub">The Ship Pub</option>
-                <option value="The Trinity">The Trinity</option>
-                <option value="Three Cheers">Three Cheers</option>
-                <option value="TJ's Pub">TJ&#39;s Pub</option>
-                <option value="Toslow">Toslow</option>
-                <option value="Trapper John's">Trapper John&#39;s</option>
-                <option value="West End Club">West End Club</option>
-                <option value="YellowBelly Brewery">YellowBelly Brewery</option>
+                {barNames.map((bar, index) => (
+                  <option key={index} value={bar}>
+                    {bar}
+                  </option>
+                ))}
               </select>
             </div>
             {/* Location */}

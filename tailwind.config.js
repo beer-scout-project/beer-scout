@@ -50,7 +50,7 @@ export default {
           neutral: "#FFE8C8",
           "neutral-content": "#000000",
           "base-100": "#F8F8FF",
-          "base-200": "#F0F0F0",
+          "base-200": "#FDEBD0",
           "base-300": "#E8E8E8",
           "base-content": "#000000",
           info: "#00A7E6",

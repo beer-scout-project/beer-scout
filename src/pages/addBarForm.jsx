@@ -20,21 +20,23 @@ const AddBarForm = () => {
   // Handle form field changes
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
-  
+
     if (name === "happy_hour_day") {
       if (checked) {
-        setFormData(prevData => ({
+        setFormData((prevData) => ({
           ...prevData,
           happy_hour_day: [...prevData.happy_hour_day, value],
         }));
       } else {
-        setFormData(prevData => ({
+        setFormData((prevData) => ({
           ...prevData,
-          happy_hour_day: prevData.happy_hour_day.filter(day => day !== value),
+          happy_hour_day: prevData.happy_hour_day.filter(
+            (day) => day !== value,
+          ),
         }));
       }
     } else {
-      setFormData(prevData => ({
+      setFormData((prevData) => ({
         ...prevData,
         [name]: type === "checkbox" ? checked : value,
       }));
@@ -207,19 +209,29 @@ const AddBarForm = () => {
                 required
               >
                 <option value="">Select a bar</option>
-                <option value="Bannerman Brewing Co.">Bannerman Brewing Co.</option>
-                <option value="Bernard Stanley Gastropub">Bernard Stanley Gastropub</option>
+                <option value="Bannerman Brewing Co.">
+                  Bannerman Brewing Co.
+                </option>
+                <option value="Bernard Stanley Gastropub">
+                  Bernard Stanley Gastropub
+                </option>
                 <option value="Boston Pizza">Boston Pizza</option>
                 <option value="Brewdock">Brewdock</option>
                 <option value="Bridie Molloy's">Bridie Molloy&#39;s</option>
-                <option value="Broderick's on George">Broderick&#39;s on George</option>
+                <option value="Broderick's on George">
+                  Broderick&#39;s on George
+                </option>
                 <option value="Bull & Barrel">Bull & Barrel</option>
                 <option value="Christian's Pub">Christian&#39;s Pub</option>
                 <option value="Cork'd">Cork&#39;d</option>
                 <option value="Erins Pub">Erins Pub</option>
-                <option value="Exile Restaurant and Lounge">Exile Restaurant and Lounge</option>
+                <option value="Exile Restaurant and Lounge">
+                  Exile Restaurant and Lounge
+                </option>
                 <option value="Green Sleeves">Green Sleeves</option>
-                <option value="Jungle Jim's Eatery">Jungle Jim&#39;s Eatery</option>
+                <option value="Jungle Jim's Eatery">
+                  Jungle Jim&#39;s Eatery
+                </option>
                 <option value="Karaoke Kops">Karaoke Kops</option>
                 <option value="Kelly's Pub">Kelly&#39;s Pub</option>
                 <option value="Konfusion">Konfusion</option>
@@ -228,27 +240,45 @@ const AddBarForm = () => {
                 <option value="Lottie's Place">Lottie&#39;s Place</option>
                 <option value="Lucy's Bar">Lucy&#39;s Bar</option>
                 <option value="Magnum & Steins">Magnum & Steins</option>
-                <option value="No. 4 Restaurant & Bar">No. 4 Restaurant & Bar</option>
-                <option value="O’Reilly’s Irish Newfoundland Pub">O&#39;Reilly&#39;s Irish Newfoundland Pub</option>
+                <option value="No. 4 Restaurant & Bar">
+                  No. 4 Restaurant & Bar
+                </option>
+                <option value="O’Reilly’s Irish Newfoundland Pub">
+                  O&#39;Reilly&#39;s Irish Newfoundland Pub
+                </option>
                 <option value="Oíche">Oíche</option>
                 <option value="On The Rocks">On The Rocks</option>
-                <option value="papillon cocktail bar">papillon cocktail bar</option>
+                <option value="papillon cocktail bar">
+                  papillon cocktail bar
+                </option>
                 <option value="Quidi Vidi Brewery">Quidi Vidi Brewery</option>
                 <option value="Rob Roy">Rob Roy</option>
                 <option value="Shamrock City Pub">Shamrock City Pub</option>
-                <option value="Sláinte Whisky & Wine">Sláinte Whisky & Wine</option>
+                <option value="Sláinte Whisky & Wine">
+                  Sláinte Whisky & Wine
+                </option>
                 <option value="Spirit">Spirit</option>
                 <option value="Station Lounge">Station Lounge</option>
-                <option value="The Adelaide Oyster House">The Adelaide Oyster House</option>
+                <option value="The Adelaide Oyster House">
+                  The Adelaide Oyster House
+                </option>
                 <option value="The Black Sheep">The Black Sheep</option>
                 <option value="The Celtic Hearth">The Celtic Hearth</option>
-                <option value="The Duke Of Duckworth">The Duke Of Duckworth</option>
+                <option value="The Duke Of Duckworth">
+                  The Duke Of Duckworth
+                </option>
                 <option value="The Martini Bar">The Martini Bar</option>
                 <option value="The Merchant Tavern">The Merchant Tavern</option>
-                <option value="The Newfoundland Embassy">The Newfoundland Embassy</option>
+                <option value="The Newfoundland Embassy">
+                  The Newfoundland Embassy
+                </option>
                 <option value="The Rock House">The Rock House</option>
-                <option value="The Rose & Thistle Pub">The Rose & Thistle Pub</option>
-                <option value="The Salt House Kitchen">The Salt House Kitchen</option>
+                <option value="The Rose & Thistle Pub">
+                  The Rose & Thistle Pub
+                </option>
+                <option value="The Salt House Kitchen">
+                  The Salt House Kitchen
+                </option>
                 <option value="The Ship Pub">The Ship Pub</option>
                 <option value="The Trinity">The Trinity</option>
                 <option value="Three Cheers">Three Cheers</option>
@@ -351,7 +381,7 @@ const AddBarForm = () => {
                         value="Monday"
                         checked={formData.happy_hour_day.includes("Monday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Monday</span>
                     </label>
@@ -364,7 +394,7 @@ const AddBarForm = () => {
                         value="Tuesday"
                         checked={formData.happy_hour_day.includes("Tuesday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Tuesday</span>
                     </label>
@@ -377,7 +407,7 @@ const AddBarForm = () => {
                         value="Wednesday"
                         checked={formData.happy_hour_day.includes("Wednesday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Wednesday</span>
                     </label>
@@ -390,7 +420,7 @@ const AddBarForm = () => {
                         value="Thursday"
                         checked={formData.happy_hour_day.includes("Thursday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Thursday</span>
                     </label>
@@ -403,7 +433,7 @@ const AddBarForm = () => {
                         value="Friday"
                         checked={formData.happy_hour_day.includes("Friday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Friday</span>
                     </label>
@@ -416,7 +446,7 @@ const AddBarForm = () => {
                         value="Saturday"
                         checked={formData.happy_hour_day.includes("Saturday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Saturday</span>
                     </label>
@@ -429,7 +459,7 @@ const AddBarForm = () => {
                         value="Sunday"
                         checked={formData.happy_hour_day.includes("Sunday")}
                         onChange={handleChange}
-                        className="checkbox checkbox-primary"
+                        className="checkbox-primary checkbox bg-base-200"
                       />
                       <span className="ml-2">Sunday</span>
                     </label>

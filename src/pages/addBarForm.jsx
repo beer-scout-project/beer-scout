@@ -299,7 +299,7 @@ const AddBarForm = () => {
                       Happy Hour Day
                     </span>
                   </label>
-                  <div className="checkbox-group">
+                  <div className="grid grid-cols-2 gap-2">
                     {/* Monday */}
                     <label className="flex items-center">
                       <input
@@ -310,9 +310,9 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Monday</span>
+                      <span className="ml-2 text-sm">Monday</span>
                     </label>
-                    <br />
+                  
                     {/* Tuesday */}
                     <label className="flex items-center">
                       <input
@@ -323,9 +323,9 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Tuesday</span>
+                      <span className="ml-2 text-sm">Tuesday</span>
                     </label>
-                    <br />
+                   
                     {/* Wednesday */}
                     <label className="flex items-center">
                       <input
@@ -336,9 +336,9 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Wednesday</span>
+                      <span className="ml-2 text-sm">Wednesday</span>
                     </label>
-                    <br />
+                    
                     {/* Thursday */}
                     <label className="flex items-center">
                       <input
@@ -349,9 +349,9 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Thursday</span>
+                      <span className="ml-2 text-sm">Thursday</span>
                     </label>
-                    <br />
+                    
                     {/* Friday */}
                     <label className="flex items-center">
                       <input
@@ -362,9 +362,9 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Friday</span>
+                      <span className="ml-2 text-sm">Friday</span>
                     </label>
-                    <br />
+                   
                     {/* Saturday */}
                     <label className="flex items-center">
                       <input
@@ -375,9 +375,9 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Saturday</span>
+                      <span className="ml-2 text-sm">Saturday</span>
                     </label>
-                    <br />
+                    
                     {/* Sunday */}
                     <label className="flex items-center">
                       <input
@@ -388,7 +388,7 @@ const AddBarForm = () => {
                         onChange={handleChange}
                         className="checkbox-primary checkbox bg-base-200"
                       />
-                      <span className="ml-2">Sunday</span>
+                      <span className="ml-2 text-sm">Sunday</span>
                     </label>
                   </div>
                 </div>

@@ -16,6 +16,6 @@ Thank you to Jan Mertlik and Sahand Seifi for setting up this project and for th
 <a href="https://github.com/GreyNewfie">Danny Simms</a>, <a href="https://github.com/casslee1">Cassandra Lee</a>, and <a href="https://github.com/Awhalen1999">Alex Whelan</a>
 
 ## Try it Here
-<a href="beerscout.ca">Beer Scout</a>
+<a href="https://beerscout.ca/">Beer Scout</a>
 
 ![image](https://github.com/Awhalen1999/beer-scout/blob/main/public/beer-price-list-570x900.png)

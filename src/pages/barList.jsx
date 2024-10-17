@@ -22,6 +22,7 @@ const BarList = () => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
+      console.log("Fetching bar prices from backend..."); // Log statement
       const data = await getBarPricesByLocation("st_johns"); //Get prices by location
       const currentData = filterPricesByHappyHour(data); //Only show prices that are currently active
       const sortedData = sortBarsByPrice(currentData); //Sort the list by price

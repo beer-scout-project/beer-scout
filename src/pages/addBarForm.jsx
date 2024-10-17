@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { addBarPrice } from "../utils/useApi";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import barNames from "../components/barNames.json";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const AddBarForm = () => {
   const [formData, setFormData] = useState({
@@ -185,6 +187,12 @@ const AddBarForm = () => {
           </div>
         )}
         <div className="mx-[10px] h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-base-100 p-6 shadow-lg sm:mx-4 md:mx-auto">
+          <Link
+            to="/bar-list"
+            className="mb-4 inline-flex items-center text-sm text-neutral-content"
+          >
+            <IoMdArrowRoundBack size={20} className="mr-2" /> Back to Bar List
+          </Link>
           <h2 className="mb-4 text-2xl font-bold text-base-content">
             Add a Beer Price
           </h2>

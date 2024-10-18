@@ -238,7 +238,7 @@ const AddBarForm = () => {
                 placeholder="Type bar name here..."
                 required
               />
-              {/* Dropdown for autocomplete suggestions */}
+              {/* Dropdown for autocomplete suggestions for bar names */}
               {filteredBarNames.length > 0 && (
                 <ul className="absolute left-0 top-full z-10 max-h-[300px] w-full overflow-y-auto rounded-lg border bg-base-300 text-secondary-content shadow-lg">
                   {filteredBarNames.map((bar, index) => (
@@ -252,20 +252,6 @@ const AddBarForm = () => {
                   ))}
                 </ul>
               )}
-              {/* <select
-                name="bar_name"
-                value={formData.bar_name}
-                onChange={handleChange}
-                className="select select-bordered w-full bg-base-200 text-secondary-content"
-                required
-              >
-                <option value="">Select a bar</option>
-                {barNames.map((bar, index) => (
-                  <option key={index} value={bar}>
-                    {bar}
-                  </option>
-                ))}
-              </select> */}
             </div>
             {/* Location */}
             <div className="form-control mb-4">

@@ -21,12 +21,16 @@ const AddBarForm = () => {
   const [success, setSuccess] = useState(null);
   const [filteredBarNames, setFilteredBarNames] = useState([]);
 
+  const handleFocus = () => {
+    setFilteredBarNames(barNames);
+  };
+
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
     if (name === "bar_name") {
       // Update the filtered suggestions based on input
-      if (value.trim() === "") {
+      if (value === "") {
         setFilteredBarNames([]);
       } else {
         const filtered = barNames.filter((bar) =>
@@ -234,8 +238,10 @@ const AddBarForm = () => {
                 name="bar_name"
                 value={formData.bar_name}
                 onChange={handleChange}
+                onFocus={handleFocus}
                 className="input input-bordered w-full bg-base-200 text-secondary-content"
                 placeholder="Type bar name here..."
+                autoComplete="off"
                 required
               />
               {/* Dropdown for autocomplete suggestions for bar names */}

@@ -19,9 +19,22 @@ const AddBarForm = () => {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [filteredBarNames, setFilteredBarNames] = useState([]);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
+
+    if (name === "bar_name") {
+      // Update the filtered suggestions based on input
+      if (value.trim() === "") {
+        setFilteredBarNames([]);
+      } else {
+        const filtered = barNames.filter((bar) =>
+          bar.toLowerCase().includes(value.toLowerCase()),
+        );
+        setFilteredBarNames(filtered);
+      }
+    }
 
     if (name === "happy_hour_day") {
       if (checked) {
@@ -45,6 +58,14 @@ const AddBarForm = () => {
     }
   };
 
+  const handleBarNameSelect = (barName) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      bar_name: barName,
+    }));
+    setFilteredBarNames([]);
+  };
+
   const handleCloseSuccess = () => setSuccess(null);
   const handleCloseAlert = () => setError(null);
 
@@ -66,6 +87,12 @@ const AddBarForm = () => {
     e.preventDefault();
     setError(null);
     setSuccess(null);
+
+    // Verify bar name is already in the database
+    if (!barNames.includes(formData.bar_name)) {
+      setError("We're only accepting prices for the bars listed at this time.");
+      return;
+    }
 
     if (!formData.bar_name) {
       setError("Bar name is required.");
@@ -197,11 +224,35 @@ const AddBarForm = () => {
             Add a Beer Price
           </h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-control mb-4">
+            <div className="form-control relative mb-4">
               <label className="label">
                 <span className="label-text text-base-content">Bar Name</span>
               </label>
-              <select
+              {/* Bar name input with autocomplete */}
+              <input
+                type="text"
+                name="bar_name"
+                value={formData.bar_name}
+                onChange={handleChange}
+                className="input input-bordered w-full bg-base-200 text-secondary-content"
+                placeholder="Type bar name here..."
+                required
+              />
+              {/* Dropdown for autocomplete suggestions */}
+              {filteredBarNames.length > 0 && (
+                <ul className="absolute left-0 top-full z-10 max-h-[300px] w-full overflow-y-auto rounded-lg border bg-base-300 text-secondary-content shadow-lg">
+                  {filteredBarNames.map((bar, index) => (
+                    <li
+                      key={index}
+                      className="cursor-pointer p-2 hover:bg-neutral-content hover:text-base-100"
+                      onClick={() => handleBarNameSelect(bar)}
+                    >
+                      {bar}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {/* <select
                 name="bar_name"
                 value={formData.bar_name}
                 onChange={handleChange}
@@ -214,7 +265,7 @@ const AddBarForm = () => {
                     {bar}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </div>
             {/* Location */}
             <div className="form-control mb-4">
@@ -312,7 +363,7 @@ const AddBarForm = () => {
                       />
                       <span className="ml-2 text-sm">Monday</span>
                     </label>
-                  
+
                     {/* Tuesday */}
                     <label className="flex items-center">
                       <input
@@ -325,7 +376,7 @@ const AddBarForm = () => {
                       />
                       <span className="ml-2 text-sm">Tuesday</span>
                     </label>
-                   
+
                     {/* Wednesday */}
                     <label className="flex items-center">
                       <input
@@ -338,7 +389,7 @@ const AddBarForm = () => {
                       />
                       <span className="ml-2 text-sm">Wednesday</span>
                     </label>
-                    
+
                     {/* Thursday */}
                     <label className="flex items-center">
                       <input
@@ -351,7 +402,7 @@ const AddBarForm = () => {
                       />
                       <span className="ml-2 text-sm">Thursday</span>
                     </label>
-                    
+
                     {/* Friday */}
                     <label className="flex items-center">
                       <input
@@ -364,7 +415,7 @@ const AddBarForm = () => {
                       />
                       <span className="ml-2 text-sm">Friday</span>
                     </label>
-                   
+
                     {/* Saturday */}
                     <label className="flex items-center">
                       <input
@@ -377,7 +428,7 @@ const AddBarForm = () => {
                       />
                       <span className="ml-2 text-sm">Saturday</span>
                     </label>
-                    
+
                     {/* Sunday */}
                     <label className="flex items-center">
                       <input

@@ -88,6 +88,12 @@ const AddBarForm = () => {
     setError(null);
     setSuccess(null);
 
+    // Verify bar name is already in the database
+    if (!barNames.includes(formData.bar_name)) {
+      setError("We're only accepting prices for the bars listed at this time.");
+      return;
+    }
+
     if (!formData.bar_name) {
       setError("Bar name is required.");
       return;

@@ -28,9 +28,9 @@ const home = () => {
       <div className="hero-content text-center text-white">
         <div className="w-full">
           <h1 className="mb-5 text-5xl font-extrabold">Scouting Beer Deals?</h1>
-          <h5 className="mb-5 text-xl font-light">
+          <h4 className="mb-5 text-xl font-light">
             Find the cheapest beer in downtown St. John&#39;s!
-          </h5>
+          </h4>
           <div className="flex flex-col items-center">
             {/*Code for drop down list if additional cities added*/}
             {/*<select
@@ -45,11 +45,14 @@ const home = () => {
             </select>*/}
             <Link
               to="/bar-list"
-              className="btn btn-primary btn-wide sm:ml-4"
+              className="btn btn-primary btn-wide text-lg sm:ml-4"
               onClick={handleClick}
             >
               Cheapest beer right now!
             </Link>
+            <h6 className="pt-3 text-sm font-light">
+            Beta Version 1
+            </h6>
           </div>
         </div>
       </div>

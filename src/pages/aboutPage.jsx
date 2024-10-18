@@ -26,7 +26,7 @@ export default function AboutPage() {
             />
             <div className="flex flex-col flex-wrap gap-4">
               <h5>Beer Price List</h5>
-              <ol className="list-decimal pl-5">
+              <ul className="list-disc pl-5">
                 <li>
                   The location highlighted at the top of the list has the
                   cheapest beer in your area right now.
@@ -47,7 +47,7 @@ export default function AboutPage() {
                   location name. You can submit a price correction if you find a
                   price has changed.
                 </li>
-              </ol>
+              </ul>
               <p>
                 *Please note that while we strive to keep the information
                 up-to-date and accurate, beer prices and happy hour details may

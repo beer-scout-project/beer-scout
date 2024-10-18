@@ -32,14 +32,15 @@ export default function AboutPage() {
                   cheapest beer in your area right now.
                 </li>
                 <li>
-                  You&#39;ll see the price and size of the beer, and below the
-                  is comparison price per 100 milliliters.
+                  Accross from the location name, you&#39;ll see the price and
+                  size of the beer, as well as the comparison price per 100
+                  milliliters below.
                 </li>
                 <li>
-                  Prices that are happy hour specials that are offered during a
-                  specific timeframe will have a clock icon. These happy hours
-                  specials are available until the end time that is show next to
-                  the this icon.
+                  Happy hour specials that are offered during a specific
+                  timeframe will have a clock icon. These happy hours specials
+                  are available until the end time that is show next to the
+                  clock icon.
                 </li>
                 <li>
                   The date and price was last updated is shown below the
@@ -58,7 +59,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-8 md:flex-row">
             <img
               className="max-w-[275px] rounded-lg"
-              src="/add-bar-form-happy-hr-350x1120.png"
+              src="/add-bar-form-happy-hr-350x900.png"
               alt="form for use to submit a beer price"
             />
             <div className="flex flex-col flex-wrap gap-4">
@@ -69,8 +70,9 @@ export default function AboutPage() {
               </p>
               <ol className="list-decimal pl-5">
                 <li>
-                  Select the name of the bar or location. We are currently
-                  scouting the list of locations currently provided.
+                  Enter the name of the bar or location. A list of bars that you
+                  can choose from will be displayed. We are currently only
+                  scouting prices forthe list of locations currently provided.
                 </li>
                 <li>
                   Select the city that the bar is located in. We are currently

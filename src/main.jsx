@@ -17,6 +17,23 @@ import AboutPage from "./pages/aboutPage.jsx";
 
 const trackingId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
 
+const loadGoogleAnalytics = () => {
+  if (!trackingId) return;
+
+  const script = document.createElement("script");
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
+  script.async = true;
+  document.body.appendChild(script);
+
+  window.datalayer = window.datalayer || [];
+  function gtag() {
+    window.datalayer.push(arguments);
+  }
+  window.gtag = gtag;
+  gtag("js", new Date());
+  gtag("config", trackingId);
+};
+
 const usePageTracking = () => {
   const location = useLocation();
 
@@ -35,6 +52,7 @@ const PageTrackingWrapper = () => {
 };
 
 const App = () => {
+  useEffect(loadGoogleAnalytics, []);
   return (
     <Router>
       <PageTrackingWrapper />

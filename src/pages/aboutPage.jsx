@@ -172,6 +172,17 @@ export default function AboutPage() {
               </p>
             </ol>
           </div>
+          <div className="flex flex-col gap-4">
+            <h4>Contact Us</h4>
+            <p>
+              If you&#39;d like to get in touch with us, please email us at
+              <a href="mailto:VXhJ0@example.com" className="text-[#D2691E]">
+                {" "}
+                beerscoutca@gmail.com
+              </a>
+              !
+            </p>
+          </div>
         </div>
       </div>
     </div>

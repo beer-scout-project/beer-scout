@@ -15,12 +15,14 @@ import BarList from "./pages/barList.jsx";
 import AddBarForm from "./pages/addBarForm.jsx";
 import AboutPage from "./pages/aboutPage.jsx";
 
+const trackingId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+
 const usePageTracking = () => {
   const location = useLocation();
 
   useEffect(() => {
     if (window.gtag) {
-      window.gtag("config", "G-GGWTJ6V32P", {
+      window.gtag("config", trackingId, {
         page_path: location.pathname,
       });
     }

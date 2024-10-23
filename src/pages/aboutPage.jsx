@@ -1,3 +1,6 @@
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+
 export default function AboutPage() {
   return (
     <div
@@ -20,7 +23,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col gap-8 md:flex-row">
             <img
-              className="max-w-[275px] rounded-lg"
+              className="h-fit max-w-[275px] self-center rounded-lg md:self-start"
               src="/beer-price-list-570x900.png"
               alt="image of the beer price list"
             />
@@ -58,7 +61,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col gap-8 md:flex-row">
             <img
-              className="max-w-[275px] rounded-lg"
+              className="h-fit max-w-[275px] self-center rounded-lg md:self-start"
               src="/add-bar-form-happy-hr-350x900.png"
               alt="form for use to submit a beer price"
             />
@@ -173,15 +176,75 @@ export default function AboutPage() {
             </ol>
           </div>
           <div className="flex flex-col gap-4">
-            <h4>Contact Us</h4>
+            <h4>Contact the Beer Scout Team</h4>
             <p>
-              If you&#39;d like to get in touch with us, please email us at
+              If you&#39;d like to get in touch with us, you can email us at
               <a href="mailto:VXhJ0@example.com" className="text-[#D2691E]">
                 {" "}
                 beerscoutca@gmail.com
               </a>
-              !
+              , and you can also find us on LinkedIn and GitHub with the links
+              below.
             </p>
+            <div className="flex flex-row justify-center gap-4 md:gap-16">
+              <div className="flex flex-col items-center gap-2">
+                <h6>Alex</h6>
+                <div className="flex gap-2">
+                  <a
+                    href="https://www.linkedin.com/in/alex-whalen-0496b227b/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedin className="h-6 w-6" />
+                  </a>
+                  <a
+                    href="https://github.com/Awhalen1999"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaGithub className="h-6 w-6" />
+                  </a>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <h6>Cassandra</h6>
+                <div className="flex gap-2">
+                  <a
+                    href="https://www.linkedin.com/in/cassandra-lee-3247b52a2/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedin className="h-6 w-6" />
+                  </a>
+                  <a
+                    href="https://github.com/casslee1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaGithub className="h-6 w-6" />
+                  </a>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <h6>Danny</h6>
+                <div className="flex gap-2">
+                  <a
+                    href="https://www.linkedin.com/in/danny-simms-2a14631a4/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaLinkedin className="h-6 w-6" />
+                  </a>
+                  <a
+                    href="https://github.com/GreyNewfie"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaGithub className="h-6 w-6" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

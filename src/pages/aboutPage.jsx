@@ -179,7 +179,7 @@ export default function AboutPage() {
             <h4>Contact the Beer Scout Team</h4>
             <p>
               If you&#39;d like to get in touch with us, you can email us at
-              <a href="mailto:VXhJ0@example.com" className="text-[#D2691E]">
+              <a href="mailto:beerscoutca@gmail.com" className="text-[#D2691E]">
                 {" "}
                 beerscoutca@gmail.com
               </a>

@@ -297,8 +297,8 @@ const AddBarForm = () => {
                 <option value="355ml">Can (355ml)</option>
                 <option value="473ml">Tall Can (473ml)</option>
                 <option value="330ml">Bottle (330ml)</option>
-                <option value="473ml">Pint (473ml)</option>
-                <option value="591ml">Large Pint (591ml)</option>
+                <option value="473ml">16oz Pint (473ml)</option>
+                <option value="591ml">20oz Pint (591ml)</option>
                 <option value="284ml">Half Pint (284ml)</option>
                 <option value="1000ml">Pitcher (1140ml)</option>
               </select>

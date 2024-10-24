@@ -25,9 +25,9 @@ const loadGoogleAnalytics = () => {
   script.async = true;
   document.body.appendChild(script);
 
-  window.datalayer = window.datalayer || [];
+  window.dataLayer = window.dataLayer || [];
   function gtag() {
-    window.datalayer.push(arguments);
+    window.dataLayer.push(arguments);
   }
   window.gtag = gtag;
   gtag("js", new Date());

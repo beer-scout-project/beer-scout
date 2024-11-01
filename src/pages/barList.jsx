@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { getBarPricesByLocation } from "../utils/useApi";
 import { IoTimeOutline } from "react-icons/io5"; // Import the icon
+import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const BarList = () => {
   const [city, setCity] = useState("");
@@ -130,19 +132,31 @@ const BarList = () => {
 
       {/* Main content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
-        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg bg-base-100 p-6 shadow-lg">
-          {/* Display city from localStorage */}
-          <p className="mb-2 flex items-center text-orange-600">
-            <span className="mr-2">
-              <FaLocationDot />
-            </span>
-            St. John&#39;s
-            {/*For When there are more cities
-            {city ? ` ${city}` : "No location selected"}*/}
-          </p>
-          <h2 className="mb-4 text-2xl font-bold text-base-content">
-            Cheapest Beer Now
-          </h2>
+        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto overflow-x-hidden rounded-lg bg-base-100 px-6 shadow-lg">
+          <div className="sticky top-0 flex justify-between bg-base-100 pt-4 opacity-95">
+            <div>
+              {/* Display city from localStorage */}
+              <p className="mb-2 flex items-center text-orange-600">
+                <span className="mr-2">
+                  <FaLocationDot />
+                </span>
+                St. John&#39;s
+                {/*For When there are more cities
+                {city ? ` ${city}` : "No location selected"}*/}
+              </p>
+              <h2 className="mb-4 text-2xl font-bold text-base-content">
+                Cheapest Beer Now
+              </h2>
+            </div>
+            <div
+              className="tooltip tooltip-bottom h-max"
+              data-tip="Suggest a beer price"
+            >
+              <Link to="/add-bar" className="btn btn-circle btn-ghost">
+                <FaPlus size={20} />
+              </Link>
+            </div>
+          </div>
 
           {/* Bars List */}
           <div className="space-y-4">

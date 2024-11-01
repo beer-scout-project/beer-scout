@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBeer, FaInfo } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
 
 const nav = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
@@ -21,15 +20,6 @@ const nav = () => {
         </Link>
       </div>
       <div className="flex-none">
-        {/* temp buttons */}
-        <div
-          className="tooltip tooltip-bottom mr-2"
-          data-tip="Suggest a beer price"
-        >
-          <Link to="/add-bar" className="btn btn-circle btn-ghost">
-            <FaPlus size={20} />
-          </Link>
-        </div>
         <div className="tooltip tooltip-bottom mr-2" data-tip="About Page">
           <Link to="/about" className="btn btn-circle btn-ghost">
             <FaInfo size={20} />

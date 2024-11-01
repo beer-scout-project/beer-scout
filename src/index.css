@@ -87,3 +87,9 @@ body {
 .tooltip::before {
   color: #120000;
 }
+
+/* Move add a beer price tooltip to make it fully visible */
+.sticky .tooltip::before {
+  left: auto;
+  z-index: 10;
+}

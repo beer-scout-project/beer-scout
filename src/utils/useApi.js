@@ -55,3 +55,72 @@ export async function getBarPricesByLocation(location) {
     throw error;
   }
 }
+
+// Function to log in
+export async function loginUser(email, password) {
+  try {
+    const response = await fetch(`${apiUrl}/users/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error logging in:", error);
+    throw error;
+  }
+}
+
+// Function to log out
+export async function logoutUser() {
+  try {
+    const response = await fetch(`${apiUrl}/users/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("API: logoutUser error", message);
+      throw new Error(message.message);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error logging out:", error);
+    throw error;
+  }
+}
+
+// Function to authenticate based on the session ID cookie
+export async function authUser() {
+  try {
+    const response = await fetch(`${apiUrl}/users/profile`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("API: authUser error", message);
+      throw new Error(message.message);
+    }
+
+    const data = await response.json();
+    return data.user;
+  } catch (error) {
+    console.error("Error authenticating user:", error);
+    return null; // Return null if authentication fails
+  }
+}

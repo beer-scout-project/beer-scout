@@ -1,82 +1,50 @@
-console.log("Main file loaded");
-
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
-import Nav from "./components/nav.jsx";
-import Home from "./pages/home.jsx";
-import BarList from "./pages/barList.jsx";
-import AddBarForm from "./pages/addBarForm.jsx";
-import AboutPage from "./pages/aboutPage.jsx";
-
-const trackingId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
-
-const loadGoogleAnalytics = () => {
-  if (!trackingId) return;
-
-  const script = document.createElement("script");
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
-  script.async = true;
-  document.body.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    window.dataLayer.push(arguments);
-  }
-  window.gtag = gtag;
-  gtag("js", new Date());
-  gtag("config", trackingId);
-};
-
-const usePageTracking = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (window.gtag) {
-      window.gtag("config", trackingId, {
-        page_path: location.pathname,
-      });
-    }
-  }, [location]);
-};
-
-const PageTrackingWrapper = () => {
-  usePageTracking();
-  return null; // Render nothing
-};
+import Nav from "./components/nav";
+import Home from "./pages/home";
+import BarList from "./pages/barList";
+import AddBarForm from "./pages/addBarForm";
+import AboutPage from "./pages/aboutPage";
+import AdminLogin from "./pages/adminLogin";
+import AdminPanel from "./pages/adminPanel";
+import ProtectedRoute from "./utils/protectedRoute";
+import { AuthProvider } from "./utils/authProvider";
 
 const App = () => {
-  useEffect(loadGoogleAnalytics, []);
   return (
-    <Router>
-      <PageTrackingWrapper />
-      <div className="app-container">
-        <Nav />
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/bar-list" element={<BarList />} />
-            <Route path="/add-bar" element={<AddBarForm />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div className="app-container">
+          <Nav />
+          <div className="content-container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/bar-list" element={<BarList />} />
+              <Route path="/add-bar" element={<AddBarForm />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/admin-login" element={<AdminLogin />} />
+              <Route
+                path="/admin-panel"
+                element={
+                  <ProtectedRoute>
+                    <AdminPanel />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 };
 
 const container = document.getElementById("root");
-if (!container.__reactRoot) {
-  container.__reactRoot = ReactDOM.createRoot(container);
-}
+const root = ReactDOM.createRoot(container);
 
-container.__reactRoot.render(
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,

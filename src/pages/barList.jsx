@@ -10,6 +10,8 @@ const BarList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [barPrices, setBarPrices] = useState([]);
+  const [selectedBar, setSelectedBar] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
@@ -121,6 +123,19 @@ const BarList = () => {
     const pricePer100Ml = (price * 100) / millilitres;
     return pricePer100Ml.toFixed(2);
   };
+
+  //Functions to open and close the bar details modal
+   const openModal = (bar) => {
+    setSelectedBar(bar);
+    setIsModalOpen(true);
+    document.body.classList.add("modal-open");
+  };
+  const closeModal = () => {
+    setSelectedBar(null);
+    setIsModalOpen(false);
+    document.body.classList.remove("modal-open");
+  };
+
 
   return (
     <div
@@ -242,6 +257,55 @@ const BarList = () => {
                       </p>
                     </div>
                   )}
+                  <div>
+                    <button
+                      onClick={() => openModal(bar)}
+                        className={`text-sm font-normal ${
+                          bar.isHighlighted ? "text-orange-200" : "text-gray-500"
+                        }`
+                      }
+                    >
+                      Details
+                    </button>
+                    {/* Happy Hour Modal */}
+                    {isModalOpen && selectedBar && selectedBar === bar && (
+                      <dialog open className="modal">
+                        {/* Darkening Overlay */}
+                        <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
+                        <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+                          <h3 className="text-left text-lg font-bold">
+                            {selectedBar.bar_name}
+                          </h3>
+                          <p className="pt-4 text-left">
+                          {selectedBar.happy_hour ? (
+                              <>
+                                Happy Hour! <br />
+                                Day: {selectedBar.happy_hour_day} <br />
+                                Time: {selectedBar.happy_hour_start} -{" "}
+                                {selectedBar.happy_hour_end} <br />
+                              </>
+                            ) : (
+                              /* In place of address until addresses are in db */
+                              <>More Information Coming Soon!</>  
+                            )}
+                            {/* Add in address here once in db */}
+                            {/* Address: {selectedBar.address} */}
+                          </p>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button
+                                onClick={closeModal}
+                                className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
+                              >
+                                Close
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
+                    )}{" "}
+                    </div>
                 </div>
               );
             })}

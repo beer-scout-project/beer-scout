@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBeer, FaInfo } from "react-icons/fa";
+import { IoIosContacts } from "react-icons/io";
 
 const nav = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
@@ -19,10 +20,15 @@ const nav = () => {
           Beer Scout
         </Link>
       </div>
+      <div className="tooltip tooltip-bottom mr-2" data-tip="About Page">
+        <Link to="/about" className="btn btn-circle btn-ghost">
+          <FaInfo size={20} />
+        </Link>
+      </div>
       <div className="flex-none">
-        <div className="tooltip tooltip-bottom mr-2" data-tip="About Page">
-          <Link to="/about" className="btn btn-circle btn-ghost">
-            <FaInfo size={20} />
+        <div className="tooltip tooltip-bottom mr-2" data-tip="Contact Us">
+          <Link to="/contact" className="btn btn-circle btn-ghost">
+            <IoIosContacts size={30} />
           </Link>
         </div>
         {/* end of temp buttons */}

@@ -11,7 +11,7 @@ import AdminLogin from "./pages/adminLogin";
 import AdminPanel from "./pages/adminPanel";
 import ProtectedRoute from "./utils/protectedRoute";
 import { AuthProvider } from "./utils/authProvider";
-
+import ContactPage from "./pages/contactPage";
 const App = () => {
   return (
     <AuthProvider>
@@ -33,6 +33,7 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </div>
         </div>

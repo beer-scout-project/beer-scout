@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
@@ -12,6 +12,7 @@ import AdminPanel from "./pages/adminPanel";
 import ProtectedRoute from "./utils/protectedRoute";
 import { AuthProvider } from "./utils/authProvider";
 import ContactPage from "./pages/contactPage";
+
 const App = () => {
   return (
     <AuthProvider>

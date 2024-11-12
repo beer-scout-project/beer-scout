@@ -14,8 +14,8 @@ export default function ContactPage() {
       const result = await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        e.target,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        e.target,
       );
 
       if (result.status === 200) {

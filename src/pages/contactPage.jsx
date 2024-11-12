@@ -36,11 +36,11 @@ export default function ContactPage() {
         backgroundImage: "url(/beerBackground.png)",
       }}
     >
-      <div className="hero-overlay bg-black bg-opacity-60 p-4 md:p-16">
-        <div className="flex flex-col gap-12 rounded-lg bg-[#FDEBD0] bg-opacity-85 p-4 text-[#2f2f2f] md:p-8">
+      <div className="hero-overlay flex items-start justify-center bg-black bg-opacity-60 p-4 md:p-16">
+        <div className="max-w-3xl flex-col gap-12 rounded-lg bg-[#FDEBD0] bg-opacity-85 p-4 text-[#2f2f2f] md:p-8">
           <div className="flex flex-col gap-4">
             <h4>Contact the Beer Scout Team</h4>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} className="mb-4 flex flex-col gap-4">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-[#2f2f2f]">Name</span>
@@ -97,14 +97,13 @@ export default function ContactPage() {
                 </p>
               )}
             </form>
-            <p>
-              If you&#39;d like to get in touch with us, you can email us at
+            <p className="mb-4">
+              You can also reach us by email at
               <a href="mailto:beerscoutca@gmail.com" className="text-[#D2691E]">
                 {" "}
                 beerscoutca@gmail.com
               </a>
-              , and you can also find us on LinkedIn and GitHub with the links
-              below.
+              , or find us on LinkedIn and GitHub with the links below.
             </p>
             <div className="flex flex-row justify-center gap-4 md:gap-16">
               <div className="flex flex-col items-center gap-2">

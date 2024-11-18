@@ -32,7 +32,7 @@ export async function addBarPrice(barData) {
 export async function getBarPricesByLocation(location) {
   try {
     const requestUrl = `${apiUrl}/barPrices/getBarPrices/${location}`;
-    console.log("Request URL:", requestUrl); // log url (for debugging)
+    console.log("Request URL:", requestUrl); // log url
 
     const response = await fetch(requestUrl, {
       method: "GET",

@@ -103,6 +103,7 @@ export async function approveNewBarPrice(priceId) {
 
     const data = await response.json();
     console.log("Price approved and moved to bar_prices:", data);
+    sessionStorage.removeItem("barPrices");
     return data;
   } catch (error) {
     console.error("Error approving price:", error);

@@ -146,6 +146,9 @@ const AddBarForm = () => {
       console.log("Form submitted successfully:", response);
       setSuccess("Bar price added successfully!");
 
+      // Invalidate the bar list cache
+      sessionStorage.removeItem("barPrices");
+
       setFormData({
         bar_name: "",
         location: "",

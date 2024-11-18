@@ -19,7 +19,14 @@ const BarList = () => {
     if (storedCity) {
       setCity(storedCity);
     }
-    fetchBarPrices();
+    // Check sessionStorage for cached bar prices
+    const cachedBarPrices = sessionStorage.getItem("barPrices");
+    if (cachedBarPrices) {
+      console.log("Loading bar prices from session storage...");
+      setBarPrices(JSON.parse(cachedBarPrices));
+    } else {
+      fetchBarPrices();
+    }
   }, []);
 
   const fetchBarPrices = async () => {
@@ -27,14 +34,16 @@ const BarList = () => {
     setError(null); // Clear any previous errors
     try {
       console.log("Fetching bar prices from backend..."); // Log statement
-      const data = await getBarPricesByLocation("st_johns"); //Get prices by location
-      const currentData = filterPricesByHappyHour(data); //Only show prices that are currently active
-      const sortedData = sortBarsByPrice(currentData); //Sort the list by price
-      // highlight the bar with the lowest price
+      const data = await getBarPricesByLocation("st_johns"); // Get prices by location
+      const currentData = filterPricesByHappyHour(data); // Only show prices that are currently active
+      const sortedData = sortBarsByPrice(currentData); // Sort the list by price
+      // Highlight the bar with the lowest price
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
       }
       setBarPrices(sortedData);
+      // Store the fetched data in sessionStorage
+      sessionStorage.setItem("barPrices", JSON.stringify(sortedData));
     } catch (error) {
       setError(error.message);
     }
@@ -118,14 +127,14 @@ const BarList = () => {
 
   // Function to get price per millilitre
   const getPricePer100Ml = (price, servingSize) => {
-    // remove ml from serving size
+    // Remove ml from serving size
     const millilitres = servingSize.replace("ml", "");
     const pricePer100Ml = (price * 100) / millilitres;
     return pricePer100Ml.toFixed(2);
   };
 
-  //Functions to open and close the bar details modal
-   const openModal = (bar) => {
+  // Functions to open and close the bar details modal
+  const openModal = (bar) => {
     setSelectedBar(bar);
     setIsModalOpen(true);
     document.body.classList.add("modal-open");
@@ -135,7 +144,6 @@ const BarList = () => {
     setIsModalOpen(false);
     document.body.classList.remove("modal-open");
   };
-
 
   return (
     <div
@@ -233,7 +241,10 @@ const BarList = () => {
                             : "text-gray-500"
                         }`}
                       >
-                        {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
+                        {`$${getPricePer100Ml(
+                          bar.price,
+                          bar.serving_size,
+                        )}/100ml`}
                       </p>
                     </div>
                   </div>
@@ -260,10 +271,9 @@ const BarList = () => {
                   <div>
                     <button
                       onClick={() => openModal(bar)}
-                        className={`text-sm font-normal ${
-                          bar.isHighlighted ? "text-orange-200" : "text-gray-500"
-                        }`
-                      }
+                      className={`text-sm font-normal ${
+                        bar.isHighlighted ? "text-orange-200" : "text-gray-500"
+                      }`}
                     >
                       Details
                     </button>
@@ -277,7 +287,7 @@ const BarList = () => {
                             {selectedBar.bar_name}
                           </h3>
                           <p className="pt-4 text-left">
-                          {selectedBar.happy_hour ? (
+                            {selectedBar.happy_hour ? (
                               <>
                                 Happy Hour! <br />
                                 Day: {selectedBar.happy_hour_day} <br />
@@ -286,7 +296,7 @@ const BarList = () => {
                               </>
                             ) : (
                               /* In place of address until addresses are in db */
-                              <>More Information Coming Soon!</>  
+                              <>More Information Coming Soon!</>
                             )}
                             {/* Add in address here once in db */}
                             {/* Address: {selectedBar.address} */}
@@ -305,7 +315,7 @@ const BarList = () => {
                         </div>
                       </dialog>
                     )}{" "}
-                    </div>
+                  </div>
                 </div>
               );
             })}

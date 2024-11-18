@@ -5,7 +5,7 @@ const apiUrl =
 
 export async function addBarPrice(barData) {
   try {
-    const response = await fetch(`${apiUrl}/barPrices/addBarPrice`, {
+    const response = await fetch(`${apiUrl}/newBarPrices/addBarPrice`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,6 +52,85 @@ export async function getBarPricesByLocation(location) {
     return data.barPrices;
   } catch (error) {
     console.error("Error fetching bar prices:", error);
+    throw error;
+  }
+}
+
+// Function to get new bar prices by location
+export async function getNewBarPricesByLocation(location) {
+  try {
+    const requestUrl = `${apiUrl}/newBarPrices/getBarPrices/${location}`;
+    console.log("Request URL:", requestUrl); // log url (for debugging)
+
+    const response = await fetch(requestUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message);
+    }
+
+    const data = await response.json();
+    console.log("New bar prices fetched successfully:", data);
+    return data.barPrices;
+  } catch (error) {
+    console.error("Error fetching new bar prices:", error);
+    throw error;
+  }
+}
+
+// Function to approve a new bar price
+export async function approveNewBarPrice(priceId) {
+  try {
+    const response = await fetch(`${apiUrl}/newBarPrices/approvePrice`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ priceId }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message);
+    }
+
+    const data = await response.json();
+    console.log("Price approved and moved to bar_prices:", data);
+    return data;
+  } catch (error) {
+    console.error("Error approving price:", error);
+    throw error;
+  }
+}
+
+// Function to decline a new bar price
+export async function declineNewBarPrice(priceId) {
+  try {
+    const response = await fetch(`${apiUrl}/newBarPrices/declinePrice`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ priceId }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message);
+    }
+
+    console.log("Price declined and removed from new_bar_prices.");
+    return { success: true };
+  } catch (error) {
+    console.error("Error declining price:", error);
     throw error;
   }
 }

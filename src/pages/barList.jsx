@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { getBarPricesByLocation } from "../utils/useApi";
-import { IoTimeOutline } from "react-icons/io5"; // Import the icon
+import { IoTimeOutline } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
+import { reportBarPrice, getBarPricesByLocation } from "../utils/useApi";
 
 const BarList = () => {
   const [city, setCity] = useState("");
@@ -12,6 +13,16 @@ const BarList = () => {
   const [barPrices, setBarPrices] = useState([]);
   const [selectedBar, setSelectedBar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [selectedBarPriceId, setSelectedBarPriceId] = useState(null);
+  const [selectedReason, setSelectedReason] = useState("");
+
+  const reportReasons = [
+    "Price is incorrect",
+    "Happy hour time is wrong",
+    "Location is incorrect",
+    "Other",
+  ];
 
   // Fetch the city from localStorage - TEMP
   useEffect(() => {
@@ -143,6 +154,24 @@ const BarList = () => {
     setSelectedBar(null);
     setIsModalOpen(false);
     document.body.classList.remove("modal-open");
+  };
+
+  // Function to handle report submission
+  const handleReport = async () => {
+    if (!selectedReason) {
+      alert("Please select a reason.");
+      return;
+    }
+
+    try {
+      await reportBarPrice(selectedBarPriceId, selectedReason);
+      alert("Thank you for your report.");
+      setIsReportModalOpen(false);
+      setSelectedReason("");
+      document.body.classList.remove("modal-open");
+    } catch (error) {
+      console.error("Error reporting bar price:", error);
+    }
   };
 
   return (
@@ -277,44 +306,19 @@ const BarList = () => {
                     >
                       Details
                     </button>
-                    {/* Happy Hour Modal */}
-                    {isModalOpen && selectedBar && selectedBar === bar && (
-                      <dialog open className="modal">
-                        {/* Darkening Overlay */}
-                        <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
-                        <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
-                          <h3 className="text-left text-lg font-bold">
-                            {selectedBar.bar_name}
-                          </h3>
-                          <p className="pt-4 text-left">
-                            {selectedBar.happy_hour ? (
-                              <>
-                                Happy Hour! <br />
-                                Day: {selectedBar.happy_hour_day} <br />
-                                Time: {selectedBar.happy_hour_start} -{" "}
-                                {selectedBar.happy_hour_end} <br />
-                              </>
-                            ) : (
-                              /* In place of address until addresses are in db */
-                              <>More Information Coming Soon!</>
-                            )}
-                            {/* Add in address here once in db */}
-                            {/* Address: {selectedBar.address} */}
-                          </p>
-                          <div className="modal-action">
-                            <form method="dialog">
-                              {/* if there is a button in form, it will close the modal */}
-                              <button
-                                onClick={closeModal}
-                                className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
-                              >
-                                Close
-                              </button>
-                            </form>
-                          </div>
-                        </div>
-                      </dialog>
-                    )}{" "}
+                    {/* Report Button */}
+                    <button
+                      onClick={() => {
+                        setSelectedBarPriceId(bar.id);
+                        setIsReportModalOpen(true);
+                        document.body.classList.add("modal-open");
+                      }}
+                      className={`ml-4 text-sm font-normal ${
+                        bar.isHighlighted ? "text-orange-200" : "text-gray-500"
+                      }`}
+                    >
+                      Report
+                    </button>
                   </div>
                 </div>
               );
@@ -322,6 +326,80 @@ const BarList = () => {
           </div>
         </div>
       </div>
+
+      {/* Details Modal */}
+      {isModalOpen && selectedBar && (
+        <dialog open className="modal">
+          {/* Darkening Overlay */}
+          <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
+          <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+            <h3 className="text-left text-lg font-bold">
+              {selectedBar.bar_name}
+            </h3>
+            <p className="pt-4 text-left">
+              {selectedBar.happy_hour ? (
+                <>
+                  Happy Hour! <br />
+                  Day: {selectedBar.happy_hour_day} <br />
+                  Time: {selectedBar.happy_hour_start} -{" "}
+                  {selectedBar.happy_hour_end} <br />
+                </>
+              ) : (
+                <>More Information Coming Soon!</>
+              )}
+            </p>
+            <div className="modal-action">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button
+                  onClick={closeModal}
+                  className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
+                >
+                  Close
+                </button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      )}
+
+      {/* Report Modal */}
+      {isReportModalOpen && (
+        <dialog open className="modal">
+          {/* Darkening Overlay */}
+          <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
+          <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+            <h3 className="text-lg font-bold">Report Bar Price</h3>
+            <p className="py-4">Please select a reason for reporting:</p>
+            <select
+              className="select select-bordered w-full"
+              value={selectedReason}
+              onChange={(e) => setSelectedReason(e.target.value)}
+            >
+              <option value="">Select a reason</option>
+              {reportReasons.map((reason, index) => (
+                <option key={index} value={reason}>
+                  {reason}
+                </option>
+              ))}
+            </select>
+            <div className="modal-action">
+              <button
+                className="btn"
+                onClick={() => {
+                  setIsReportModalOpen(false);
+                  document.body.classList.remove("modal-open");
+                }}
+              >
+                Cancel
+              </button>
+              <button className="btn btn-primary" onClick={handleReport}>
+                Submit Report
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </div>
   );
 };

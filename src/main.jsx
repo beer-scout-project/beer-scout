@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-//import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Nav from "./components/nav";
 import Home from "./pages/home";
@@ -12,8 +12,6 @@ import AdminPanel from "./pages/adminPanel";
 import ProtectedRoute from "./utils/protectedRoute";
 import { AuthProvider } from "./utils/authProvider";
 import ContactPage from "./pages/contactPage";
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-
 
 const App = () => {
   return (

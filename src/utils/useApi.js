@@ -1,7 +1,7 @@
 const apiUrl =
   import.meta.env.MODE === "production"
     ? "https://beer-scout-backend-production.up.railway.app" // Production backend URL
-    : "http://localhost:8787"; // Development backend URL
+    : "http://localhost:8787"; // local URL
 
 export async function addBarPrice(barData) {
   try {
@@ -231,7 +231,7 @@ export async function reportBarPrice(barPriceId, reason) {
   }
 }
 
-// Function to get reported bar prices (admin)
+// Function to get reported bar prices
 export async function getReportedBarPrices() {
   try {
     const response = await fetch(`${apiUrl}/reportedBarPrices/getReports`, {
@@ -239,7 +239,7 @@ export async function getReportedBarPrices() {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include", // Include credentials if required
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -257,7 +257,7 @@ export async function getReportedBarPrices() {
   }
 }
 
-// Function to ignore reports (admin)
+// Function to ignore reports
 export async function ignoreReports(barPriceId) {
   try {
     const response = await fetch(`${apiUrl}/reportedBarPrices/ignoreReports`, {
@@ -265,7 +265,7 @@ export async function ignoreReports(barPriceId) {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include", // Include credentials if required
+      credentials: "include",
       body: JSON.stringify({ barPriceId }),
     });
 
@@ -284,7 +284,7 @@ export async function ignoreReports(barPriceId) {
   }
 }
 
-// Function to remove bar price and reports (admin)
+// Function to remove bar price and reports
 export async function removeBarPrice(barPriceId) {
   try {
     const response = await fetch(`${apiUrl}/reportedBarPrices/removeBarPrice`, {
@@ -292,7 +292,7 @@ export async function removeBarPrice(barPriceId) {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include", // Include credentials if required
+      credentials: "include",
       body: JSON.stringify({ barPriceId }),
     });
 
@@ -304,6 +304,7 @@ export async function removeBarPrice(barPriceId) {
 
     const data = await response.json();
     console.log("Bar price and reports removed successfully:", data);
+    sessionStorage.removeItem("barPrices");
     return data;
   } catch (error) {
     console.error("Error removing bar price:", error);

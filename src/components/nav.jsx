@@ -65,7 +65,7 @@ const nav = () => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content menu-sm right-0 z-[1] mt-3 flex w-max flex-col gap-2 rounded-box bg-base-100 p-2 pr-4 shadow"
+          className="menu dropdown-content menu-sm right-0 z-[20] mt-3 flex w-max flex-col gap-2 rounded-box bg-base-100 p-2 pr-4 shadow"
         >
           <li>
             <Link to="/">Home</Link>

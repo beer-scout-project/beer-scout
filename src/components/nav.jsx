@@ -20,18 +20,7 @@ const nav = () => {
           Beer Scout
         </Link>
       </div>
-      <div className="tooltip tooltip-bottom mr-2" data-tip="About Page">
-        <Link to="/about" className="btn btn-circle btn-ghost">
-          <FaInfo size={20} />
-        </Link>
-      </div>
       <div className="flex-none">
-        <div className="tooltip tooltip-bottom mr-2" data-tip="Contact Us">
-          <Link to="/contact" className="btn btn-circle btn-ghost">
-            <IoIosContacts size={30} />
-          </Link>
-        </div>
-        {/* end of temp buttons */}
         <button className="btn btn-circle btn-ghost">
           <label className="swap swap-rotate">
             <input
@@ -57,6 +46,41 @@ const nav = () => {
             </svg>
           </label>
         </button>
+      </div>
+      <div className="dropdown">
+        <div tabIndex={0} role="button" className="btn btn-circle btn-ghost">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h7"
+            />
+          </svg>
+        </div>
+        <ul
+          tabIndex={0}
+          className="menu dropdown-content menu-sm right-0 z-[1] mt-3 flex w-max flex-col gap-2 rounded-box bg-base-100 p-2 pr-4 shadow"
+        >
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/admin-login">Admin Login</Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

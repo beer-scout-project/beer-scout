@@ -1,7 +1,10 @@
 <!doctype html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=./" />
+    <script>
+      let path = window.location.pathname;
+      window.location.replace("/?" + path);
+    </script>
   </head>
   <body></body>
 </html>

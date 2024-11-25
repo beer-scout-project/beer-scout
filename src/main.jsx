@@ -13,6 +13,12 @@ import ProtectedRoute from "./utils/protectedRoute";
 import { AuthProvider } from "./utils/authProvider";
 import ContactPage from "./pages/contactPage";
 
+const query = window.location.search;
+if (query.startsWith('?')) {
+  const path = query.slice(1); 
+  window.history.replaceState(null, '', path); 
+}
+
 const App = () => {
   return (
     <AuthProvider>

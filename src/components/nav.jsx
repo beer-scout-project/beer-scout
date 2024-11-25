@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBeer, FaInfo } from "react-icons/fa";
-import { IoIosContacts } from "react-icons/io";
+import { FaBeer } from "react-icons/fa";
 
 const nav = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
@@ -20,7 +19,7 @@ const nav = () => {
           Beer Scout
         </Link>
       </div>
-      <div className="flex-none">
+      <div className="mr-2 flex-none">
         <button className="btn btn-circle btn-ghost">
           <label className="swap swap-rotate">
             <input
@@ -47,7 +46,7 @@ const nav = () => {
           </label>
         </button>
       </div>
-      <div className="dropdown">
+      <div className="dropdown mr-2">
         <div tabIndex={0} role="button" className="btn btn-circle btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"

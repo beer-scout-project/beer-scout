@@ -1,7 +1,7 @@
 const apiUrl =
   import.meta.env.MODE === "production"
     ? "https://beer-scout-backend-production.up.railway.app" // Production backend URL
-    : "http://localhost:8787"; // Development backend URL
+    : "http://localhost:8787"; // local URL
 
 export async function addBarPrice(barData) {
   try {
@@ -202,5 +202,114 @@ export async function authUser() {
   } catch (error) {
     console.error("Error authenticating user:", error);
     return null; // Return null if authentication fails
+  }
+}
+
+// Function to report a bar price
+export async function reportBarPrice(barPriceId, reason) {
+  try {
+    const response = await fetch(`${apiUrl}/reportedBarPrices/report`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ barPriceId, reason }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error reporting bar price:", message);
+      throw new Error(message.error);
+    }
+
+    const data = await response.json();
+    console.log("Bar price reported successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error reporting bar price:", error);
+    throw error;
+  }
+}
+
+// Function to get reported bar prices by location
+export async function getReportedBarPrices(location) {
+  try {
+    const requestUrl = `${apiUrl}/reportedBarPrices/getReports/${location}`;
+    console.log("Request URL:", requestUrl); // log url (for debugging)
+
+    const response = await fetch(requestUrl, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.message || "Failed to fetch reported bar prices");
+    }
+
+    const data = await response.json();
+    console.log("Reported bar prices fetched successfully:", data);
+    return data.reports;
+  } catch (error) {
+    console.error("Error fetching reported bar prices:", error);
+    throw error;
+  }
+}
+
+// Function to ignore reports
+export async function ignoreReports(barPriceId) {
+  try {
+    const response = await fetch(`${apiUrl}/reportedBarPrices/ignoreReports`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ barPriceId }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error ignoring reports:", message);
+      throw new Error(message.error);
+    }
+
+    const data = await response.json();
+    console.log("Reports ignored successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error ignoring reports:", error);
+    throw error;
+  }
+}
+
+// Function to remove bar price and reports
+export async function removeBarPrice(barPriceId) {
+  try {
+    const response = await fetch(`${apiUrl}/reportedBarPrices/removeBarPrice`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ barPriceId }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error removing bar price:", message);
+      throw new Error(message.error);
+    }
+
+    const data = await response.json();
+    console.log("Bar price and reports removed successfully:", data);
+    sessionStorage.removeItem("barPrices");
+    return data;
+  } catch (error) {
+    console.error("Error removing bar price:", error);
+    throw error;
   }
 }

@@ -7,7 +7,7 @@ import ReportedPrices from "../components/adminDashboard/reportedPrices";
 const AdminPanel = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [location, setLocation] = useState("st_johns"); // Default location (might want to add location prop to the admin user to limit location access in future)
+  const [location, setLocation] = useState("st_johns"); // Default location
 
   const handleLogout = async () => {
     await logout();
@@ -15,7 +15,7 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="flex min-h-full flex-col bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500">
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500">
       {/* Header Section */}
       <div className="flex items-center justify-between bg-base-100 px-6 py-4 shadow-md">
         <div>
@@ -52,7 +52,7 @@ const AdminPanel = () => {
           <NewPrices location={location} />
 
           {/* Reported Bar Prices */}
-          <ReportedPrices />
+          <ReportedPrices location={location} />
         </div>
       </div>
     </div>

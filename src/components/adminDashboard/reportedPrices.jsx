@@ -5,18 +5,18 @@ import {
   removeBarPrice,
 } from "../../utils/useApi";
 
-const ReportedPrices = () => {
+const ReportedPrices = ({ location }) => {
   const [reportedBarPrices, setReportedBarPrices] = useState([]);
   const [loadingReports, setLoadingReports] = useState(false);
 
   useEffect(() => {
     fetchReportedBarPrices();
-  }, []);
+  }, [location]);
 
   const fetchReportedBarPrices = async () => {
     setLoadingReports(true);
     try {
-      const reports = await getReportedBarPrices();
+      const reports = await getReportedBarPrices(location);
       setReportedBarPrices(reports);
     } catch (error) {
       console.error("Error fetching reported bar prices:", error);

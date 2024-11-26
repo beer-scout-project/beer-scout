@@ -231,21 +231,23 @@ export async function reportBarPrice(barPriceId, reason) {
   }
 }
 
-// Function to get reported bar prices
-export async function getReportedBarPrices() {
+// Function to get reported bar prices by location
+export async function getReportedBarPrices(location) {
   try {
-    const response = await fetch(`${apiUrl}/reportedBarPrices/getReports`, {
+    const requestUrl = `${apiUrl}/reportedBarPrices/getReports/${location}`;
+    console.log("Request URL:", requestUrl); // log url (for debugging)
+
+    const response = await fetch(requestUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
 
     if (!response.ok) {
       const message = await response.json();
-      console.error("Error fetching reported bar prices:", message);
-      throw new Error(message.error);
+      console.error("Error response from server:", message);
+      throw new Error(message.message || "Failed to fetch reported bar prices");
     }
 
     const data = await response.json();

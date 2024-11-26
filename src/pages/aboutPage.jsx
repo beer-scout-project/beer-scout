@@ -119,26 +119,24 @@ export default function AboutPage() {
               </p>
               <br />
               <li>User Responsibilities</li>
-              <p>
-                By using Beer Scout, you agree to:
-                <ul>
-                  <li>
-                    • Provide accurate and truthful information when submitting
-                    deals.
-                  </li>
-                  <li>
-                    • Respect the intellectual property rights of Beer Scout and
-                    other users.
-                  </li>
-                  <li>
-                    • Not use the website for any illegal or harmful purposes.
-                  </li>
-                  <li>
-                    • Acknowledge that Beer Scout is for personal use only and
-                    not for commercial purposes.
-                  </li>
-                </ul>
-              </p>
+              <p>By using Beer Scout, you agree to:</p>
+              <ul>
+                <li>
+                  • Provide accurate and truthful information when submitting
+                  deals.
+                </li>
+                <li>
+                  • Respect the intellectual property rights of Beer Scout and
+                  other users.
+                </li>
+                <li>
+                  • Not use the website for any illegal or harmful purposes.
+                </li>
+                <li>
+                  • Acknowledge that Beer Scout is for personal use only and not
+                  for commercial purposes.
+                </li>
+              </ul>
               <br />
               <li>Content Submission</li>
               <p>

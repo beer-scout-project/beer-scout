@@ -90,6 +90,11 @@ body {
 
 /* Move add a beer price tooltip to make it fully visible */
 .sticky .tooltip::before {
-  left: auto;
+  left: -26px;
   z-index: 10;
+}
+
+/* Fix black bar where scrollbar is when modal is open */
+:root:has(.modal-open) {
+  scrollbar-gutter: auto !important;
 }

@@ -4,14 +4,31 @@ import {
   ignoreReports,
   removeBarPrice,
 } from "../../utils/useApi";
+import { IoCloseCircleSharp, IoShieldCheckmark } from "react-icons/io5";
 
 const ReportedPrices = ({ location }) => {
   const [reportedBarPrices, setReportedBarPrices] = useState([]);
   const [loadingReports, setLoadingReports] = useState(false);
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchReportedBarPrices();
   }, [location]);
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const fetchReportedBarPrices = async () => {
     setLoadingReports(true);
@@ -20,6 +37,7 @@ const ReportedPrices = ({ location }) => {
       setReportedBarPrices(reports);
     } catch (error) {
       console.error("Error fetching reported bar prices:", error);
+      setError("Failed to fetch reported bar prices.");
     }
     setLoadingReports(false);
   };
@@ -27,25 +45,41 @@ const ReportedPrices = ({ location }) => {
   const handleIgnoreReports = async (barPriceId) => {
     try {
       await ignoreReports(barPriceId);
-      alert("Reports ignored successfully.");
+      setSuccess("Reports ignored successfully.");
       fetchReportedBarPrices();
     } catch (error) {
       console.error("Error ignoring reports:", error);
+      setError("Failed to ignore reports.");
     }
   };
 
   const handleRemoveBarPrice = async (barPriceId) => {
     try {
       await removeBarPrice(barPriceId);
-      alert("Bar price removed successfully.");
+      setSuccess("Bar price removed successfully.");
       fetchReportedBarPrices();
     } catch (error) {
       console.error("Error removing bar price:", error);
+      setError("Failed to remove bar price.");
     }
   };
 
   return (
     <div>
+      {/* Success Message */}
+      {success && (
+        <div
+          role="alert"
+          className="alert alert-success absolute right-4 top-4 z-10 flex max-w-max justify-center rounded-lg"
+        >
+          <IoShieldCheckmark size={26} />
+          <span>{success}</span>
+          <button onClick={() => setSuccess(null)}>
+            <IoCloseCircleSharp className="h-[1.3rem] w-[1.3rem]" />
+          </button>
+        </div>
+      )}
+
       <h2 className="mb-4 text-2xl font-bold">Reported Bar Prices</h2>
       {loadingReports ? (
         <div className="text-center">Loading...</div>
@@ -61,7 +95,7 @@ const ReportedPrices = ({ location }) => {
                 <th>Price</th>
                 <th>Reports</th>
                 <th>Reasons</th>
-                <th>Actions</th>
+                <th className="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -83,19 +117,23 @@ const ReportedPrices = ({ location }) => {
                       </div>
                     ))}
                   </td>
-                  <td className="flex space-x-2">
-                    <button
-                      className="btn btn-warning btn-sm"
-                      onClick={() => handleIgnoreReports(report.bar_price_id)}
-                    >
-                      Ignore
-                    </button>
-                    <button
-                      className="btn btn-error btn-sm"
-                      onClick={() => handleRemoveBarPrice(report.bar_price_id)}
-                    >
-                      Remove
-                    </button>
+                  <td className="text-right">
+                    <div className="inline-flex space-x-2">
+                      <button
+                        className="btn btn-warning btn-sm"
+                        onClick={() => handleIgnoreReports(report.bar_price_id)}
+                      >
+                        Ignore
+                      </button>
+                      <button
+                        className="btn btn-error btn-sm"
+                        onClick={() =>
+                          handleRemoveBarPrice(report.bar_price_id)
+                        }
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

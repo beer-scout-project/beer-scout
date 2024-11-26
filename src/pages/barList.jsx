@@ -270,10 +270,7 @@ const BarList = () => {
                             : "text-gray-500"
                         }`}
                       >
-                        {`$${getPricePer100Ml(
-                          bar.price,
-                          bar.serving_size,
-                        )}/100ml`}
+                        {`$${getPricePer100Ml(bar.price, bar.serving_size)}/100ml`}
                       </p>
                     </div>
                   </div>
@@ -314,7 +311,7 @@ const BarList = () => {
                         document.body.classList.add("modal-open");
                       }}
                       className={`ml-4 text-sm font-normal ${
-                        bar.isHighlighted ? "text-orange-200" : "text-gray-500"
+                        bar.isHighlighted ? "text-orange-200" : "text-error"
                       }`}
                     >
                       Report
@@ -332,7 +329,7 @@ const BarList = () => {
         <dialog open className="modal">
           {/* Darkening Overlay */}
           <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
-          <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+          <div className="modal-box bg-base-100">
             <h3 className="text-left text-lg font-bold">
               {selectedBar.bar_name}
             </h3>
@@ -351,10 +348,7 @@ const BarList = () => {
             <div className="modal-action">
               <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}
-                <button
-                  onClick={closeModal}
-                  className="btn btn-primary border-none bg-[#D2691E] text-[#FAF9F6]"
-                >
+                <button onClick={closeModal} className="btn btn-primary">
                   Close
                 </button>
               </form>
@@ -367,32 +361,39 @@ const BarList = () => {
       {isReportModalOpen && (
         <dialog open className="modal">
           {/* Darkening Overlay */}
-          <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
-          <div className="modal-box bg-[#FDEBD0] text-[#2f2f2f]">
+          <div className="fixed inset-0 bg-[#2f2f2f]/50 opacity-75" />
+          <div className="modal-box relative bg-base-100">
+            {/* Close Button */}
+            <button
+              className="btn btn-circle btn-error btn-sm absolute right-2 top-2 text-white"
+              onClick={() => {
+                setIsReportModalOpen(false);
+                document.body.classList.remove("modal-open");
+              }}
+            >
+              ✕
+            </button>
             <h3 className="text-lg font-bold">Report Bar Price</h3>
             <p className="py-4">Please select a reason for reporting:</p>
-            <select
-              className="select select-bordered w-full"
-              value={selectedReason}
-              onChange={(e) => setSelectedReason(e.target.value)}
-            >
-              <option value="">Select a reason</option>
+            <div className="space-y-2">
               {reportReasons.map((reason, index) => (
-                <option key={index} value={reason}>
-                  {reason}
-                </option>
+                <label
+                  key={index}
+                  className="flex cursor-pointer items-center gap-3 rounded-lg p-2 hover:bg-primary/10"
+                >
+                  <input
+                    type="radio"
+                    name="report-reason"
+                    className="radio-primary radio"
+                    value={reason}
+                    checked={selectedReason === reason}
+                    onChange={(e) => setSelectedReason(e.target.value)}
+                  />
+                  <span>{reason}</span>
+                </label>
               ))}
-            </select>
-            <div className="modal-action">
-              <button
-                className="btn"
-                onClick={() => {
-                  setIsReportModalOpen(false);
-                  document.body.classList.remove("modal-open");
-                }}
-              >
-                Cancel
-              </button>
+            </div>
+            <div className="modal-action mt-4">
               <button className="btn btn-primary" onClick={handleReport}>
                 Submit Report
               </button>

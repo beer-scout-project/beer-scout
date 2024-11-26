@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/authProvider";
 
@@ -8,7 +8,14 @@ const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { user, loading, login } = useAuth(); // Destructure user and loading from useAuth
+
+  // Redirect to AdminPanel if user is already logged in
+  useEffect(() => {
+    if (!loading && user) {
+      navigate("/admin-panel");
+    }
+  }, [user, loading, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,9 +29,21 @@ const AdminLogin = () => {
     }
   };
 
+  // Display a loading indicator while checking auth status
+  if (loading) {
+    return (
+      <div className="flex min-h-full items-center justify-center bg-base-100">
+        <div className="text-center">
+          <div className="loading loading-spinner text-primary"></div>
+          <p className="mt-2 text-gray-700">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-full items-center justify-center bg-base-100">
-      <div className="card w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+      <div className="card relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-bold text-black">
           Admin Login
         </h2>
@@ -67,7 +86,7 @@ const AdminLogin = () => {
           <button type="submit" className="btn btn-primary mb-4 w-full">
             Login
           </button>
-          {error && <p className="text-center text-error">{error}</p>}
+          {error && <p className="text-center text-red-500">{error}</p>}
         </form>
       </div>
     </div>

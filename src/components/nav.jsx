@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBeer } from "react-icons/fa";
 
-const nav = () => {
+export default function Nav() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "myDark");
 
   const handleThemeChange = (event) => {
@@ -83,6 +83,4 @@ const nav = () => {
       </div>
     </div>
   );
-};
-
-export default nav;
+}

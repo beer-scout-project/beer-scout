@@ -309,7 +309,7 @@ const BarList = () => {
                         document.body.classList.add("modal-open");
                       }}
                       className={`ml-4 text-sm font-normal ${
-                        bar.isHighlighted ? "text-orange-200" : "text-error"
+                        bar.isHighlighted ? "text-orange-200" : "text-gray-500"
                       }`}
                     >
                       Report

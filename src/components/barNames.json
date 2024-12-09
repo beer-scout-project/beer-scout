@@ -1,53 +1,206 @@
 [
-  "Bannerman Brewing Co.",
-  "Bernard Stanley Gastropub",
-  "Boston Pizza",
-  "Brewdock",
-  "Bridie Molloy's",
-  "Broderick's on George",
-  "Bull & Barrel",
-  "Christian's Pub",
-  "Cork'd",
-  "Erins Pub",
-  "Exile Restaurant and Lounge",
-  "Green Sleeves",
-  "Jungle Jim's Eatery",
-  "Karaoke Kops",
-  "Kelly's Pub",
-  "Konfusion",
-  "LIV",
-  "Loose Tie",
-  "Lottie's Place",
-  "Lucy's Bar",
-  "Magnum & Steins",
-  "No. 4 Restaurant & Bar",
-  "O’Reilly’s Irish Newfoundland Pub",
-  "Oíche",
-  "On The Rocks",
-  "papillon cocktail bar",
-  "Quidi Vidi Brewery",
-  "Rob Roy",
-  "Shamrock City Pub",
-  "Sláinte Whisky & Wine",
-  "Spirit",
-  "Station Lounge",
-  "The Adelaide Oyster House",
-  "The Black Sheep",
-  "The Celtic Hearth",
-  "The Duke Of Duckworth",
-  "The Martini Bar",
-  "The Merchant Tavern",
-  "The Newfoundland Embassy",
-  "The Rock House",
-  "The Rose & Thistle Pub",
-  "The Salt House Kitchen",
-  "The Ship Pub",
-  "The Trinity",
-  "Three Cheers",
-  "TJ's Pub",
-  "Toslow",
-  "Trapper John's",
-  "West End Club",
-  "YellowBelly Brewery",
-  "Alex's Bar"
+  {
+    "name": "Bannerman Brewing Co.",
+    "address": "90 Duckworth Street"
+  },
+  {
+    "name": "Bernard Stanley Gastropub",
+    "address": "223 Duckworth Street"
+  },
+  {
+    "name": "Boston Pizza",
+    "address": "367 Water Street"
+  },
+  {
+    "name": "Brewdock",
+    "address": "85 Duckworth Street"
+  },
+  {
+    "name": "Bridie Molloy's",
+    "address": "5 George Street"
+  },
+  {
+    "name": "Broderick's on George",
+    "address": "36 George Street"
+  },
+  {
+    "name": "Bull & Barrel",
+    "address": "4 George Street"
+  },
+  {
+    "name": "Christian's Pub",
+    "address": "23 George Street"
+  },
+  {
+    "name": "Cork'd",
+    "address": "345 Duckworth Street"
+  },
+  {
+    "name": "Erins Pub",
+    "address": "186 Water Street"
+  },
+  {
+    "name": "Exile Restaurant and Lounge",
+    "address": "115 George Street"
+  },
+  {
+    "name": "Green Sleeves",
+    "address": "14 George Street"
+  },
+  {
+    "name": "Jungle Jim's Eatery",
+    "address": "2 Holdsworth Street"
+  },
+  {
+    "name": "Karaoke Kops",
+    "address": "6 George Street"
+  },
+  {
+    "name": "Kelly's Pub",
+    "address": "10 George Street"
+  },
+  {
+    "name": "Konfusion",
+    "address": "391 Duckworth Street"
+  },
+  {
+    "name": "LIV",
+    "address": "310 Water Street"
+  },
+  {
+    "name": "Loose Tie",
+    "address": "14 George Street"
+  },
+  {
+    "name": "Lottie's Place",
+    "address": "3 George Street"
+  },
+  {
+    "name": "Lucy's Bar",
+    "address": "371 Duckworth Street"
+  },
+  {
+    "name": "Magnum & Steins",
+    "address": "329 Duckworth Street"
+  },
+  {
+    "name": "No. 4 Restaurant & Bar",
+    "address": "4 Cathedral Street"
+  },
+  {
+    "name": "O’Reilly’s Irish Newfoundland Pub",
+    "address": "13 George Street"
+  },
+  {
+    "name": "Oíche",
+    "address": "16 George Street"
+  },
+  {
+    "name": "On The Rocks",
+    "address": "179 Duckworth Street"
+  },
+  {
+    "name": "papillon cocktail bar",
+    "address": "152 Water Street"
+  },
+  {
+    "name": "Quidi Vidi Brewery",
+    "address": "35 Barrows Road"
+  },
+  {
+    "name": "Rob Roy",
+    "address": "391 Duckworth Street"
+  },
+  {
+    "name": "Shamrock City Pub",
+    "address": "340 Water Street"
+  },
+  {
+    "name": "Sláinte Whisky & Wine",
+    "address": "115 Duckworth Street"
+  },
+  {
+    "name": "Spirit",
+    "address": "164 Water Street"
+  },
+  {
+    "name": "Station Lounge",
+    "address": "7 Hutchings Street"
+  },
+  {
+    "name": "The Adelaide Oyster House",
+    "address": "334 Water Street"
+  },
+  {
+    "name": "The Black Sheep",
+    "address": "7 George Street"
+  },
+  {
+    "name": "The Celtic Hearth",
+    "address": "300 Water Street"
+  },
+  {
+    "name": "The Duke Of Duckworth",
+    "address": "325 Duckworth Street"
+  },
+  {
+    "name": "The Martini Bar",
+    "address": "11 George Street"
+  },
+  {
+    "name": "The Merchant Tavern",
+    "address": "291 Water Street"
+  },
+  {
+    "name": "The Newfoundland Embassy",
+    "address": "79-81 New Gower Street"
+  },
+  {
+    "name": "The Rock House",
+    "address": "8 George Street"
+  },
+  {
+    "name": "The Rose & Thistle Pub",
+    "address": "208 Water Street"
+  },
+  {
+    "name": "The Salt House Kitchen",
+    "address": "171 Water Street"
+  },
+  {
+    "name": "The Ship Pub",
+    "address": "265 Duckworth Street"
+  },
+  {
+    "name": "The Trinity",
+    "address": "8 Becks Cove"
+  },
+  {
+    "name": "Three Cheers",
+    "address": "1 New Gower Street"
+  },
+  {
+    "name": "TJ's Pub",
+    "address": "7 George Street"
+  },
+  {
+    "name": "Toslow",
+    "address": "108 Duckworth Street"
+  },
+  {
+    "name": "Trapper John's",
+    "address": "371 Duckworth Street"
+  },
+  {
+    "name": "West End Club",
+    "address": "14 Hamilton Ave"
+  },
+  {
+    "name": "YellowBelly Brewery",
+    "address": "288 Water Street"
+  },
+  {
+    "name": "Alex's Bar & Grill",
+    "address": "25 alex Street"
+  }
 ]

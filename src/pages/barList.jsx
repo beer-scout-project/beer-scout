@@ -231,6 +231,17 @@ const BarList = () => {
               <span className="loading loading-spinner ml-[49%] text-warning"></span>
             )}
 
+            {error && (
+              <div className="py-4 text-center text-red-500">{error}</div>
+            )}
+
+            {!loading && !error && barPrices.length === 0 && (
+              <div className="py-4 text-center text-neutral-content">
+                No bar prices available yet. Please try selecting another city
+                or check back later.
+              </div>
+            )}
+
             {barPrices?.map((bar, index) => {
               let beerDescription = getBeerDescriptionFromSize(
                 bar.serving_size,

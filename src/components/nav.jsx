@@ -76,9 +76,9 @@ export default function Nav() {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/admin-login">Admin Login</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

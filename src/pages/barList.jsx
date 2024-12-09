@@ -24,40 +24,52 @@ const BarList = () => {
     "Other",
   ];
 
-  // Fetch the city from localStorage - TEMP
   useEffect(() => {
     const storedCity = localStorage.getItem("city");
     if (storedCity) {
       setCity(storedCity);
     }
-    // Check sessionStorage for cached bar prices
+  }, []);
+
+  useEffect(() => {
+    if (!city) return; // Wait until city is known
+    // Check sessionStorage for cached bar prices and cached city
     const cachedBarPrices = sessionStorage.getItem("barPrices");
-    if (cachedBarPrices) {
+    const cachedCity = sessionStorage.getItem("cachedCity");
+
+    if (cachedBarPrices && cachedCity === city) {
       console.log("Loading bar prices from session storage...");
       setBarPrices(JSON.parse(cachedBarPrices));
     } else {
-      fetchBarPrices();
+      // Different city or no cached data => fetch new data
+      sessionStorage.removeItem("barPrices"); // clear old data
+      sessionStorage.removeItem("cachedCity");
+      fetchBarPrices(city);
     }
-  }, []);
+  }, [city]);
 
-  const fetchBarPrices = async () => {
+  const fetchBarPrices = async (currentCity) => {
     setLoading(true);
-    setError(null); // Clear any previous errors
+    setError(null);
+
     try {
-      console.log("Fetching bar prices from backend..."); // Log statement
-      const data = await getBarPricesByLocation("st_johns"); // Get prices by location
-      const currentData = filterPricesByHappyHour(data); // Only show prices that are currently active
-      const sortedData = sortBarsByPrice(currentData); // Sort the list by price
-      // Highlight the bar with the lowest price
+      console.log(`Fetching bar prices for city: ${currentCity}`);
+      const data = await getBarPricesByLocation(currentCity);
+      const currentData = filterPricesByHappyHour(data);
+      const sortedData = sortBarsByPrice(currentData);
+
       if (sortedData.length > 0) {
         sortedData[0].isHighlighted = true;
       }
       setBarPrices(sortedData);
-      // Store the fetched data in sessionStorage
+
+      // Store fetched data and current city in sessionStorage
       sessionStorage.setItem("barPrices", JSON.stringify(sortedData));
+      sessionStorage.setItem("cachedCity", currentCity);
     } catch (error) {
       setError(error.message);
     }
+
     setLoading(false);
   };
 
@@ -191,7 +203,13 @@ const BarList = () => {
                 <span className="mr-2">
                   <FaLocationDot />
                 </span>
-                St. John&#39;s
+                {city === "st_johns"
+                  ? "St. John's"
+                  : city === "halifax"
+                    ? "Halifax"
+                    : city === "corner_brook"
+                      ? "Corner Brook"
+                      : "Unknown Location"}
               </p>
               <h2 className="mb-4 text-2xl font-bold text-base-content">
                 Cheapest Beer Now

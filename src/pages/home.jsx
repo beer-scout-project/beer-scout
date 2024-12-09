@@ -1,19 +1,15 @@
-//import React, { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const home = () => {
-  const selectedCity = "st_johns";
-
-  //Code for drop down list if additional cities added
-  /*const [selectedCity, setSelectedCity] = useState("");
+const Home = () => {
+  const [selectedCity, setSelectedCity] = useState("st_johns");
 
   const handleSelectChange = (event) => {
     setSelectedCity(event.target.value);
-  };*/
+  };
 
-  // temp add to storage
   const handleClick = () => {
-    console.log(selectedCity);
+    console.log("Selected City:", selectedCity);
     localStorage.setItem("city", selectedCity);
   };
 
@@ -29,30 +25,29 @@ const home = () => {
         <div className="w-full">
           <h1 className="mb-5 text-5xl font-extrabold">Scouting Beer Deals?</h1>
           <h4 className="mb-5 text-xl font-light">
-            Find the cheapest beer in downtown St. John&#39;s!
+            Find the cheapest beer near you!
           </h4>
           <div className="flex flex-col items-center">
-            {/*Code for drop down list if additional cities added*/}
-            {/*<select
+            {/* Dropdown with three locations */}
+            <select
               className="select select-bordered w-full max-w-xs bg-base-100 text-base-content"
               onChange={handleSelectChange}
+              value={selectedCity}
             >
-              <option disabled selected>
-                Select your city
-              </option>
-              <option>St.Johns</option>
-              <option>Halifax</option>
-            </select>*/}
+              <option value="">Select your city</option>
+              <option value="st_johns">St. John's</option>
+              <option value="halifax">Halifax</option>
+              <option value="corner_brook">Corner Brook</option>
+            </select>
             <Link
               to="/bar-list"
-              className="btn btn-primary btn-wide text-lg sm:ml-4"
+              className="btn btn-primary btn-wide mt-4 text-lg sm:ml-4"
               onClick={handleClick}
+              disabled={!selectedCity} // Disable button if no city selected
             >
               Cheapest beer right now!
             </Link>
-            <h6 className="pt-3 text-sm font-light">
-            Beta Version 1
-            </h6>
+            {/* <h6 className="pt-3 text-sm font-light">Beta Version 1</h6> */}
           </div>
         </div>
       </div>
@@ -60,4 +55,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

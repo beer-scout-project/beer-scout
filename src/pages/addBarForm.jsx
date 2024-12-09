@@ -34,7 +34,7 @@ const AddBarForm = () => {
         setFilteredBarNames([]);
       } else {
         const filtered = barNames.filter((bar) =>
-          bar.toLowerCase().includes(value.toLowerCase()),
+          bar.name.toLowerCase().includes(value.toLowerCase()),
         );
         setFilteredBarNames(filtered);
       }
@@ -92,8 +92,9 @@ const AddBarForm = () => {
     setError(null);
     setSuccess(null);
 
-    // Verify bar name is already in the database
-    if (!barNames.includes(formData.bar_name)) {
+    // Verify bar name is in the list
+    const selectedBar = barNames.find((b) => b.name === formData.bar_name);
+    if (!selectedBar) {
       setError("We're only accepting prices for the bars listed at this time.");
       return;
     }
@@ -142,10 +143,15 @@ const AddBarForm = () => {
     }
 
     try {
-      const response = await addBarPrice(formData);
+      // Include the address from the selected bar
+      const barDataToSend = {
+        ...formData,
+        address: selectedBar.address,
+      };
+
+      const response = await addBarPrice(barDataToSend);
       console.log("Form submitted successfully:", response);
       setSuccess("Bar price added successfully!");
-      
 
       setFormData({
         bar_name: "",
@@ -233,7 +239,6 @@ const AddBarForm = () => {
               <label className="label">
                 <span className="label-text text-base-content">Bar Name</span>
               </label>
-              {/* Bar name input with autocomplete */}
               <input
                 type="text"
                 name="bar_name"
@@ -245,22 +250,20 @@ const AddBarForm = () => {
                 autoComplete="off"
                 required
               />
-              {/* Dropdown for autocomplete suggestions for bar names */}
               {filteredBarNames.length > 0 && (
                 <ul className="absolute left-0 top-full z-10 max-h-[300px] w-full overflow-y-auto rounded-lg border bg-base-300 text-secondary-content shadow-lg">
                   {filteredBarNames.map((bar, index) => (
                     <li
                       key={index}
                       className="cursor-pointer p-2 hover:bg-neutral-content hover:text-base-100"
-                      onClick={() => handleBarNameSelect(bar)}
+                      onClick={() => handleBarNameSelect(bar.name)}
                     >
-                      {bar}
+                      {bar.name}
                     </li>
                   ))}
                 </ul>
               )}
             </div>
-            {/* Location */}
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text text-base-content">Location</span>
@@ -278,7 +281,6 @@ const AddBarForm = () => {
                 <option value="st_johns">St. John&#39;s</option>
               </select>
             </div>
-            {/* Serving Size */}
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text text-base-content">
@@ -304,7 +306,6 @@ const AddBarForm = () => {
                 <option value="1000ml">Pitcher (1140ml)</option>
               </select>
             </div>
-            {/* Price */}
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text text-base-content">Price ($)</span>
@@ -320,7 +321,6 @@ const AddBarForm = () => {
                 required
               />
             </div>
-            {/* Happy Hour Checkbox */}
             <div className="form-control mb-4">
               <label className="label cursor-pointer">
                 <span className="label-text text-base-content">Happy Hour</span>
@@ -333,10 +333,8 @@ const AddBarForm = () => {
                 />
               </label>
             </div>
-            {/* Happy Hour Details */}
             {formData.happy_hour && (
               <>
-                {/* Happy Hour Day */}
                 <div className="form-control mb-4">
                   <label className="label">
                     <span className="label-text text-base-content">
@@ -344,99 +342,29 @@ const AddBarForm = () => {
                     </span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
-                    {/* Monday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Monday"
-                        checked={formData.happy_hour_day.includes("Monday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Monday</span>
-                    </label>
-
-                    {/* Tuesday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Tuesday"
-                        checked={formData.happy_hour_day.includes("Tuesday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Tuesday</span>
-                    </label>
-
-                    {/* Wednesday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Wednesday"
-                        checked={formData.happy_hour_day.includes("Wednesday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Wednesday</span>
-                    </label>
-
-                    {/* Thursday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Thursday"
-                        checked={formData.happy_hour_day.includes("Thursday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Thursday</span>
-                    </label>
-
-                    {/* Friday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Friday"
-                        checked={formData.happy_hour_day.includes("Friday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Friday</span>
-                    </label>
-
-                    {/* Saturday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Saturday"
-                        checked={formData.happy_hour_day.includes("Saturday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Saturday</span>
-                    </label>
-
-                    {/* Sunday */}
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="happy_hour_day"
-                        value="Sunday"
-                        checked={formData.happy_hour_day.includes("Sunday")}
-                        onChange={handleChange}
-                        className="checkbox-primary checkbox bg-base-200"
-                      />
-                      <span className="ml-2 text-sm">Sunday</span>
-                    </label>
+                    {[
+                      "Monday",
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday",
+                      "Sunday",
+                    ].map((day) => (
+                      <label className="flex items-center" key={day}>
+                        <input
+                          type="checkbox"
+                          name="happy_hour_day"
+                          value={day}
+                          checked={formData.happy_hour_day.includes(day)}
+                          onChange={handleChange}
+                          className="checkbox-primary checkbox bg-base-200"
+                        />
+                        <span className="ml-2 text-sm">{day}</span>
+                      </label>
+                    ))}
                   </div>
                 </div>
-                {/* Happy Hour Start */}
                 <div className="form-control mb-4">
                   <label className="label">
                     <span className="label-text text-base-content">
@@ -452,7 +380,6 @@ const AddBarForm = () => {
                     required={formData.happy_hour}
                   />
                 </div>
-                {/* Happy Hour End */}
                 <div className="form-control mb-4">
                   <label className="label">
                     <span className="label-text text-base-content">
@@ -470,7 +397,6 @@ const AddBarForm = () => {
                 </div>
               </>
             )}
-            {/* Submit Button */}
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary w-full">
                 Submit

@@ -19,10 +19,19 @@ const BarList = () => {
 
   const reportReasons = [
     "Price is incorrect",
+    "Sizing is incorrect",
     "Happy hour time is wrong",
     "Location is incorrect",
     "Other",
   ];
+
+  // location formatter removes the underscore and capitalizes the first letter of each word
+  const formatName = (name) => {
+    return name
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   useEffect(() => {
     const storedCity = localStorage.getItem("city");
@@ -239,6 +248,19 @@ const BarList = () => {
               <div className="py-4 text-center text-neutral-content">
                 No bar prices available yet. Please try selecting another city
                 or check back later.
+                <br />
+                <div className="divider">OR</div>
+                <div className="flex items-center justify-center py-4 text-center text-neutral-content">
+                  Be the first to suggest a price!
+                  <div
+                    className="tooltip tooltip-bottom ml-2"
+                    data-tip="Suggest a beer price"
+                  >
+                    <Link to="/add-bar" className="text-base-content">
+                      <FaPlus size={20} />
+                    </Link>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -354,24 +376,48 @@ const BarList = () => {
       {/* Details Modal */}
       {isModalOpen && selectedBar && (
         <dialog open className="modal">
-          <div className="fixed inset-0 bg-[#2f2f2f]/25 opacity-50" />
-          <div className="modal-box bg-base-100">
-            <h3 className="text-left text-lg font-bold">
+          <div className="fixed inset-0 bg-black opacity-50" />
+          <div className="modal-box rounded-lg bg-base-100 p-6 shadow-lg">
+            <h3 className="mb-4 text-left text-2xl font-bold">
               {selectedBar.bar_name}
             </h3>
-            <p className="pt-4 text-left">
-              {selectedBar.happy_hour ? (
-                <>
-                  Happy Hour! <br />
-                  Day: {selectedBar.happy_hour_day} <br />
-                  Time: {selectedBar.happy_hour_start} -{" "}
-                  {selectedBar.happy_hour_end} <br />
-                </>
-              ) : (
-                <>More Information Coming Soon!</>
+            <div className="spacing-2 space-y-4 text-left tracking-wider">
+              {selectedBar.location && (
+                <div>
+                  <h4 className="mb-1 text-xl font-bold">Location:</h4>
+                  <div className="flex">
+                    <p>
+                      <span className="text-base font-normal">
+                        {selectedBar.address},{" "}
+                        {formatName(selectedBar.location)}
+                      </span>
+                    </p>
+                  </div>
+                </div>
               )}
-            </p>
-            <div className="modal-action">
+              {selectedBar.happy_hour && (
+                <div>
+                  <h4 className="mb-1 text-xl font-bold">Happy Hour!</h4>
+                  <p className="mb-1">
+                    <span className="text-lg font-semibold">Day: </span>
+                    <span className="text-base font-normal">
+                      {selectedBar.happy_hour_day}
+                    </span>
+                  </p>
+                  <p>
+                    <span className="text-lg font-semibold">Time: </span>
+                    <span className="text-base font-normal">
+                      {selectedBar.happy_hour_start} -{" "}
+                      {selectedBar.happy_hour_end}
+                    </span>
+                  </p>
+                </div>
+              )}
+              {!selectedBar.happy_hour && !selectedBar.location && (
+                <div>More Information Coming Soon!</div>
+              )}
+            </div>
+            <div className="modal-action mt-6">
               <form method="dialog">
                 <button onClick={closeModal} className="btn btn-primary">
                   Close
@@ -385,7 +431,7 @@ const BarList = () => {
       {/* Report Modal */}
       {isReportModalOpen && (
         <dialog open className="modal">
-          <div className="fixed inset-0 bg-[#2f2f2f]/50 opacity-75" />
+          <div className="fixed inset-0 bg-black opacity-75" />
           <div className="modal-box relative bg-base-100">
             <button
               className="btn btn-circle btn-error btn-sm absolute right-2 top-2 text-white"

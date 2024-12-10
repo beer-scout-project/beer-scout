@@ -12,12 +12,20 @@ import AdminPanel from "./pages/adminPanel";
 import ProtectedRoute from "./utils/protectedRoute";
 import { AuthProvider } from "./utils/authProvider";
 import ContactPage from "./pages/contactPage";
+import { PostHogProvider } from "posthog-js/react";
+import posthog from "posthog-js";
 
 const query = window.location.search;
-if (query.startsWith('?')) {
-  const path = query.slice(1); 
-  window.history.replaceState(null, '', path); 
+if (query.startsWith("?")) {
+  const path = query.slice(1);
+  window.history.replaceState(null, "", path);
 }
+
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+};
+
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, options);
 
 const App = () => {
   return (
@@ -54,6 +62,8 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <PostHogProvider client={posthog}>
+      <App />
+    </PostHogProvider>
   </React.StrictMode>,
 );

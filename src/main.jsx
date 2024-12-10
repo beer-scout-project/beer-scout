@@ -21,13 +21,9 @@ if (query.startsWith("?")) {
   window.history.replaceState(null, "", path);
 }
 
-console.log("PostHog Key:", import.meta.env.VITE_PUBLIC_POSTHOG_KEY);
-console.log("PostHog Host:", import.meta.env.VITE_PUBLIC_POSTHOG_HOST);
-
 posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
   person_profiles: "identified_only",
-  debug: true, // Enable debug mode
 });
 
 const App = () => {

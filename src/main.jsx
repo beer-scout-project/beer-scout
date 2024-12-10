@@ -12,8 +12,8 @@ import AdminPanel from "./pages/adminPanel";
 import ProtectedRoute from "./utils/protectedRoute";
 import { AuthProvider } from "./utils/authProvider";
 import ContactPage from "./pages/contactPage";
-import { PostHogProvider } from "posthog-js/react";
 import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 
 const query = window.location.search;
 if (query.startsWith("?")) {
@@ -21,11 +21,10 @@ if (query.startsWith("?")) {
   window.history.replaceState(null, "", path);
 }
 
-const options = {
+posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-};
-
-posthog.init(import.meta.env.VITE_PUBLIC_POSTHOG_KEY, options);
+  person_profiles: "identified_only",
+});
 
 const App = () => {
   return (

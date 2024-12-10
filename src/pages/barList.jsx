@@ -214,11 +214,11 @@ const BarList = () => {
                 </span>
                 {city === "st_johns"
                   ? "St. John's"
-                  : city === "halifax"
-                    ? "Halifax"
-                    : city === "corner_brook"
-                      ? "Corner Brook"
-                      : "Unknown Location"}
+                  : // : city === "halifax"
+                    //   ? "Halifax"
+                    city === "corner_brook"
+                    ? "Corner Brook"
+                    : "Unknown Location"}
               </p>
               <h2 className="mb-4 text-2xl font-bold text-base-content">
                 Cheapest Beer Now

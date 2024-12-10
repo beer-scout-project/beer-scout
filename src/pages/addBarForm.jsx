@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { addBarPrice } from "../utils/useApi";
+import { addBarPrice, getBarsByLocation } from "../utils/useApi";
 import { IoCloseCircleSharp } from "react-icons/io5";
-import barNames from "../components/barNames.json";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -19,24 +18,64 @@ const AddBarForm = () => {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [filteredBarNames, setFilteredBarNames] = useState([]);
+  const [filteredBars, setFilteredBars] = useState([]);
+  const [allBars, setAllBars] = useState([]);
+  const [city, setCity] = useState("");
+
+  useEffect(() => {
+    // Load the user's city from localStorage
+    const storedCity = localStorage.getItem("city");
+    if (storedCity) {
+      setCity(storedCity);
+      setFormData((prev) => ({ ...prev, location: storedCity }));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!city) return;
+
+    // Load or Initialize barsCache from sessionStorage
+    const cachedData = sessionStorage.getItem("barsCache");
+    let barsCache = cachedData ? JSON.parse(cachedData) : {};
+
+    if (barsCache[city]) {
+      console.log(`Loading bars for ${city} from cache.`);
+      setAllBars(barsCache[city]);
+    } else {
+      fetchAndCacheBars(city, barsCache);
+    }
+  }, [city]);
+
+  const fetchAndCacheBars = async (loc, barsCache) => {
+    try {
+      const bars = await getBarsByLocation(loc);
+      setAllBars(bars);
+
+      // Update cache
+      barsCache[loc] = bars;
+      sessionStorage.setItem("barsCache", JSON.stringify(barsCache));
+    } catch (error) {
+      console.error("Error fetching bars:", error);
+      setAllBars([]);
+    }
+  };
 
   const handleFocus = () => {
-    setFilteredBarNames(barNames);
+    setFilteredBars(allBars);
   };
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
     if (name === "bar_name") {
-      // Update the filtered suggestions based on input
+      // Filter suggestions based on input
       if (value === "") {
-        setFilteredBarNames([]);
+        setFilteredBars([]);
       } else {
-        const filtered = barNames.filter((bar) =>
+        const filtered = allBars.filter((bar) =>
           bar.name.toLowerCase().includes(value.toLowerCase()),
         );
-        setFilteredBarNames(filtered);
+        setFilteredBars(filtered);
       }
     }
 
@@ -67,7 +106,7 @@ const AddBarForm = () => {
       ...prevData,
       bar_name: barName,
     }));
-    setFilteredBarNames([]);
+    setFilteredBars([]);
   };
 
   const handleCloseSuccess = () => setSuccess(null);
@@ -92,10 +131,9 @@ const AddBarForm = () => {
     setError(null);
     setSuccess(null);
 
-    // Verify bar name is in the list
-    const selectedBar = barNames.find((b) => b.name === formData.bar_name);
+    const selectedBar = allBars.find((b) => b.name === formData.bar_name);
     if (!selectedBar) {
-      setError("We're only accepting prices for the bars listed at this time.");
+      setError("We only accept prices for the bars listed at this time.");
       return;
     }
 
@@ -143,7 +181,6 @@ const AddBarForm = () => {
     }
 
     try {
-      // Include the address from the selected bar
       const barDataToSend = {
         ...formData,
         address: selectedBar.address,
@@ -155,7 +192,7 @@ const AddBarForm = () => {
 
       setFormData({
         bar_name: "",
-        location: "",
+        location: formData.location,
         serving_size: "",
         price: "",
         happy_hour: false,
@@ -167,6 +204,27 @@ const AddBarForm = () => {
       console.error("Error submitting form:", err);
       setError("Failed to add bar price. Please try again.");
     }
+  };
+
+  const handleLocationChange = async (e) => {
+    const newLocation = e.target.value;
+
+    // Clear relevant fields
+    setFormData((prevData) => ({
+      ...prevData,
+      location: newLocation,
+      bar_name: "",
+      serving_size: "",
+      price: "",
+      happy_hour: false,
+      happy_hour_day: [],
+      happy_hour_start: "",
+      happy_hour_end: "",
+    }));
+
+    setCity(newLocation);
+    // We do not clear barsCache globally here because we want to keep other cached locations.
+    // The fetch logic will check if we have cached data for this new location or not.
   };
 
   return (
@@ -235,6 +293,27 @@ const AddBarForm = () => {
             Add a Beer Price
           </h2>
           <form onSubmit={handleSubmit}>
+            {/* Location Selector */}
+            <div className="form-control mb-4">
+              <label className="label">
+                <span className="label-text text-base-content">Location</span>
+              </label>
+              <select
+                name="location"
+                value={formData.location}
+                onChange={handleLocationChange}
+                className="select select-bordered w-full bg-base-200 text-secondary-content"
+                required
+              >
+                <option value="" disabled>
+                  Select your city
+                </option>
+                <option value="st_johns">St. John's</option>
+                {/* <option value="halifax">Halifax</option> */}
+                <option value="corner_brook">Corner Brook</option>
+              </select>
+            </div>
+
             <div className="form-control relative mb-4">
               <label className="label">
                 <span className="label-text text-base-content">Bar Name</span>
@@ -250,9 +329,9 @@ const AddBarForm = () => {
                 autoComplete="off"
                 required
               />
-              {filteredBarNames.length > 0 && (
+              {filteredBars.length > 0 && (
                 <ul className="absolute left-0 top-full z-10 max-h-[300px] w-full overflow-y-auto rounded-lg border bg-base-300 text-secondary-content shadow-lg">
-                  {filteredBarNames.map((bar, index) => (
+                  {filteredBars.map((bar, index) => (
                     <li
                       key={index}
                       className="cursor-pointer p-2 hover:bg-neutral-content hover:text-base-100"
@@ -264,23 +343,8 @@ const AddBarForm = () => {
                 </ul>
               )}
             </div>
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text text-base-content">Location</span>
-              </label>
-              <select
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                className="select select-bordered w-full bg-base-200 text-secondary-content"
-                required
-              >
-                <option value="" disabled>
-                  Select your city
-                </option>
-                <option value="st_johns">St. John&#39;s</option>
-              </select>
-            </div>
+
+            {/* Serving Size */}
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text text-base-content">
@@ -306,6 +370,7 @@ const AddBarForm = () => {
                 <option value="1000ml">Pitcher (1140ml)</option>
               </select>
             </div>
+            {/* Price */}
             <div className="form-control mb-4">
               <label className="label">
                 <span className="label-text text-base-content">Price ($)</span>
@@ -321,6 +386,7 @@ const AddBarForm = () => {
                 required
               />
             </div>
+            {/* Happy Hour Checkbox */}
             <div className="form-control mb-4">
               <label className="label cursor-pointer">
                 <span className="label-text text-base-content">Happy Hour</span>
@@ -335,6 +401,7 @@ const AddBarForm = () => {
             </div>
             {formData.happy_hour && (
               <>
+                {/* Happy Hour Day */}
                 <div className="form-control mb-4">
                   <label className="label">
                     <span className="label-text text-base-content">
@@ -365,6 +432,7 @@ const AddBarForm = () => {
                     ))}
                   </div>
                 </div>
+                {/* Happy Hour Start */}
                 <div className="form-control mb-4">
                   <label className="label">
                     <span className="label-text text-base-content">
@@ -380,6 +448,7 @@ const AddBarForm = () => {
                     required={formData.happy_hour}
                   />
                 </div>
+                {/* Happy Hour End */}
                 <div className="form-control mb-4">
                   <label className="label">
                     <span className="label-text text-base-content">
@@ -397,6 +466,7 @@ const AddBarForm = () => {
                 </div>
               </>
             )}
+            {/* Submit Button */}
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary w-full">
                 Submit

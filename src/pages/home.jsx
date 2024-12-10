@@ -36,7 +36,7 @@ const Home = () => {
             >
               <option value="">Select your city</option>
               <option value="st_johns">St. John's</option>
-              <option value="halifax">Halifax</option>
+              {/* <option value="halifax">Halifax</option> */}
               <option value="corner_brook">Corner Brook</option>
             </select>
             <Link

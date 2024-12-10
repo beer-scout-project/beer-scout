@@ -313,3 +313,58 @@ export async function removeBarPrice(barPriceId) {
     throw error;
   }
 }
+
+// Function to get bars by location
+export async function getBarsByLocation(location) {
+  try {
+    const response = await fetch(`${apiUrl}/bars/getBars/${location}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.error || `Failed to fetch bars for ${location}`);
+    }
+
+    const data = await response.json();
+    console.log("Bars fetched successfully:", data);
+    return data.bars;
+  } catch (error) {
+    console.error("Error fetching bars:", error);
+    throw error;
+  }
+}
+
+// Function to create a new bar location from admin panel
+export async function createBar(name, address, location) {
+  try {
+    const response = await fetch(`${apiUrl}/bars/createBar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, address, location }),
+    });
+
+    if (!response.ok) {
+      const message = await response.json();
+      console.error("Error response from server:", message);
+      throw new Error(message.error || "Failed to create bar");
+    }
+
+    const data = await response.json();
+    console.log("Bar created successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error creating bar:", error);
+    throw error;
+  }
+}
+
+// Function to delete a bar from the bar list
+
+// I created this in backend but we don't need to use it for now

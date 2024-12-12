@@ -3,6 +3,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoTimeOutline } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 import { reportBarPrice, getBarPricesByLocation } from "../utils/useApi";
 
@@ -16,6 +17,7 @@ const BarList = () => {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [selectedBarPriceId, setSelectedBarPriceId] = useState(null);
   const [selectedReason, setSelectedReason] = useState("");
+  const [reportCorrectionSuccess, setReportCorrectionSuccess] = useState(null);
 
   const reportReasons = [
     "Price is incorrect",
@@ -39,6 +41,15 @@ const BarList = () => {
       setCity(storedCity);
     }
   }, []);
+
+  useEffect(() => {
+    if (reportCorrectionSuccess) {
+      const timer = setTimeout(() => setReportCorrectionSuccess(null), 5000);
+      return () => clearTimeout(timer);
+    }
+
+  }, [reportCorrectionSuccess]);
+
 
   useEffect(() => {
     if (!city) return; // Wait until city is known
@@ -75,6 +86,7 @@ const BarList = () => {
       // Store fetched data and current city in sessionStorage
       sessionStorage.setItem("barPrices", JSON.stringify(sortedData));
       sessionStorage.setItem("cachedCity", currentCity);
+      setReportCorrectionSuccess(true);
     } catch (error) {
       setError(error.message);
     }
@@ -195,6 +207,8 @@ const BarList = () => {
     document.body.classList.remove("modal-open");
   };
 
+  const handleCloseSuccess = () => setReportCorrectionSuccess(null);
+
   return (
     <div
       className="relative h-full bg-cover bg-center"
@@ -205,6 +219,31 @@ const BarList = () => {
 
       {/* Main content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
+      {reportCorrectionSuccess && (
+          <div
+            role="alert"
+            className="alert alert-success absolute right-4 top-4 z-10 flex max-w-max justify-center rounded-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>{" "}
+            <span>Your correction has been reported!</span>
+            <button onClick={handleCloseSuccess}>
+              <IoCloseCircleSharp className="h-[1.3rem] w-[1.3rem]" />
+            </button>
+          </div>
+        )}
+
         <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto overflow-x-hidden rounded-lg bg-base-100 px-6 shadow-lg">
           <div className="sticky top-0 flex justify-between bg-base-100 pt-4 opacity-95">
             <div>

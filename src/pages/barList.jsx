@@ -86,7 +86,6 @@ const BarList = () => {
       // Store fetched data and current city in sessionStorage
       sessionStorage.setItem("barPrices", JSON.stringify(sortedData));
       sessionStorage.setItem("cachedCity", currentCity);
-      setReportCorrectionSuccess(true);
     } catch (error) {
       setError(error.message);
     }

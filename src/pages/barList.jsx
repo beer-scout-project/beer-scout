@@ -194,6 +194,7 @@ const BarList = () => {
       setIsReportModalOpen(false);
       setSelectedReason("");
       setError(null); // Clear error on successful submission
+      setReportCorrectionSuccess(true);
       document.body.classList.remove("modal-open");
     } catch (error) {
       console.error("Error reporting bar price:", error);
@@ -244,7 +245,7 @@ const BarList = () => {
           </div>
         )}
 
-        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto overflow-x-hidden rounded-lg bg-base-100 px-6 shadow-lg">
+        <div className="h-max max-h-[80vh] w-full max-w-lg overflow-y-auto overflow-x-hidden rounded-lg bg-base-100 px-6 shadow-lg pb-[1rem]">
           <div className="sticky top-0 flex justify-between bg-base-100 pt-4 opacity-95">
             <div>
               <p className="mb-2 flex items-center text-orange-600">
